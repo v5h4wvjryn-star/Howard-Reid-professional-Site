@@ -19,10 +19,10 @@ const PROJECT_DETAILS = {
       "Strengthened security posture for 2,000+ employees across 30+ applications by implementing Hybrid Azure AD.",
     ],
     technical: [
-      "Azure/Microsoft 365 (AAD, Intune, Exchange Online)", 
-      "Zero Trust Network Architecture (ZTNA)", 
-      "PrinterLogic", 
-      "Active Directory/GPO", 
+      "Azure/Microsoft 365 (AAD, Intune, Exchange Online)",
+      "Zero Trust Network Architecture (ZTNA)",
+      "PrinterLogic",
+      "Active Directory/GPO",
       "Windows Server/SCCM",
     ],
   },
@@ -42,10 +42,10 @@ const PROJECT_DETAILS = {
       "Improved collaboration and internal communication efficiency through a unified platform.",
     ],
     technical: [
-      "Microsoft Teams Voice/RingCentral", 
-      "SIP/VOIP Telephony", 
-      "Cisco Call Manager/Unity", 
-      "Global Network Architecture", 
+      "Microsoft Teams Voice/RingCentral",
+      "SIP/VOIP Telephony",
+      "Cisco Call Manager/Unity",
+      "Global Network Architecture",
       "Vendor Management",
     ],
   },
@@ -65,10 +65,10 @@ const PROJECT_DETAILS = {
       "Improved overall security resilience and strengthened regulatory posture.",
     ],
     technical: [
-      "Zero Trust Network Access (ZTNA)", 
-      "Identity and Access Management (IAM)", 
-      "Azure AD Join/Conditional Access", 
-      "Multi-Factor Authentication (MFA)", 
+      "Zero Trust Network Access (ZTNA)",
+      "Identity and Access Management (IAM)",
+      "Azure AD Join/Conditional Access",
+      "Multi-Factor Authentication (MFA)",
       "KnowBe4/Security Awareness Training",
     ],
   },
@@ -88,10 +88,10 @@ const PROJECT_DETAILS = {
       "Significantly improved end-user satisfaction with IT services due to clear processes and faster resolution times.",
     ],
     technical: [
-      "FreshService (ITSM)", 
-      "Project Management Office (PMO) Governance", 
-      "Agile/Waterfall Methodologies", 
-      "HRIS/IT System Integration (API)", 
+      "FreshService (ITSM)",
+      "Project Management Office (PMO) Governance",
+      "Agile/Waterfall Methodologies",
+      "HRIS/IT System Integration (API)",
       "SLA and KPI Reporting",
     ],
   },
@@ -111,10 +111,10 @@ const PROJECT_DETAILS = {
       "Established a repeatable, efficient M&A playbook for future transactions.",
     ],
     technical: [
-      "Due Diligence & Valuation", 
-      "Transition Service Agreements (TSAs)", 
-      "Enterprise System Migration", 
-      "Vendor Contract Consolidation", 
+      "Due Diligence & Valuation",
+      "Transition Service Agreements (TSAs)",
+      "Enterprise System Migration",
+      "Vendor Contract Consolidation",
       "Data Security & Compliance",
     ],
   },
@@ -127,10 +127,10 @@ const MOCK_DATA = {
   name: "Howard Reid",
   tagline: "Visionary IT Leader | Strategic Advisor | Enterprise Transformation",
   // 💡 IMPORTANT: Replace the URL below with the public link to your professional photo.
-  profileImageUrl: "https://placehold.co/128x128/9CA3AF/1F2937?text=HR", 
-  
+  profileImageUrl: "https://placehold.co/128x128/9CA3AF/1F2937?text=HR",
+
   story: "A passionate and results-driven professional with over 27 years of experience driving technology strategy, infrastructure modernization, and enterprise transformation. I've successfully driven multi-million dollar savings and strengthened security across global operations. A visionary leader known for aligning technology with business outcomes, fostering innovation, and optimizing resources at scale. I am committed to continuous learning and technical excellence, and I leverage technology to drive organizational success, support team development, foster collaborative partnerships, and mentor my team to enhance performance and achieve company objectives.",
-  
+
   strengths: [
     { name: "Restorative", description: "Natural problem solver with a focus on diagnosing and fixing complex infrastructure challenges." },
     { name: "Strategic", description: "Strategic thinker with the ability to anticipate roadblocks and design scalable solutions." },
@@ -138,7 +138,7 @@ const MOCK_DATA = {
     { name: "Ideation", description: "Creative innovator who generates new ideas to optimize systems and processes." },
     { name: "Arranger", description: "Skilled at coordinating people, tools, and priorities to execute effectively under pressure." }
   ],
-  
+
   skills: [
     { name: "IT Strategy & Architecture", level: 95, icon: <Briefcase className="w-5 h-5 text-indigo-400" /> },
     { name: "Cloud Migrations (Azure/AWS)", level: 90, icon: <Code className="w-5 h-5 text-blue-400" /> },
@@ -147,8 +147,8 @@ const MOCK_DATA = {
     { name: "M&A Integration & Divestiture", level: 85, icon: <Briefcase className="w-5 h-5 text-orange-400" /> },
     { name: "Budgeting & Vendor Management", level: 90, icon: <Briefcase className="w-5 h-5 text-yellow-400" /> },
   ],
-  
-  achievements: [ 
+
+  achievements: [
     { title: "Strategic Cost Optimization", detail: "Delivered $5M+ in annual IT cost synergies through strategic acquisition integration and achieved $750K annual savings through Azure cloud migration and Microsoft 365 optimization." },
     { title: "Infrastructure Modernization", detail: "Led enterprise-wide transformations including data center consolidation (165+ servers to cloud), Zero Trust network security implementation, and elimination of legacy infrastructure." },
     { title: "Security Leadership", detail: "Established a formal IT Security organization to strengthen enterprise cybersecurity strategy, governance and Zero Trust alignment, while institutionalizing enterprise-wide cybersecurity awareness training." },
@@ -163,7 +163,7 @@ const MOCK_DATA = {
     { id: 'ma-integration', title: "M&A Integration & Strategic Divestiture Management", shortDescription: "Led M&A integrations and a major IT divestiture, realizing $5M+ in annual IT cost synergies with zero business disruption." },
     { id: 'pmo-itsm-development', title: "PMO Establishment & IT Service Management (ITSM) Overhaul", shortDescription: "Created a formal PMO and implemented FreshService ITSM, automating 60% of common requests and improving project success rates." },
   ],
-  
+
   experience: [
     { period: "MAY 2025 - PRESENT", role: "Strategic Advisor, Business Development & IT Operations", company: "Blue Star Equity Group", location: "FORT WORTH, TX", highlights: [
         "Provided strategic, operational, and technology consulting across the equity group and its diverse portfolio companies.",
@@ -181,10 +181,10 @@ const MOCK_DATA = {
         "Reduced telecom expenses by $400K annually by migrating 2000+ users to cloud based systems."
     ]},
   ],
-  
+
   linkedinUrl: "https://www.linkedin.com/in/howardareid",
   // Note: The file name must match the one referenced in the HTML tag's download attribute.
-  resumeDownloadLink: "/Howard-Reid-7.pdf" 
+  resumeDownloadLink: "/Howard-Reid-7.pdf"
 };
 // --- END MOCK DATA ---
 
@@ -219,8 +219,8 @@ const SkillBar = ({ name, level, icon }) => (
       <span className="font-semibold text-sm">{level}%</span>
     </div>
     <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-      <div 
-        className="bg-indigo-600 h-2.5 rounded-full transition-all duration-1000 ease-out" 
+      <div
+        className="bg-indigo-600 h-2.5 rounded-full transition-all duration-1000 ease-out"
         style={{ width: `${level}%` }}
       ></div>
     </div>
@@ -242,7 +242,7 @@ const ExperienceItem = ({ period, role, company, location, highlights }) => (
     {/* Line and Dot */}
     <div className="absolute left-0 sm:left-10 top-0 w-px bg-gray-300 dark:bg-gray-700 h-full group-last:h-1/2"></div>
     <div className="absolute -left-1 sm:left-9 top-0 w-3 h-3 bg-indigo-600 rounded-full ring-4 ring-white dark:ring-gray-900 z-10"></div>
-    
+
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
       <div className="sm:w-20 sm:text-right mb-2 sm:mb-0">
         <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">{period}</span>
@@ -274,7 +274,7 @@ const ProjectSummaryCard = ({ id, title, shortDescription, onSelectProject }) =>
         <p className="text-md text-gray-600 dark:text-gray-300 mb-5">{shortDescription}</p>
         <span className="text-indigo-600 dark:text-indigo-400 font-semibold flex items-center justify-end">
             Read Full Case Study
-            <ArrowRight className="w-4 h-4 ml-2"/> 
+            <ArrowRight className="w-4 h-4 ml-2"/>
         </span>
     </button>
 );
@@ -343,7 +343,7 @@ const ProjectDetailPage = ({ projectData, onGoBack }) => (
                     ))}
                 </div>
             </div>
-            
+
             {/* Call to Action */}
             <div className="mt-12 text-center p-6 bg-gray-100 dark:bg-gray-700 rounded-xl">
                 <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">
@@ -363,11 +363,9 @@ const ProjectDetailPage = ({ projectData, onGoBack }) => (
 
 // --- MAIN APP COMPONENT ---
 
-// Export the App component for use in the HTML file
-// window.App is assigned in the subsequent script tag in the HTML file for Babel
-export default function App() {
+function App() {
   const { isVisible, scrollToTop } = useScrollToTop();
-  const [darkMode, setDarkMode] = useState(true); 
+  const [darkMode, setDarkMode] = useState(true);
   // State for multi-page simulation
   const [currentPage, setCurrentPage] = useState('home'); // 'home' or 'project'
   const [selectedProjectId, setSelectedProjectId] = useState(null);
@@ -393,7 +391,7 @@ export default function App() {
         setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 50);
     }
   };
-  
+
   const handleSelectProject = (id) => {
     // Navigates to the project's 'own page' view
     setSelectedProjectId(id);
@@ -407,17 +405,17 @@ export default function App() {
     setCurrentPage('home');
     setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 50);
   };
-  
+
 
   const navLinks = [
     { name: "Home", id: "home", icon: Home },
     { name: "Leadership", id: "leadership", icon: User },
     { name: "Skills", id: "skills", icon: Code },
     { name: "Projects", id: "projects", icon: Lightbulb },
-    { name: "Experience", id: "experience", icon: Briefcase }, 
+    { name: "Experience", id: "experience", icon: Briefcase },
     { name: "Contact", id: "contact", icon: Mail },
   ];
-  
+
   const currentProjectData = selectedProjectId ? PROJECT_DETAILS[selectedProjectId] : null;
 
   // --- RENDERING ---
@@ -429,7 +427,7 @@ export default function App() {
           <button onClick={() => {setCurrentPage('home'); setSelectedProjectId(null);}} className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
             {MOCK_DATA.name}<span className="text-gray-900 dark:text-white">.me</span>
           </button>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
@@ -438,3 +436,262 @@ export default function App() {
                 onClick={() => handleScroll(link.id)}
                 className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition duration-150 flex items-center"
               >
+                <link.icon className="w-4 h-4 mr-1"/>
+                {link.name}
+              </button>
+            ))}
+          </nav>
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:ring-2 hover:ring-indigo-500 transition duration-150"
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            )}
+          </button>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto">
+        {/* Mobile Navigation (Fixed Bottom) - Hidden when on a detail page */}
+        {currentPage === 'home' && (
+            <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-xl rounded-t-lg">
+              <div className="flex justify-around items-center h-16">
+                {navLinks.map((link) => (
+                  <button
+                    key={`mobile-${link.id}`}
+                    onClick={() => handleScroll(link.id)}
+                    className="flex flex-col items-center text-xs text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition duration-150 p-2"
+                  >
+                    <link.icon className="w-5 h-5 mb-1"/>
+                    {link.name}
+                  </button>
+                ))}
+              </div>
+            </nav>
+        )}
+
+        {/* Conditional Rendering: Home Page or Project Detail Page */}
+        {currentPage === 'home' ? (
+          <>
+            {/* 1. Hero Section */}
+            <section id="home" className="pt-20 pb-24 md:pt-32 md:pb-40 px-4 sm:px-6 lg:px-8 text-center min-h-screen flex items-center justify-center">
+              <div className="max-w-4xl mx-auto">
+                {/* Professional Image */}
+                <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-indigo-500 dark:border-indigo-400 shadow-2xl">
+                    <img
+                        src={MOCK_DATA.profileImageUrl}
+                        alt={`${MOCK_DATA.name} Profile`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"><svg class="w-16 h-16 text-indigo-500 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.015-8 4.5V20h16v-1.5c0-2.485-3.582-4.5-8-4.5z"></path></svg></div>';
+                        }}
+                    />
+                </div>
+
+                <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
+                  Hello, I'm <span className="text-indigo-600 dark:text-indigo-400">Howard Reid</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light mb-8">
+                  {MOCK_DATA.tagline}
+                </p>
+
+                <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a
+                      href={MOCK_DATA.linkedinUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
+                    >
+                      <Linkedin className="w-5 h-5 mr-2" />
+                      View LinkedIn
+                    </a>
+                    <a
+                      href={MOCK_DATA.resumeDownloadLink}
+                      download="Howard-Reid-Resume.pdf"
+                      className="px-8 py-3 bg-transparent border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-400 font-semibold rounded-full shadow-lg hover:bg-indigo-50 dark:hover:bg-gray-800 transition duration-300 transform hover:scale-105 flex items-center justify-center"
+                    >
+                      <Download className="w-5 h-5 mr-2" />
+                      Download Resume
+                    </a>
+                </div>
+              </div>
+            </section>
+
+            {/* 2. My Leadership Philosophy Section */}
+            <section id="leadership" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl mx-4 sm:mx-6 lg:mx-8 mb-12">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-8 border-b-4 border-indigo-500/50 inline-block pb-1">
+                  My Leadership Philosophy
+                </h2>
+                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-12">
+                  {MOCK_DATA.story}
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <Zap className="w-6 h-6 mr-2 text-indigo-600" />
+                    CliftonStrengths Top 5
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {MOCK_DATA.strengths.map((strength, index) => (
+                        <div key={index} className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h4 className="font-bold text-indigo-600 dark:text-indigo-400 text-lg mb-1">{strength.name}</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">{strength.description}</p>
+                        </div>
+                    ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 3. Skills/Expertise Section */}
+            <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+              <div className="max-w-6xl mx-auto">
+                <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                  Core Technical <span className="text-indigo-600 dark:text-indigo-400">Expertise</span>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                  {MOCK_DATA.skills.map((skill, index) => (
+                    <SkillBar key={index} {...skill} />
+                  ))}
+                </div>
+
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-16 mb-8 text-center">
+                    Key <span className="text-indigo-600 dark:text-indigo-400">Achievements</span>
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {MOCK_DATA.achievements.map((achievement, index) => (
+                    <AchievementCard key={index} {...achievement} />
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 4. Highlighted Projects / Case Studies - Summary View */}
+            <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
+              <div className="max-w-6xl mx-auto">
+                <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                  Highlighted <span className="text-indigo-600 dark:text-indigo-400">Projects</span>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {MOCK_DATA.projectSummaries.map((project, index) => (
+                    <div key={index} className={index >= 3 ? 'lg:col-span-1 md:col-span-1' : 'lg:col-span-1 md:col-span-1'}>
+                      <ProjectSummaryCard {...project} onSelectProject={handleSelectProject} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+
+            {/* 5. Professional Experience Section */}
+            <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
+              <div className="max-w-6xl mx-auto">
+                <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                  Professional <span className="text-indigo-600 dark:text-indigo-400">Experience</span>
+                </h2>
+                <div className="flex flex-col items-center">
+                  {MOCK_DATA.experience.map((job, index) => (
+                    <ExperienceItem key={index} {...job} />
+                  ))}
+                  <div className="mt-8 text-center">
+                     <a
+                        href={MOCK_DATA.resumeDownloadLink}
+                        download="Howard-Reid-Resume.pdf"
+                        className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 flex items-center justify-center"
+                     >
+                        <Download className="w-5 h-5 mr-2" />
+                        Download Full CV for Complete History
+                     </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+            {/* 6. Contact Section */}
+            <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl mx-4 sm:mx-6 lg:mx-8 mb-12">
+              <div className="max-w-xl mx-auto text-center">
+                <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
+                  Let's <span className="text-indigo-600 dark:text-indigo-400">Connect</span>
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                  Ready to start a project? Have a question? Send me a message, and I'll get back to you as soon as possible.
+                </p>
+                <form className="space-y-6 p-8 rounded-2xl border border-gray-100 dark:border-gray-700">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-900 dark:text-white transition duration-150"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-900 dark:text-white transition duration-150"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      placeholder="Your Message"
+                      rows="5"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-900 dark:text-white transition duration-150"
+                      required
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
+                  >
+                    Send Message
+                  </button>
+                </form>
+                <div className="mt-6 text-gray-600 dark:text-gray-400">
+                    <Mail className="w-5 h-5 inline-block mr-2" />
+                    <a href="mailto:Howard.Reid@outlook.com" className="hover:text-indigo-600 transition duration-150">
+                        Howard.Reid@outlook.com
+                    </a>
+                </div>
+              </div>
+            </section>
+          </>
+        ) : (
+          <ProjectDetailPage projectData={currentProjectData} onGoBack={handleGoBack} />
+        )}
+
+      </main>
+
+      {/* 7. Footer */}
+      <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-12 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+          <p>&copy; {new Date().getFullYear()} {MOCK_DATA.name}. All rights reserved.</p>
+          <p className="mt-2 text-gray-400">Designed and built with React and Tailwind CSS.</p>
+        </div>
+      </footer>
+
+      {/* Scroll to Top Button */}
+      {isVisible && currentPage === 'home' && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-24 md:bottom-8 right-8 p-3 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 z-50"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
+    </div>
+  );
+}
+
+// Expose App to the global window object so index.html can access it
+window.App = App;
