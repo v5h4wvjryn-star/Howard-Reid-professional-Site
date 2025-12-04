@@ -727,6 +727,10 @@
        // This ensures the App component is accessible by the index.html loader script.
        window.App = App;
 
+       // Render the App to the DOM
+       const root = ReactDOM.createRoot(document.getElementById('root'));
+       root.render(<App />);
+
    </script>
 </body>
 </html>
