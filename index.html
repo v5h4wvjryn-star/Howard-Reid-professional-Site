@@ -17,8 +17,8 @@
    <!-- Load React libraries (Development versions) -->
    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-   <!-- Load Lucide icons library -->
-   <script src="https://unpkg.com/lucide@latest"></script>
+   <!-- Load Lucide React icons library -->
+   <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
    <!-- Load Babel for JSX and modern JavaScript support in the browser -->
    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
@@ -29,7 +29,7 @@
    <script type="text/babel">
        // Import components/hooks from the globally loaded React libraries
        const { useState, useEffect, StrictMode } = React;
-       const { Briefcase, Code, User, Mail, Home, ArrowUp, Zap, Download, Linkedin, CheckCircle, Lightbulb, ArrowLeft, ArrowRight } = lucide;
+       const { Briefcase, Code, User, Mail, Home, ArrowUp, Zap, Download, Linkedin, CheckCircle, Lightbulb, ArrowLeft, ArrowRight } = LucideReact;
 
        // --- FULL PROJECT DETAIL DATA ---
        const PROJECT_DETAILS = {
