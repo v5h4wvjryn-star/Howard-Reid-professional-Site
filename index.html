@@ -1,62 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Howard Reid | IT Leader & Strategic Advisor</title>
-    <meta name="description" content="Howard Reid - Visionary IT Leader, Strategic Advisor, and Enterprise Transformation Expert with 27+ years of experience.">
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Howard Reid | Professional Portfolio</title>
+       <!-- Load the 'Inter' font from Google Fonts -->
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+       <!-- Load the Tailwind CSS CDN for styling -->
+       <script src="https://cdn.tailwindcss.com"></script>
+       <script>
+           // Tailwind configuration for dark mode
+           tailwind.config = {
+             darkMode: 'class',
+           }
+       </script>
+       <!-- Load React libraries (Development versions) -->
+       <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+       <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+       <!-- Load Babel for JSX and modern JavaScript support in the browser -->
+       <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   </head>
+   <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+       <div id="root"></div>
+       
+       <!-- The main application code (App.jsx) is loaded here -->
+       <script type="text/babel" src="./App.jsx"></script>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+       <!-- Bootstrap the React application -->
+       <script type="text/babel">
+           // This is necessary because Babel standalone doesn't support 'export default'
+           // from external files perfectly; we attach the component to the window object in App.jsx
+           const App = window.App;
+           
+           function bootstrap() {
+               const container = document.getElementById('root');
+               if (container && ReactDOM) {
+                   // Use ReactDOM.createRoot for React 18 to render the App component
+                   ReactDOM.createRoot(container).render(
+                       <React.StrictMode>
+                           <App />
+                       </React.StrictMode>
+                   );
+               } else {
+                   console.error('Root element not found or ReactDOM not loaded.');
+               }
+           }
 
-    <!-- Tailwind Dark Mode Configuration -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'inter': ['Inter', 'system-ui', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- React and ReactDOM from CDN -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-    <!-- Babel Standalone for JSX transformation -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
-</head>
-<body>
-    <!-- Root element where React will mount -->
-    <div id="root"></div>
-
-    <!-- Load the React component from app.jsx -->
-    <script type="text/babel" src="app.jsx"></script>
-
-    <!-- Mount the React app -->
-    <script type="text/babel">
-        const { App } = window;
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+           // Ensure the bootstrap function runs after the document and all dependencies are loaded
+           window.onload = bootstrap;
+       </script>
+   </body>
+   </html>
