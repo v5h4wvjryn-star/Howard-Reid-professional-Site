@@ -500,14 +500,115 @@
            </section>
        );
 
+       // --- NEW COMPONENTS FOR LEADERSHIP ---
+
+       const LeadershipSummaryCard = ({ id, title, shortDescription, onSelectLeadership }) => (
+           <button
+               onClick={() => onSelectLeadership(id)}
+               className="text-left w-full h-full bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-purple-500/30 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
+           >
+               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-start">
+                   <User className="w-6 h-6 mr-3 mt-1 flex-shrink-0 text-purple-600" />
+                   {title}
+               </h3>
+               <p className="text-md text-gray-600 dark:text-gray-300 mb-5">{shortDescription}</p>
+               <span className="text-purple-600 dark:text-purple-400 font-semibold flex items-center justify-end">
+                   Read Full Details
+                   <ArrowRight className="w-4 h-4 ml-2"/>
+               </span>
+           </button>
+       );
+
+       const LeadershipDetailPage = ({ leadershipData, onGoBack }) => (
+           <section className="py-20 px-4 sm:px-6 lg:px-8 min-h-screen">
+               <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 md:p-12 rounded-2xl shadow-2xl">
+                   <button
+                       onClick={onGoBack}
+                       className="mb-8 flex items-center text-purple-600 dark:text-purple-400 font-medium hover:text-purple-700 transition duration-150"
+                   >
+                       <ArrowLeft className="w-5 h-5 mr-2" />
+                       Back to Leadership Competencies
+                   </button>
+
+                   <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight">
+                       {leadershipData.title}
+                   </h1>
+                   <p className="text-lg text-gray-600 dark:text-gray-300 mb-10 border-b pb-4 border-gray-200 dark:border-gray-700 italic">
+                       {leadershipData.context}
+                   </p>
+
+                   {/* Key Responsibilities */}
+                   <div className="mb-10">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-purple-200 dark:border-purple-800 pb-2">
+                           <Briefcase className="w-6 h-6 mr-3 text-purple-600" />
+                           Key Responsibilities & Approach
+                       </h2>
+                       <ul className="space-y-4 text-gray-700 dark:text-gray-300">
+                           {leadershipData.responsibilities.map((r, i) => (
+                               <li key={i} className="flex items-start text-base">
+                                   <span className="w-2 h-2 mt-2 mr-3 bg-purple-500 rounded-full flex-shrink-0"></span>
+                                   <span>{r}</span>
+                               </li>
+                           ))}
+                       </ul>
+                   </div>
+
+                   {/* Results and Benefits */}
+                   <div className="mb-10 p-6 bg-purple-50 dark:bg-gray-900 rounded-xl">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-purple-300 dark:border-purple-700 pb-2">
+                           <Zap className="w-6 h-6 mr-3 text-green-600" />
+                           Results & Impact
+                       </h2>
+                       <ul className="space-y-4 text-gray-700 dark:text-gray-300">
+                           {leadershipData.benefits.map((b, i) => (
+                               <li key={i} className="flex items-start text-base">
+                                   <CheckCircle className="w-5 h-5 mr-3 mt-1 flex-shrink-0 text-green-500" />
+                                   <span>{b}</span>
+                               </li>
+                           ))}
+                       </ul>
+                   </div>
+
+                   {/* Technical Skills/Competencies */}
+                   <div className="mb-10">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-purple-200 dark:border-purple-800 pb-2">
+                           <Code className="w-6 h-6 mr-3 text-purple-600" />
+                           Key Competencies & Skills
+                       </h2>
+                       <div className="flex flex-wrap gap-3">
+                           {leadershipData.technical.map((tech, i) => (
+                               <span key={i} className="px-4 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 rounded-full text-sm font-medium shadow-sm">
+                                   {tech}
+                               </span>
+                           ))}
+                       </div>
+                   </div>
+
+                   {/* Call to Action */}
+                   <div className="mt-12 text-center p-6 bg-gray-100 dark:bg-gray-700 rounded-xl">
+                       <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">
+                           This competency demonstrates my leadership approach and ability to drive organizational success through people, strategy, and execution.
+                       </p>
+                       <button
+                           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                           className="mt-4 px-8 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105"
+                       >
+                           Let's Discuss
+                       </button>
+                   </div>
+               </div>
+           </section>
+       );
+
 
        // --- MAIN APP COMPONENT ---
        function App() {
          const { isVisible, scrollToTop } = useScrollToTop();
          const [darkMode, setDarkMode] = useState(true);
          // State for multi-page simulation
-         const [currentPage, setCurrentPage] = useState('home'); // 'home' or 'project'
+         const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project', or 'leadership'
          const [selectedProjectId, setSelectedProjectId] = useState(null);
+         const [selectedLeadershipId, setSelectedLeadershipId] = useState(null);
 
          useEffect(() => {
            // Manages the dark mode class on the root HTML element
@@ -523,14 +624,15 @@
            if (currentPage === 'home') {
                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
            } else {
-               // If navigation is clicked from a project page, return to home and then scroll
+               // If navigation is clicked from a detail page, return to home and then scroll
                setCurrentPage('home');
                setSelectedProjectId(null);
+               setSelectedLeadershipId(null);
                // Timeout ensures the page state updates before attempting to scroll
                setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 50);
            }
          };
-         
+
          const handleSelectProject = (id) => {
            // Navigates to the project's 'own page' view
            setSelectedProjectId(id);
@@ -538,11 +640,24 @@
            window.scrollTo({ top: 0, behavior: 'smooth' });
          };
 
+         const handleSelectLeadership = (id) => {
+           // Navigates to the leadership competency detail page
+           setSelectedLeadershipId(id);
+           setCurrentPage('leadership');
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+         };
+
          const handleGoBack = () => {
-           // Handles the 'Back to Projects List' button and scrolls back to the list
-           setSelectedProjectId(null);
-           setCurrentPage('home');
-           setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 50);
+           // Handles the 'Back' button from detail pages
+           if (currentPage === 'project') {
+             setSelectedProjectId(null);
+             setCurrentPage('home');
+             setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 50);
+           } else if (currentPage === 'leadership') {
+             setSelectedLeadershipId(null);
+             setCurrentPage('home');
+             setTimeout(() => document.getElementById('leadership-competencies')?.scrollIntoView({ behavior: 'smooth' }), 50);
+           }
          };
          
 
@@ -554,8 +669,9 @@
            { name: "Experience", id: "experience", icon: Briefcase },
            { name: "Contact", id: "contact", icon: Mail },
          ];
-         
+
          const currentProjectData = selectedProjectId ? PROJECT_DETAILS[selectedProjectId] : null;
+         const currentLeadershipData = selectedLeadershipId ? LEADERSHIP_DETAILS[selectedLeadershipId] : null;
 
          // --- RENDERING ---
          return (
@@ -563,7 +679,7 @@
              {/* Header/Navigation */}
              <header className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-md">
                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-                 <button onClick={() => {setCurrentPage('home'); setSelectedProjectId(null);}} className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+                 <button onClick={() => {setCurrentPage('home'); setSelectedProjectId(null); setSelectedLeadershipId(null);}} className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
                    {MOCK_DATA.name}<span className="text-gray-900 dark:text-white">.me</span>
                  </button>
                  
@@ -615,7 +731,7 @@
                    </nav>
                )}
                
-               {/* Conditional Rendering: Home Page or Project Detail Page */}
+               {/* Conditional Rendering: Home Page, Project Detail Page, or Leadership Detail Page */}
                {currentPage === 'home' ? (
                  <>
                    {/* 1. Hero Section */}
@@ -689,7 +805,24 @@
                      </div>
                    </section>
 
-                   {/* 3. Skills/Expertise Section */}
+                   {/* 3. Leadership Competencies Section */}
+                   <section id="leadership-competencies" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 text-center">
+                         Leadership <span className="text-purple-600 dark:text-purple-400">Competencies</span>
+                       </h2>
+                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 text-center max-w-3xl mx-auto">
+                         Click any competency below to explore the detailed approach, impact, and results that define my leadership philosophy.
+                       </p>
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                         {MOCK_DATA.leadershipSummaries.map((leadership, index) => (
+                           <LeadershipSummaryCard key={index} {...leadership} onSelectLeadership={handleSelectLeadership} />
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* 4. Skills/Expertise Section */}
                    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
                      <div className="max-w-6xl mx-auto">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
@@ -712,7 +845,7 @@
                      </div>
                    </section>
                    
-                   {/* 4. Highlighted Projects / Case Studies - Summary View */}
+                   {/* 5. Highlighted Projects / Case Studies - Summary View */}
                    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
                      <div className="max-w-6xl mx-auto">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
@@ -730,7 +863,7 @@
                    </section>
 
 
-                   {/* 5. Professional Experience Section */}
+                   {/* 6. Professional Experience Section */}
                    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
                      <div className="max-w-6xl mx-auto">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
@@ -755,7 +888,7 @@
                    </section>
 
 
-                   {/* 6. Contact Section */}
+                   {/* 7. Contact Section */}
                    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl mx-4 sm:mx-6 lg:mx-8 mb-12">
                      <div className="max-w-xl mx-auto text-center">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
@@ -805,13 +938,15 @@
                      </div>
                    </section>
                  </>
-               ) : (
+               ) : currentPage === 'project' ? (
                  <ProjectDetailPage projectData={currentProjectData} onGoBack={handleGoBack} />
-               )}
+               ) : currentPage === 'leadership' ? (
+                 <LeadershipDetailPage leadershipData={currentLeadershipData} onGoBack={handleGoBack} />
+               ) : null}
 
              </main>
 
-             {/* 7. Footer */}
+             {/* 8. Footer */}
              <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-12 py-8">
                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
                  <p>© {new Date().getFullYear()} {MOCK_DATA.name}. All rights reserved.</p>
