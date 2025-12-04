@@ -363,12 +363,13 @@
          ],
          
          skills: [
-           { name: "IT Strategy & Architecture", level: 95, icon: <Briefcase className="w-5 h-5 text-indigo-400" /> },
-           { name: "Cloud Migrations (Azure/AWS)", level: 90, icon: <Code className="w-5 h-5 text-blue-400" /> },
-           { name: "Cybersecurity & Zero Trust", level: 92, icon: <Code className="w-5 h-5 text-red-400" /> },
-           { name: "ITSM & Process Improvement", level: 88, icon: <Briefcase className="w-5 h-5 text-green-400" /> },
-           { name: "M&A Integration & Divestiture", level: 85, icon: <Briefcase className="w-5 h-5 text-orange-400" /> },
-           { name: "Budgeting & Vendor Management", level: 90, icon: <Briefcase className="w-5 h-5 text-yellow-400" /> },
+           { icon: "🔷", title: "IT Strategy & Enterprise Architecture", description: "Building scalable, business-aligned technology roadmaps that reduce cost and accelerate transformation." },
+           { icon: "🔐", title: "Cybersecurity & Zero Trust", description: "Establishing enterprise cybersecurity programs, IAM, and Zero Trust architectures that reduce risk exposure." },
+           { icon: "☁️", title: "Cloud Transformation & Infrastructure Modernization", description: "Executing data center exits and cloud migrations delivering multi-million-dollar efficiencies." },
+           { icon: "🔄", title: "M&A Integration & Divestiture", description: "Harmonizing technology, identity, operations, and data across acquisitions to deliver rapid synergies." },
+           { icon: "🛠️", title: "IT Operations, ITSM & Automation", description: "Standardizing processes and automating lifecycle operations for enterprise-scale service delivery." },
+           { icon: "📈", title: "PMO Leadership & Organizational Development", description: "Building high-performance teams and governance models that improve delivery success rates." },
+           { icon: "💰", title: "Budgeting & Vendor Optimization", description: "Managing $12M–$15M budgets while reducing operating costs by 35% through modernization and negotiation." },
          ],
          
          achievements: [
@@ -487,6 +488,16 @@
                style={{ width: `${level}%` }}
              ></div>
            </div>
+         </div>
+       );
+
+       const SkillCard = ({ icon, title, description }) => (
+         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-indigo-300 dark:hover:border-indigo-600">
+           <div className="flex items-start mb-3">
+             <span className="text-3xl mr-3 flex-shrink-0">{icon}</span>
+             <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{title}</h3>
+           </div>
+           <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{description}</p>
          </div>
        );
 
@@ -951,9 +962,9 @@
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
                          Core Technical <span className="text-indigo-600 dark:text-indigo-400">Expertise</span>
                        </h2>
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                          {MOCK_DATA.skills.map((skill, index) => (
-                           <SkillBar key={index} {...skill} />
+                           <SkillCard key={index} {...skill} />
                          ))}
                        </div>
                        
