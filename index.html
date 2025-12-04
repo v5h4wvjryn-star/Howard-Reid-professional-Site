@@ -518,14 +518,14 @@
                    <section id="home" className="pt-20 pb-24 md:pt-32 md:pb-40 px-4 sm:px-6 lg:px-8 text-center min-h-screen flex items-center justify-center">
                      <div className="max-w-4xl mx-auto">
                        {/* Professional Image */}
-                       <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-indigo-500 dark:border-indigo-400 shadow-2xl">
+                       <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-6 border-indigo-500 dark:border-indigo-400 shadow-2xl">
                            <img
                                src={MOCK_DATA.profileImageUrl}
                                alt={`${MOCK_DATA.name} Profile`}
                                className="w-full h-full object-cover"
                                onError={(e) => {
                                    e.target.onerror = null;
-                                   e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"><svg class="w-16 h-16 text-indigo-500 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.015-8 4.5V20h16v-1.5c0-2.485-3.582-4.5-8-4.5z"></path></svg></div>';
+                                   e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"><svg class="w-24 h-24 text-indigo-500 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.015-8 4.5V20h16v-1.5c0-2.485-3.582-4.5-8-4.5z"></path></svg></div>';
                                }}
                            />
                        </div>
