@@ -1033,76 +1033,32 @@
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
                          Let's <span className="text-indigo-600 dark:text-indigo-400">Connect</span>
                        </h2>
-                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                         Ready to start a project? Have a question? Send me a message, and I'll get back to you as soon as possible.
+                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-12">
+                         Ready to start a project? Have a question? Choose your preferred way to reach out.
                        </p>
-                       <form id="contactForm" onSubmit={async (e) => {
-                         e.preventDefault();
-                         const name = e.target.name.value;
-                         const email = e.target.email.value;
-                         const message = e.target.message.value;
 
-                         // Build the message to copy
-                         const formattedMessage = `Subject: Message from ${name} via Professional Website\n\nName: ${name}\nEmail: ${email}\n\n${message}`;
-
-                         try {
-                           // Copy message to clipboard
-                           await navigator.clipboard.writeText(formattedMessage);
-
-                           // Show success notification
-                           alert('✅ Message copied to clipboard!\n\nYou will now be redirected to Howard\'s LinkedIn profile.\n\nClick the "Message" button on his profile and paste your message.');
-
-                           // Redirect to LinkedIn profile
-                           window.open('https://www.linkedin.com/in/howardareid', '_blank');
-
-                           // Clear the form
-                           e.target.reset();
-                         } catch (err) {
-                           // Fallback if clipboard fails
-                           alert('Please copy this message and send it to Howard on LinkedIn:\n\n' + formattedMessage);
-                           window.open('https://www.linkedin.com/in/howardareid', '_blank');
-                           e.target.reset();
-                         }
-                       }} className="space-y-6 p-8 rounded-2xl border border-gray-100 dark:border-gray-700">
-                         <div>
-                           <input
-                             type="text"
-                             name="name"
-                             placeholder="Your Name"
-                             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-900 dark:text-white transition duration-150"
-                             required
-                           />
-                         </div>
-                         <div>
-                           <input
-                             type="email"
-                             name="email"
-                             placeholder="Your Email"
-                             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-900 dark:text-white transition duration-150"
-                             required
-                           />
-                         </div>
-                         <div>
-                           <textarea
-                             name="message"
-                             placeholder="Your Message"
-                             rows="5"
-                             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-900 dark:text-white transition duration-150"
-                             required
-                           ></textarea>
-                         </div>
-                         <button
-                           type="submit"
-                           className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
+                       <div className="flex flex-col sm:flex-row gap-6 justify-center items-stretch max-w-2xl mx-auto">
+                         {/* LinkedIn Button */}
+                         <a
+                           href="https://www.linkedin.com/in/howardareid"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="flex-1 flex flex-col items-center justify-center px-8 py-8 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
                          >
-                           Copy & Connect on LinkedIn
-                         </button>
-                       </form>
-                       <div className="mt-6 text-gray-600 dark:text-gray-400">
-                           <Mail className="w-5 h-5 inline-block mr-2" />
-                           <a href="mailto:Howard.Reid@outlook.com" className="hover:text-indigo-600 transition duration-150">
-                               Howard.Reid@outlook.com
-                           </a>
+                           <Linkedin className="w-12 h-12 mb-3" />
+                           <span className="text-xl mb-2">Connect on LinkedIn</span>
+                           <span className="text-sm text-blue-100">Click to message me</span>
+                         </a>
+
+                         {/* Email Button */}
+                         <a
+                           href="mailto:Howard.Reid@outlook.com"
+                           className="flex-1 flex flex-col items-center justify-center px-8 py-8 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
+                         >
+                           <Mail className="w-12 h-12 mb-3" />
+                           <span className="text-xl mb-2">Send an Email</span>
+                           <span className="text-sm text-indigo-100">Howard.Reid@outlook.com</span>
+                         </a>
                        </div>
                      </div>
                    </section>
