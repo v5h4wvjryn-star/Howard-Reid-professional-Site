@@ -1036,24 +1036,33 @@
                        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
                          Ready to start a project? Have a question? Send me a message, and I'll get back to you as soon as possible.
                        </p>
-                       <form id="contactForm" onSubmit={(e) => {
+                       <form id="contactForm" onSubmit={async (e) => {
                          e.preventDefault();
                          const name = e.target.name.value;
                          const email = e.target.email.value;
                          const message = e.target.message.value;
 
-                         // Build the LinkedIn message
-                         const subject = `Message from ${name} via Professional Website`;
-                         const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+                         // Build the message to copy
+                         const formattedMessage = `Subject: Message from ${name} via Professional Website\n\nName: ${name}\nEmail: ${email}\n\n${message}`;
 
-                         // Create LinkedIn messaging URL with pre-filled content
-                         const linkedInUrl = `https://www.linkedin.com/messaging/compose/?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                         try {
+                           // Copy message to clipboard
+                           await navigator.clipboard.writeText(formattedMessage);
 
-                         // Open LinkedIn in new tab
-                         window.open(linkedInUrl, '_blank');
+                           // Show success notification
+                           alert('✅ Message copied to clipboard!\n\nYou will now be redirected to Howard\'s LinkedIn profile.\n\nClick the "Message" button on his profile and paste your message.');
 
-                         // Clear the form
-                         e.target.reset();
+                           // Redirect to LinkedIn profile
+                           window.open('https://www.linkedin.com/in/howardareid', '_blank');
+
+                           // Clear the form
+                           e.target.reset();
+                         } catch (err) {
+                           // Fallback if clipboard fails
+                           alert('Please copy this message and send it to Howard on LinkedIn:\n\n' + formattedMessage);
+                           window.open('https://www.linkedin.com/in/howardareid', '_blank');
+                           e.target.reset();
+                         }
                        }} className="space-y-6 p-8 rounded-2xl border border-gray-100 dark:border-gray-700">
                          <div>
                            <input
@@ -1086,7 +1095,7 @@
                            type="submit"
                            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
                          >
-                           Send Message via LinkedIn
+                           Copy & Connect on LinkedIn
                          </button>
                        </form>
                        <div className="mt-6 text-gray-600 dark:text-gray-400">
