@@ -805,7 +805,21 @@
                      </div>
                    </section>
 
-                   {/* 3. Leadership Competencies Section */}
+                   {/* 3. Key Achievements Section */}
+                   <section id="achievements" className="py-20 px-4 sm:px-6 lg:px-8">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                         Key <span className="text-indigo-600 dark:text-indigo-400">Achievements</span>
+                       </h2>
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                         {MOCK_DATA.achievements.map((achievement, index) => (
+                           <AchievementCard key={index} {...achievement} />
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* 4. Leadership Competencies Section */}
                    <section id="leadership-competencies" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
                      <div className="max-w-6xl mx-auto">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 text-center">
@@ -822,7 +836,7 @@
                      </div>
                    </section>
 
-                   {/* 4. Skills/Expertise Section */}
+                   {/* 5. Skills/Expertise Section */}
                    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
                      <div className="max-w-6xl mx-auto">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
@@ -833,19 +847,10 @@
                            <SkillBar key={index} {...skill} />
                          ))}
                        </div>
-                       
-                       <h3 className="text-3xl font-bold text-gray-900 dark:text-white mt-16 mb-8 text-center">
-                           Key <span className="text-indigo-600 dark:text-indigo-400">Achievements</span>
-                       </h3>
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                         {MOCK_DATA.achievements.map((achievement, index) => (
-                           <AchievementCard key={index} {...achievement} />
-                         ))}
-                       </div>
                      </div>
                    </section>
                    
-                   {/* 5. Highlighted Projects / Case Studies - Summary View */}
+                   {/* 6. Highlighted Projects / Case Studies - Summary View */}
                    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
                      <div className="max-w-6xl mx-auto">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
@@ -863,7 +868,7 @@
                    </section>
 
 
-                   {/* 6. Professional Experience Section */}
+                   {/* 7. Professional Experience Section */}
                    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
                      <div className="max-w-6xl mx-auto">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
@@ -888,7 +893,7 @@
                    </section>
 
 
-                   {/* 7. Contact Section */}
+                   {/* 8. Contact Section */}
                    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl mx-4 sm:mx-6 lg:mx-8 mb-12">
                      <div className="max-w-xl mx-auto text-center">
                        <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
@@ -946,7 +951,7 @@
 
              </main>
 
-             {/* 8. Footer */}
+             {/* 9. Footer */}
              <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-12 py-8">
                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
                  <p>© {new Date().getFullYear()} {MOCK_DATA.name}. All rights reserved.</p>
