@@ -970,7 +970,7 @@
                        {/* Professional Image */}
                        <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-6 border-indigo-500 dark:border-indigo-400 shadow-2xl">
                            <img
-                               src={MOCK_DATA.profileImageUrl}
+                               src={darkMode ? MOCK_DATA.profileImageUrl : "./profile-light.jpeg"}
                                alt={`${MOCK_DATA.name} Profile`}
                                className="w-full h-full object-cover"
                                onError={(e) => {
