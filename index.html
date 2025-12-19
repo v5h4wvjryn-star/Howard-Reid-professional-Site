@@ -973,7 +973,7 @@
                                key={darkMode ? 'dark-profile' : 'light-profile'}
                                src={darkMode ? MOCK_DATA.profileImageUrl : "./profile-light.jpeg"}
                                alt={`${MOCK_DATA.name} Profile`}
-                               className="w-full h-full object-cover"
+                               className={`w-full h-full ${darkMode ? 'object-cover' : 'object-contain'}`}
                                onError={(e) => {
                                    e.target.onerror = null;
                                    e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"><svg class="w-24 h-24 text-indigo-500 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.015-8 4.5V20h16v-1.5c0-2.485-3.582-4.5-8-4.5z"></path></svg></div>';
