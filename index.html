@@ -968,7 +968,7 @@
                    <section id="home" className="pt-20 pb-24 md:pt-32 md:pb-40 px-4 sm:px-6 lg:px-8 text-center min-h-screen flex items-center justify-center">
                      <div className="max-w-4xl mx-auto">
                        {/* Professional Image */}
-                       <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-6 border-indigo-500 dark:border-indigo-400 shadow-2xl">
+                       <div className={`${darkMode ? 'w-48 h-48' : 'w-64 h-64'} mx-auto mb-6 rounded-full overflow-hidden border-6 border-indigo-500 dark:border-indigo-400 shadow-2xl`}>
                            <img
                                key={darkMode ? 'dark-profile' : 'light-profile'}
                                src={darkMode ? MOCK_DATA.profileImageUrl : "./profile-light.jpeg"}
