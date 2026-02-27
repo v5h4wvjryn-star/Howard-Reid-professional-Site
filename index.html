@@ -497,6 +497,21 @@
          ],
 
          experience: [
+          { period: "2025 - PRESENT", role: "Founder & Product Technology Lead", company: "Pantry Tab LLC", location: "DALLAS–FORT WORTH, TX (REMOTE)",
+            description: "Founded and launched a subscription-based SaaS platform that automates grocery inventory, recipe planning, and household management using modern cloud and AI workflows.",
+            highlights: [
+              "Led end-to-end product strategy, design, and launch of a consumer SaaS platform",
+              "Designed scalable cloud architecture with strong security, privacy, and data-protection practices",
+              "Implemented AI-driven automation workflows to improve user experience and reduce manual data entry",
+              "Established subscription billing, compliance, and customer-data governance processes",
+              "Built marketing automation and analytics workflows to track adoption and engagement",
+              "Managed branding, pricing model, legal policies, and go-to-market strategy"
+            ],
+            impact: [
+              "Live SaaS platform demonstrating leadership across product development, cloud architecture, security governance, and operations",
+              "Strengthened hands-on expertise in modern SaaS, AI, and subscription business models relevant to CIO-level digital transformation initiatives"
+            ]
+          },
            { period: "MAY 2025 - PRESENT", role: "Strategic Advisor, Business Development & IT Operations", company: "Blue Star Equity Group", location: "FORT WORTH, TX", highlights: [
                "Serve as a Chief-Level Technology Consultant, providing deep strategic guidance and operational advisory across the equity group and its diverse portfolio companies.",
                "Architected foundational IT, Cloud, and Automation Frameworks to ensure scalable, rapid growth for multiple service businesses.",
@@ -607,12 +622,12 @@
          </div>
        );
 
-       const ExperienceItem = ({ period, role, company, location, highlights }) => (
+       const ExperienceItem = ({ period, role, company, location, description, highlights, impact }) => (
          <div className="relative pl-8 sm:pl-32 pb-16 group">
            {/* Line and Dot */}
            <div className="absolute left-0 sm:left-10 top-0 w-px bg-gray-300 dark:bg-gray-700 h-full group-last:h-1/2"></div>
            <div className="absolute -left-1 sm:left-9 top-0 w-3 h-3 bg-indigo-600 rounded-full ring-4 ring-white dark:ring-gray-900 z-10"></div>
-           
+
            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
              <div className="sm:w-20 sm:text-right mb-2 sm:mb-0">
                <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">{period}</span>
@@ -620,11 +635,27 @@
              <div className="sm:flex-1 sm:pl-6">
                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{role}</h3>
                <p className="text-indigo-600 dark:text-indigo-400 font-medium mb-3">{company} <span className="text-gray-500 dark:text-gray-400 font-normal">| {location}</span></p>
-               <ul className="list-disc space-y-2 text-gray-700 dark:text-gray-300 ml-4">
-                 {highlights.map((h, i) => (
-                   <li key={i} className="text-sm">{h}</li>
-                 ))}
-               </ul>
+               {description && <p className="text-sm text-gray-600 dark:text-gray-300 italic mb-3">{description}</p>}
+               {highlights && highlights.length > 0 && (
+                 <>
+                   {impact && <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-1">Key Contributions</p>}
+                   <ul className="list-disc space-y-2 text-gray-700 dark:text-gray-300 ml-4">
+                     {highlights.map((h, i) => (
+                       <li key={i} className="text-sm">{h}</li>
+                     ))}
+                   </ul>
+                 </>
+               )}
+               {impact && impact.length > 0 && (
+                 <>
+                   <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mt-4 mb-1">Impact</p>
+                   <ul className="list-disc space-y-2 text-gray-700 dark:text-gray-300 ml-4">
+                     {impact.map((h, i) => (
+                       <li key={i} className="text-sm">{h}</li>
+                     ))}
+                   </ul>
+                 </>
+               )}
              </div>
            </div>
          </div>
