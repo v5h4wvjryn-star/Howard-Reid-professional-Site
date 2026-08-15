@@ -1164,6 +1164,8 @@
          const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project', or 'leadership'
          const [selectedProjectId, setSelectedProjectId] = useState(null);
          const [selectedLeadershipId, setSelectedLeadershipId] = useState(null);
+         // Remembers which section a detail page was opened from, so "Back" returns there
+         const [returnSection, setReturnSection] = useState('projects');
 
          useEffect(() => {
            // Manages the dark mode class on the root HTML element
@@ -1173,6 +1175,16 @@
              document.documentElement.classList.remove('dark');
            }
          }, [darkMode]);
+
+         // Jump to the top of any detail page AFTER it renders.
+         // This must run in an effect, not in the click handler: scrolling before
+         // React commits the new page means the browser clamps the scroll offset to
+         // the old (much taller) document, dumping the reader at the bottom.
+         useEffect(() => {
+           if (currentPage === 'project' || currentPage === 'leadership') {
+             window.scrollTo({ top: 0, behavior: 'auto' });
+           }
+         }, [currentPage, selectedProjectId, selectedLeadershipId]);
 
          const handleScroll = (id) => {
            // Only scroll if we are on the home page
@@ -1188,18 +1200,18 @@
            }
          };
 
-         const handleSelectProject = (id) => {
-           // Navigates to the project's 'own page' view
+         const handleSelectProject = (id, fromSection) => {
+           // Navigates to the project's 'own page' view.
+           // Scrolling is handled by the effect above, once the page has rendered.
            setSelectedProjectId(id);
+           setReturnSection(fromSection || 'projects');
            setCurrentPage('project');
-           window.scrollTo({ top: 0, behavior: 'smooth' });
          };
 
          const handleSelectLeadership = (id) => {
            // Navigates to the leadership competency detail page
            setSelectedLeadershipId(id);
            setCurrentPage('leadership');
-           window.scrollTo({ top: 0, behavior: 'smooth' });
          };
 
          const handleGoBack = () => {
@@ -1207,7 +1219,8 @@
            if (currentPage === 'project') {
              setSelectedProjectId(null);
              setCurrentPage('home');
-             setTimeout(() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }), 50);
+             // Return to whichever section the card was opened from
+             setTimeout(() => document.getElementById(returnSection)?.scrollIntoView({ behavior: 'smooth' }), 50);
            } else if (currentPage === 'leadership') {
              setSelectedLeadershipId(null);
              setCurrentPage('home');
@@ -1446,7 +1459,7 @@
                        </p>
                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                          {MOCK_DATA.aiProjects.map((project, index) => (
-                           <ProjectSummaryCard key={index} {...project} onSelectProject={handleSelectProject} />
+                           <ProjectSummaryCard key={index} {...project} onSelectProject={(pid) => handleSelectProject(pid, 'ai-projects')} />
                          ))}
                        </div>
                      </div>
@@ -1462,7 +1475,7 @@
                          {MOCK_DATA.projectSummaries.map((project, index) => (
                            // Using index to ensure 3 cards fit nicely on desktop, with 2 extra on the next row.
                            <div key={index} className={index >= 3 ? 'lg:col-span-1 md:col-span-1' : 'lg:col-span-1 md:col-span-1'}>
-                             <ProjectSummaryCard {...project} onSelectProject={handleSelectProject} />
+                             <ProjectSummaryCard {...project} onSelectProject={(pid) => handleSelectProject(pid, 'projects')} />
                            </div>
                          ))}
                        </div>
