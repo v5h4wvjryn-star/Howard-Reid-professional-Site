@@ -3,10 +3,36 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Howard Reid | Director of IT — AI Systems & Governance, Private Equity Technology, PMO, M&A Integration, Cloud & Cybersecurity</title>
+   <title>Howard Reid | Technology Executive — AI Systems & Governance, Private Equity Portfolio Technology, PMO, M&A, Cloud & Cybersecurity</title>
    <meta name="description" content="Howard Reid — Technology executive with 27+ years leading enterprise IT strategy, private equity portfolio technology operations, enterprise PMO, M&A integration, cloud modernization, and cybersecurity transformation. Builds production AI systems: multi-agent architectures, agent governance frameworks, and MCP tooling.">
-   <meta name="keywords" content="Director of IT, Senior Director, AI Strategy, AI Governance, Multi-Agent Systems, Model Context Protocol, MCP, AI Automation, Private Equity Portfolio, Technology Executive, Enterprise PMO, M&A Integration, Cloud Modernization, Cybersecurity, Zero Trust, IT Strategy">
-   <!-- Updated: Fixed React rendering and icon compatibility -->
+   <meta name="keywords" content="Technology Executive, CIO, Chief Information Officer, VP of Technology, VP Information Technology, Senior Director of IT, Director of IT, AI Strategy, AI Governance, Multi-Agent Systems, Model Context Protocol, MCP, AI Automation, Private Equity Portfolio, Enterprise PMO, M&A Integration, Cloud Modernization, Cybersecurity, Zero Trust, IT Strategy">
+   <link rel="canonical" href="https://www.howardreid.me/">
+   <meta name="author" content="Howard Reid">
+   <meta name="theme-color" content="#0f172a">
+
+   <!-- Favicon -->
+   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+   <!-- Open Graph (LinkedIn, Facebook, Slack, iMessage) -->
+   <meta property="og:type" content="profile">
+   <meta property="og:site_name" content="Howard Reid">
+   <meta property="og:url" content="https://www.howardreid.me/">
+   <meta property="og:title" content="Howard Reid — Technology Executive | AI Systems &amp; Governance">
+   <meta property="og:description" content="27+ years leading enterprise IT strategy, private equity portfolio technology, PMO, M&amp;A integration, cloud and cybersecurity. Builds production AI systems: multi-agent architectures, agent governance frameworks, and MCP tooling.">
+   <meta property="og:image" content="https://www.howardreid.me/og-image.png">
+   <meta property="og:image:width" content="1200">
+   <meta property="og:image:height" content="630">
+   <meta property="og:image:alt" content="Howard Reid — Technology Executive. AI Systems &amp; Governance, Private Equity Portfolio Technology, Enterprise PMO &amp; M&amp;A Integration, Cloud &amp; Cybersecurity.">
+   <meta property="profile:first_name" content="Howard">
+   <meta property="profile:last_name" content="Reid">
+
+   <!-- Twitter / X -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="Howard Reid — Technology Executive | AI Systems &amp; Governance">
+   <meta name="twitter:description" content="27+ years leading enterprise IT strategy, private equity portfolio technology, PMO, M&amp;A integration, cloud and cybersecurity. Builds production AI systems.">
+   <meta name="twitter:image" content="https://www.howardreid.me/og-image.png">
+
    <!-- Load the 'Inter' font from Google Fonts -->
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
    <!-- Load the Tailwind CSS CDN for styling -->
@@ -41,9 +67,52 @@
 
        // --- FULL PROJECT DETAIL DATA ---
        const PROJECT_DETAILS = {
+         'signal-works': {
+           title: "Signal Works — Shared-Service AI Marketing Firm",
+           context: "Signal Works is an AI marketing organization rather than a marketing tool. Seven \u201cStudio\u201d agents \u2014 brand and strategy, paid acquisition, organic growth, social and community, creative, lifecycle, and insights \u2014 serve multiple portfolio companies under engagement contracts, coordinated by a director agent and governed by three system agents: an Approval Router, a Policy Engine that acts as the single source of truth for what authority tier any action falls under, and a Graduation Tracker that measures whether an agent has earned more autonomy but is structurally forbidden from granting it. The design decision that matters most is the founder lock: no customer-facing content publishes without human approval, and that constraint is encoded in four independent places \u2014 the master blueprint, the foundational design document, the Social Studio charter, and a flag on every individual engagement file. The redundancy is deliberate. A control that exists in exactly one place is a control that can be removed by accident.",
+           images: [
+             { src: "./assets/signalworks-dashboard.webp",
+               alt: "Signal Works review queue showing 29 drafts pending review, 22 approved, 7 rejected, 67 total, with approve, reject and edit controls on each draft.",
+               caption: "The approval queue. AI drafts the content; a human approves, rejects, or edits every item before anything reaches a channel. Client and business identifiers redacted." },
+           ],
+           responsibilities: [
+             "Designed a shared-services marketing organization of eleven agents \u2014 seven domain Studios, three system agents, and a coordinating director \u2014 serving multiple portfolio companies from one capability rather than duplicating a marketing function inside each.",
+             "Built the approval pipeline end to end: drafts enter a review queue with pending, approved, rejected, pushed, and exported states, and only a human moves content past review.",
+             "Encoded the founder lock on customer-facing publishing in four independent locations so that no single edit can silently remove it.",
+             "Wrote a Policy Engine as the single source of truth for what authority tier a given action requires on a given engagement, so tiering is resolved by policy rather than by each agent's judgment.",
+             "Built a Graduation Tracker that measures eligibility for increased autonomy but is explicitly barred from granting it \u2014 promotion remains an owner decision.",
+             "Implemented the backend as pure-standard-library Python (~750 lines) with a single-dispatch API surface, backup-before-write on every queue mutation, and atomic file writes.",
+             "Built REST endpoints for queue retrieval, approve, reject, field-level edit, and export, each writing an audit record with timestamp and actor.",
+             "Integrated a product catalog sync against the Shopify Admin API using normalized title matching with a fuzzy substring fallback, cached atomically to disk.",
+             "Delivered a review dashboard with status counts, filtered queues, inline editing, and one-click export of approved content to a scheduling-tool CSV.",
+             "Structured the initial build to match the locked target architecture conventions so the later foundation build absorbs it mechanically instead of requiring a rewrite.",
+           ],
+           benefits: [
+             "Demonstrates the governance thesis in production: AI generates at volume, a human authorizes, and nothing customer-facing publishes unreviewed.",
+             "The shared-service model eliminates duplicated marketing capability across portfolio companies \u2014 the same consolidation argument that justifies shared IT services in an enterprise.",
+             "Every state change carries an audit record, so content decisions are traceable after the fact rather than reconstructed.",
+             "Defense-in-depth on the publishing lock reflects real controls practice: a control encoded once is a control that erodes.",
+             "Building the first version to the conventions of the eventual architecture avoided the rewrite that normally follows a proof of concept.",
+           ],
+           technical: [
+             "Multi-Agent Orchestration",
+             "Human-in-the-Loop Approval Workflow",
+             "Policy & Authority Engines",
+             "Python REST API (stdlib)",
+             "Shopify Admin API Integration",
+             "Audit Logging & Atomic Writes",
+             "Content Operations Automation",
+             "Review Dashboard & Tooling",
+           ],
+         },
          'exodus-multi-agent': {
            title: "EXODUS — Autonomous Multi-Agent Operating System",
            context: "EXODUS is a production multi-agent AI system I designed and built in Python — roughly 117 modules and 37,800 lines of code — that runs the daily operating rhythm of a private venture portfolio. Rather than a single assistant answering prompts, it is an organization: about twenty specialized agents arranged in a deliberate hierarchy, each with defined scope, authority, and reporting lines. An executive tier (CEO, CFO, CIO, CRO) sets direction, domain desk agents handle specialized analysis, a dedicated escalation agent enforces the boundary conditions, and a chief-of-staff agent named Moses acts as the single human-facing entry point. The design principle is the one that governs any well-run enterprise: the owner reviews decisions, rather than managing the people making them. The interesting engineering problem was never getting an agent to produce output — it was getting twenty of them to operate continuously without producing chaos, and doing it at a model cost tracked at roughly ten dollars a month.",
+           images: [
+             { src: "./assets/exodus-dashboard.webp",
+               alt: "EXODUS operations dashboard showing system health, macro environment, five agent desks with status and open positions, a pending-decisions panel, and phase progress checklist.",
+               caption: "The operations dashboard: every agent's state on one screen, with a pending-decisions queue as the single place a human is asked for input. Business identifiers and capital figures redacted." },
+           ],
            responsibilities: [
              "Designed and built EXODUS end to end — a production multi-agent operating system of ~117 Python modules and 37,800+ lines running continuous daily operations.",
              "Architected a hierarchical agent organization of roughly twenty agents: an executive tier (CEO, CFO, CIO, CRO), specialized domain desk agents, a cross-entity oversight agent, and a dedicated escalation agent, each with explicit scope and authority.",
@@ -76,6 +145,11 @@
          'ai-agent-governance': {
            title: "AI Agent Governance & Delegated Authority Framework",
            context: "Built for a confidential business. The question that stops enterprise AI adoption is not whether an agent can perform the work — it is who authorized the action, what the agent was permitted to decide alone, and how any of it can be audited afterward. I wrote a formal governance framework to answer that. It defines a three-tier authority model, explicit decision rights and escalation thresholds per agent role, and a documented target distribution for where decisions should resolve. It borrows its structure from private equity governance: a holding entity does not operate its portfolio companies, it governs them, and it intervenes only when a decision exceeds delegated authority. The framework also solves a failure mode that gets far less attention than it deserves — context drift, where successive AI sessions silently work from stale or duplicated copies of files. The fix was not more prompting. It was a versioned directory contract treated as a controlled document, with any artifact found outside its contracted location escalated as an anomaly rather than quietly used.",
+           images: [
+             { src: "./assets/agent-governance.svg",
+               alt: "Diagram of a three-tier delegated authority model: domain operating agents resolve 90 percent of decisions, an executive oversight tier resolves 9 percent, and 1 percent escalates through a chief-of-staff agent to the human owner.",
+               caption: "The authority model. Decision rights are explicit at each tier, and the escalation path is the only route to a human \u2014 which is what makes the system auditable." },
+           ],
            responsibilities: [
              "Authored a formal Global Executive Authority Matrix specifying what autonomous AI agents may decide independently, what requires peer review, and what must escalate to a human owner.",
              "Designed a three-tier governance model — domain operating agents, a cross-entity executive oversight tier, and a chief-of-staff layer — modeled on how a private equity firm governs rather than operates its portfolio.",
@@ -105,6 +179,11 @@
          'tradingview-mcp': {
            title: "TradingView MCP Bridge — Agent Tooling & Protocol Engineering",
            context: "An open-source Model Context Protocol server that gives LLM agents structured, tool-level access to a live desktop trading application. Most enterprise software an AI agent needs to reach has no convenient API — it is a stateful desktop or legacy application that was never designed to be automated. This project is a working answer to that problem. It connects over Chrome DevTools Protocol against the application's Electron runtime, with no server-side API calls, no network interception, and no vendor data redistribution. Beyond the integration itself, the harder design work was context economics: a single Pine Script source file can exceed 200KB and full chart state can blow past any practical context window, so every tool defaults to compact, filtered, deduplicated output with verbose mode as an explicit opt-in. It ships with a CLI, an automated test suite, and full security and contribution documentation.",
+           images: [
+             { src: "./assets/tradingview-mcp.webp",
+               alt: "Trading chart interface driven by the MCP bridge, showing candlestick data, volume, session controls and toggles for indicators including VWAP, EMA, MACD and CVD.",
+               caption: "A chart session driven entirely through MCP tool calls \u2014 symbol, timeframe, session bounds and indicator overlays all set by the agent rather than by hand. Local endpoint redacted." },
+           ],
            responsibilities: [
              "Built an open-source Model Context Protocol (MCP) server in Node.js exposing structured tool-level access to a live, stateful desktop application for LLM agents.",
              "Engineered the integration over Chrome DevTools Protocol against the application's Electron runtime — no vendor API dependency, no network interception, no data redistribution.",
@@ -558,6 +637,14 @@
         'pantry-tab': {
           title: "Pantry Tab — AI-Driven Household SaaS Platform",
           context: "Pantry Tab is a live, subscription-based platform that helps families manage groceries, recipes, allergies, and meal planning in one place. I founded it and built it from the ground up — 400+ commits into a production product, not a proof of concept. The backend is 26 serverless edge functions, nine of them AI-powered: recipe parsing from photographs, receipts, URLs, and documents, ingredient recognition from images, automated weekly meal planning, and generated prep sheets and shopping lists. It carries a full retail grocery commerce integration, complete Stripe subscription billing, and ships as an installable progressive web app. The judgment call worth noting is where the AI actually sits: at ingestion, eliminating the manual data entry that kills adoption of every household app of this kind — rather than as a chatbot bolted onto an otherwise conventional product.",
+          images: [
+          { src: "./assets/pantrytab-dashboard.webp",
+          alt: "Pantry Tab dashboard showing pantry value, expiring items, inventory counts by storage location, and AI actions for meal planning, grocery list building and receipt scanning.",
+          caption: "The dashboard. The three AI actions sit at the point of friction \u2014 planning, list building, and scanning \u2014 rather than behind a chat box." },
+          { src: "./assets/pantrytab-meal-planner.webp",
+          alt: "Pantry Tab weekly meal planner view showing planned meals across days of the week.",
+          caption: "Weekly planning generated from what is already in the pantry and what expires soonest." },
+          ],
           responsibilities: [
             "Founded and built a production subscription SaaS platform end to end, sustained through 400+ commits from concept to live paying product.",
             "Architected a serverless backend of 26 Supabase edge functions spanning AI inference, third-party commerce, billing, and scheduled jobs.",
@@ -691,7 +778,7 @@
        // --- MOCK DATA ---
        const MOCK_DATA = {
          name: "Howard Reid",
-         tagline: "Director of IT | Private Equity Technology Leader | AI Systems & Governance | Enterprise PMO & M&A Integration | Cloud & Cybersecurity Transformation",
+         tagline: "Technology Executive | AI Systems & Governance | Private Equity Portfolio Technology | Enterprise PMO & M&A Integration | Cloud & Cybersecurity",
          profileImageUrl: "./IMG_9551.jpeg",
 
          story: "I'm a technology executive with 27+ years of experience leading enterprise IT strategy, infrastructure modernization, cybersecurity transformation, and operational governance across complex multi-company environments.\n\nMy background includes supporting 27+ private equity portfolio companies, building enterprise PMO and ITSM functions, leading M&A technology integration, and delivering measurable business outcomes including $5M+ annual cost synergies, $750K annual cloud savings, and 35% infrastructure cost reductions.\n\nMore recently I've been building AI systems hands-on — production multi-agent architectures, formal governance frameworks defining what autonomous agents may decide and when they must escalate, and protocol-level tooling connecting AI to existing business applications. I approach AI the same way I approach any enterprise platform: with attention to authority, auditability, and cost, because those are what determine whether it survives contact with a real organization.\n\nI specialize in helping organizations improve execution discipline, reduce technology risk, modernize infrastructure, and align IT investments with business growth.",
@@ -739,6 +826,7 @@
            { id: 'exodus-multi-agent', title: "EXODUS \u2014 Autonomous Multi-Agent Operating System", shortDescription: "A production multi-agent AI system in Python (~37,800 lines) running daily operations through roughly twenty specialized agents with defined authority, escalation paths, and executive reporting \u2014 at about $10/month in model cost." },
            { id: 'ai-agent-governance', title: "AI Agent Governance & Delegated Authority Framework", shortDescription: "A formal three-tier authority matrix for autonomous AI agents \u2014 decision rights, escalation thresholds, and document control \u2014 answering the question that actually blocks enterprise agent adoption: who authorized the action, and how is it audited?" },
            { id: 'tradingview-mcp', title: "TradingView MCP Bridge \u2014 Agent Tooling & Protocol Engineering", shortDescription: "An open-source Model Context Protocol server giving LLM agents structured access to a stateful desktop application over Chrome DevTools Protocol \u2014 16 tool modules, 5 packaged agent skills, full test suite and security policy." },
+           { id: 'signal-works', title: "Signal Works \u2014 Shared-Service AI Marketing Firm", shortDescription: "Eleven agents producing marketing content at volume behind a human approval gate \u2014 with the publishing lock encoded in four separate places so no single edit can remove it." },
            { id: 'pantry-tab', title: "Pantry Tab \u2014 AI-Driven Household SaaS Platform", shortDescription: "A live subscription SaaS platform built from scratch: 26 serverless edge functions, nine of them AI-powered, plus retail grocery commerce integration, Stripe billing, and an installable PWA." },
            { id: 'hoa-compliance', title: "AI Process Automation in a Regulated Industry \u2014 HOA Compliance Platform", shortDescription: "An end-to-end AI automation system built around a Texas regulatory compliance gap: live-data prospecting, risk scoring, AI-assisted site generation, and automated deployment \u2014 clients live in 48 hours, no developer required." },
          ],
@@ -974,7 +1062,7 @@
            </button>
        );
 
-       const ProjectDetailPage = ({ projectData, onGoBack }) => (
+       const ProjectDetailPage = ({ projectData, onGoBack, backLabel }) => (
            <section className="py-20 px-4 sm:px-6 lg:px-8 min-h-screen">
                <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 md:p-12 rounded-2xl shadow-2xl">
                    <button
@@ -982,7 +1070,7 @@
                        className="mb-8 flex items-center text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-700 transition duration-150"
                    >
                        <ArrowLeft className="w-5 h-5 mr-2" />
-                       Back to Projects List
+                       {backLabel || 'Back to Projects List'}
                    </button>
 
                    <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight">
@@ -991,6 +1079,27 @@
                    <p className="text-lg text-gray-600 dark:text-gray-300 mb-10 border-b pb-4 border-gray-200 dark:border-gray-700 italic">
                        {projectData.context}
                    </p>
+
+                   {/* Screenshots / diagrams */}
+                   {projectData.images && projectData.images.length > 0 && (
+                       <div className="mb-12 space-y-8">
+                           {projectData.images.map((img, i) => (
+                               <figure key={i}>
+                                   <img
+                                       src={img.src}
+                                       alt={img.alt}
+                                       loading="lazy"
+                                       className="w-full rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg bg-gray-50 dark:bg-gray-900"
+                                   />
+                                   {img.caption && (
+                                       <figcaption className="mt-3 text-sm text-gray-500 dark:text-gray-400 text-center italic px-4">
+                                           {img.caption}
+                                       </figcaption>
+                                   )}
+                               </figure>
+                           ))}
+                       </div>
+                   )}
 
                    {/* Key Responsibilities */}
                    <div className="mb-10">
@@ -1161,11 +1270,66 @@
          const { isVisible, scrollToTop } = useScrollToTop();
          const [darkMode, setDarkMode] = useState(true);
          // State for multi-page simulation
-         const [currentPage, setCurrentPage] = useState('home'); // 'home', 'project', or 'leadership'
-         const [selectedProjectId, setSelectedProjectId] = useState(null);
-         const [selectedLeadershipId, setSelectedLeadershipId] = useState(null);
-         // Remembers which section a detail page was opened from, so "Back" returns there
-         const [returnSection, setReturnSection] = useState('projects');
+         // --- URL ROUTING ---
+         // Every case study gets a real, shareable URL (#/project/<id>, #/leadership/<id>)
+         // so a link can be sent directly to one page and the browser back button works.
+         const routeFromHash = () => {
+           const raw = (window.location.hash || '').replace(/^#\/?/, '');
+           const [kind, id] = raw.split('/');
+           if (kind === 'project' && id && PROJECT_DETAILS[id]) {
+             return { page: 'project', projectId: id, leadershipId: null };
+           }
+           if (kind === 'leadership' && id && LEADERSHIP_DETAILS[id]) {
+             return { page: 'leadership', projectId: null, leadershipId: id };
+           }
+           return { page: 'home', projectId: null, leadershipId: null };
+         };
+         const initialRoute = routeFromHash();
+
+         const [currentPage, setCurrentPage] = useState(initialRoute.page); // 'home', 'project', or 'leadership'
+         const [selectedProjectId, setSelectedProjectId] = useState(initialRoute.projectId);
+         const [selectedLeadershipId, setSelectedLeadershipId] = useState(initialRoute.leadershipId);
+         const didInitRoute = React.useRef(false);
+
+         // Which section a project card belongs to, so "Back" returns to the right place
+         // (derived rather than remembered, so it also works for direct links).
+         const sectionForProject = (id) =>
+           MOCK_DATA.aiProjects.some((p) => p.id === id) ? 'ai-projects' : 'projects';
+
+         // Keep the URL in sync with the current view
+         useEffect(() => {
+           let target = '#/';
+           if (currentPage === 'project' && selectedProjectId) target = `#/project/${selectedProjectId}`;
+           else if (currentPage === 'leadership' && selectedLeadershipId) target = `#/leadership/${selectedLeadershipId}`;
+           // Treat '', '#' and '#/' as the same "home" URL. Without this, returning
+           // home from a detail page pushes '#/' over an empty hash, which silently
+           // destroys the forward history and breaks the browser's forward button.
+           const raw = window.location.hash || '';
+           const current = (!raw || raw === '#' || raw === '#/') ? '#/' : raw;
+           if (!didInitRoute.current) {
+             // First run: never push, or the back button would just strip the hash
+             didInitRoute.current = true;
+             if (current !== target && target !== '#/') window.history.replaceState(null, '', target);
+             return;
+           }
+           if (current !== target) window.history.pushState(null, '', target);
+         }, [currentPage, selectedProjectId, selectedLeadershipId]);
+
+         // Respond to browser back/forward and to hash edits
+         useEffect(() => {
+           const syncFromUrl = () => {
+             const r = routeFromHash();
+             setCurrentPage(r.page);
+             setSelectedProjectId(r.projectId);
+             setSelectedLeadershipId(r.leadershipId);
+           };
+           window.addEventListener('popstate', syncFromUrl);
+           window.addEventListener('hashchange', syncFromUrl);
+           return () => {
+             window.removeEventListener('popstate', syncFromUrl);
+             window.removeEventListener('hashchange', syncFromUrl);
+           };
+         }, []);
 
          useEffect(() => {
            // Manages the dark mode class on the root HTML element
@@ -1200,11 +1364,10 @@
            }
          };
 
-         const handleSelectProject = (id, fromSection) => {
+         const handleSelectProject = (id) => {
            // Navigates to the project's 'own page' view.
-           // Scrolling is handled by the effect above, once the page has rendered.
+           // Scrolling and the URL are handled by the effects above, after render.
            setSelectedProjectId(id);
-           setReturnSection(fromSection || 'projects');
            setCurrentPage('project');
          };
 
@@ -1217,10 +1380,11 @@
          const handleGoBack = () => {
            // Handles the 'Back' button from detail pages
            if (currentPage === 'project') {
+             // Return to whichever section this project belongs to
+             const target = sectionForProject(selectedProjectId);
              setSelectedProjectId(null);
              setCurrentPage('home');
-             // Return to whichever section the card was opened from
-             setTimeout(() => document.getElementById(returnSection)?.scrollIntoView({ behavior: 'smooth' }), 50);
+             setTimeout(() => document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' }), 50);
            } else if (currentPage === 'leadership') {
              setSelectedLeadershipId(null);
              setCurrentPage('home');
@@ -1459,7 +1623,7 @@
                        </p>
                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                          {MOCK_DATA.aiProjects.map((project, index) => (
-                           <ProjectSummaryCard key={index} {...project} onSelectProject={(pid) => handleSelectProject(pid, 'ai-projects')} />
+                           <ProjectSummaryCard key={index} {...project} onSelectProject={handleSelectProject} />
                          ))}
                        </div>
                      </div>
@@ -1475,7 +1639,7 @@
                          {MOCK_DATA.projectSummaries.map((project, index) => (
                            // Using index to ensure 3 cards fit nicely on desktop, with 2 extra on the next row.
                            <div key={index} className={index >= 3 ? 'lg:col-span-1 md:col-span-1' : 'lg:col-span-1 md:col-span-1'}>
-                             <ProjectSummaryCard {...project} onSelectProject={(pid) => handleSelectProject(pid, 'projects')} />
+                             <ProjectSummaryCard {...project} onSelectProject={handleSelectProject} />
                            </div>
                          ))}
                        </div>
@@ -1515,7 +1679,7 @@
                          Let's <span className="text-indigo-600 dark:text-indigo-400">Connect</span>
                        </h2>
                        <p className="text-lg text-gray-600 dark:text-gray-300 mb-12">
-                         Currently exploring Director and Senior Director technology leadership opportunities focused on private equity portfolio operations, enterprise PMO, M&amp;A integration, and infrastructure modernization.
+                         Open to senior technology leadership roles &mdash; Director through CIO &mdash; focused on private equity portfolio operations, AI strategy and governance, enterprise PMO, M&amp;A integration, and infrastructure modernization.
                        </p>
 
                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-center items-stretch max-w-3xl mx-auto">
@@ -1556,7 +1720,7 @@
                    </section>
                  </>
                ) : currentPage === 'project' ? (
-                 <ProjectDetailPage projectData={currentProjectData} onGoBack={handleGoBack} />
+                 <ProjectDetailPage projectData={currentProjectData} onGoBack={handleGoBack} backLabel={sectionForProject(selectedProjectId) === 'ai-projects' ? 'Back to AI & Automation' : 'Back to Projects List'} />
                ) : currentPage === 'leadership' ? (
                  <LeadershipDetailPage leadershipData={currentLeadershipData} onGoBack={handleGoBack} />
                ) : null}
