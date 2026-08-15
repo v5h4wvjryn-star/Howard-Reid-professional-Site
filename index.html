@@ -41,6 +41,98 @@
 
        // --- FULL PROJECT DETAIL DATA ---
        const PROJECT_DETAILS = {
+         'exodus-multi-agent': {
+           title: "EXODUS — Autonomous Multi-Agent Operating System",
+           context: "EXODUS is a production multi-agent AI system I designed and built in Python — roughly 117 modules and 37,800 lines of code — that runs the daily operating rhythm of a private venture portfolio. Rather than a single assistant answering prompts, it is an organization: about twenty specialized agents arranged in a deliberate hierarchy, each with defined scope, authority, and reporting lines. An executive tier (CEO, CFO, CIO, CRO) sets direction, domain desk agents handle specialized analysis, a dedicated escalation agent enforces the boundary conditions, and a chief-of-staff agent named Moses acts as the single human-facing entry point. The design principle is the one that governs any well-run enterprise: the owner reviews decisions, rather than managing the people making them. The interesting engineering problem was never getting an agent to produce output — it was getting twenty of them to operate continuously without producing chaos, and doing it at a model cost tracked at roughly ten dollars a month.",
+           responsibilities: [
+             "Designed and built EXODUS end to end — a production multi-agent operating system of ~117 Python modules and 37,800+ lines running continuous daily operations.",
+             "Architected a hierarchical agent organization of roughly twenty agents: an executive tier (CEO, CFO, CIO, CRO), specialized domain desk agents, a cross-entity oversight agent, and a dedicated escalation agent, each with explicit scope and authority.",
+             "Built \"Moses,\" a chief-of-staff agent with a Telegram interface, as the single human-facing entry point — consolidating twenty agents' output into one reviewable channel.",
+             "Developed a modular skills library spanning nine domains — governance, intelligence, risk, security, capital, trading, options, futures, and shared services — so capability is composed once and reused rather than duplicated per agent.",
+             "Implemented scheduled intelligence pipelines: pre-market daily briefings, news and economic-calendar ingestion, and automated end-of-day review with persisted state across runs.",
+             "Built a REST API server and a React/Vite operations dashboard delivering portfolio-level status, system health checks, a pending-decision queue, and per-entity drill-down.",
+             "Instrumented model-cost tracking and routing to hold total AI operating cost near $10/month while running continuous multi-agent workloads.",
+             "Established durable session context and directory contracts so successive agent runs inherit state instead of rediscovering it.",
+           ],
+           benefits: [
+             "Reduced human involvement to review-and-approve against a designed 90/9/1 decision distribution — 90% resolved at the domain tier, 9% at the executive tier, and 1% escalated to a person.",
+             "Demonstrated that enterprise operating-model concepts — org charts, delegated authority, escalation paths, executive reporting — transfer directly and usefully to autonomous agent systems.",
+             "Delivered continuous multi-agent operations at roughly $10/month in model cost, showing that agentic architecture is a cost-engineering discipline rather than a prompting exercise.",
+             "Created a reusable pattern for agent observability: every agent's output flows into a common dashboard and decision queue instead of disappearing into isolated chat sessions.",
+             "Produced a working reference for how an IT organization can adopt agents at scale without surrendering auditability, traceability, or control.",
+           ],
+           technical: [
+             "Multi-Agent Orchestration",
+             "Python 3.13 / Asyncio / aiohttp",
+             "Anthropic Claude API",
+             "REST API Design",
+             "React + Vite Operations Dashboard",
+             "Scheduled Job & Data Pipelines",
+             "pandas / NumPy",
+             "Telegram Bot Integration",
+             "Model Routing & Cost Optimization",
+           ],
+         },
+         'ai-agent-governance': {
+           title: "AI Agent Governance & Delegated Authority Framework",
+           context: "Built for a confidential business. The question that stops enterprise AI adoption is not whether an agent can perform the work — it is who authorized the action, what the agent was permitted to decide alone, and how any of it can be audited afterward. I wrote a formal governance framework to answer that. It defines a three-tier authority model, explicit decision rights and escalation thresholds per agent role, and a documented target distribution for where decisions should resolve. It borrows its structure from private equity governance: a holding entity does not operate its portfolio companies, it governs them, and it intervenes only when a decision exceeds delegated authority. The framework also solves a failure mode that gets far less attention than it deserves — context drift, where successive AI sessions silently work from stale or duplicated copies of files. The fix was not more prompting. It was a versioned directory contract treated as a controlled document, with any artifact found outside its contracted location escalated as an anomaly rather than quietly used.",
+           responsibilities: [
+             "Authored a formal Global Executive Authority Matrix specifying what autonomous AI agents may decide independently, what requires peer review, and what must escalate to a human owner.",
+             "Designed a three-tier governance model — domain operating agents, a cross-entity executive oversight tier, and a chief-of-staff layer — modeled on how a private equity firm governs rather than operates its portfolio.",
+             "Defined explicit decision rights, escalation thresholds, and reporting lines for each agent role, with a documented target distribution of 90% / 9% / 1% across the three tiers.",
+             "Created a \"Directory Contract\" — a single-source-of-truth specification for where every operational file and artifact lives — to eliminate cross-session context drift.",
+             "Established anomaly-flagging rules requiring any artifact found outside its contracted location to be escalated as an exception instead of silently consumed.",
+             "Applied enterprise document-control practice to AI operating policy: classification, ownership, version history, and periodic re-verification of every governance artifact.",
+             "Defined onboarding procedures so a new entity or agent inherits the governance model by default rather than by convention.",
+           ],
+           benefits: [
+             "Addresses the actual blocker to enterprise agent adoption — authorization, traceability, and audit — rather than capability, which is rarely the constraint.",
+             "Directly transferable to enterprise AI governance, third-party AI risk review, and internal-audit readiness for organizations deploying agentic tooling.",
+             "Eliminated a real and under-discussed operational failure mode, AI context drift across sessions, using a filesystem contract instead of additional prompt engineering.",
+             "Provides a reusable template for delegated authority design, escalation thresholds, and human-in-the-loop boundaries in any AI program.",
+             "Aligns AI operations with the same governance discipline already applied to enterprise PMO, change management, and security policy.",
+           ],
+           technical: [
+             "AI Governance Frameworks",
+             "Delegated Authority & Decision Rights",
+             "Human-in-the-Loop Escalation Design",
+             "Risk & Controls",
+             "Document Control & Versioning",
+             "Operating Model Design",
+             "Agent Observability & Auditability",
+           ],
+         },
+         'tradingview-mcp': {
+           title: "TradingView MCP Bridge — Agent Tooling & Protocol Engineering",
+           context: "An open-source Model Context Protocol server that gives LLM agents structured, tool-level access to a live desktop trading application. Most enterprise software an AI agent needs to reach has no convenient API — it is a stateful desktop or legacy application that was never designed to be automated. This project is a working answer to that problem. It connects over Chrome DevTools Protocol against the application's Electron runtime, with no server-side API calls, no network interception, and no vendor data redistribution. Beyond the integration itself, the harder design work was context economics: a single Pine Script source file can exceed 200KB and full chart state can blow past any practical context window, so every tool defaults to compact, filtered, deduplicated output with verbose mode as an explicit opt-in. It ships with a CLI, an automated test suite, and full security and contribution documentation.",
+           responsibilities: [
+             "Built an open-source Model Context Protocol (MCP) server in Node.js exposing structured tool-level access to a live, stateful desktop application for LLM agents.",
+             "Engineered the integration over Chrome DevTools Protocol against the application's Electron runtime — no vendor API dependency, no network interception, no data redistribution.",
+             "Designed 16 discrete tool modules spanning chart control, indicators, drawing, Pine Script authoring, replay, alerts, watchlists, data retrieval, batch operations, pane management, and health checks.",
+             "Packaged five reusable agent skills — chart analysis, multi-symbol scanning, a full Pine Script development loop, replay practice, and strategy reporting — so agents invoke workflows rather than raw primitives.",
+             "Solved agent context-budget constraints through compact-by-default tool output, study filtering, and deduplication, with verbose mode as an explicit opt-in.",
+             "Built a companion CLI, ESLint configuration, and an automated test suite covering end-to-end behavior, input sanitization, CLI surface, replay, and indicator handling.",
+             "Authored SECURITY, CONTRIBUTING, LICENSE, and setup documentation with explicit scope disclaimers defining precisely what the tool does and does not access.",
+           ],
+           benefits: [
+             "Demonstrates protocol-level integration engineering — exactly the layer enterprises must build to connect AI agents to existing line-of-business applications safely.",
+             "Establishes a repeatable pattern for agent-enabling legacy or vendor desktop software that exposes no official API — a common enterprise constraint.",
+             "Encodes a defensible security posture by design: local-only processing, an opt-in debug port disabled by default, no credential handling, and no circumvention of vendor access controls.",
+             "Tool-output design directly addresses context-window economics, which is a primary practical constraint on real-world agent reliability.",
+             "Released with security policy, contribution guidelines, and test coverage — production engineering discipline rather than prototype code.",
+           ],
+           technical: [
+             "Model Context Protocol (MCP)",
+             "Node.js (ESM)",
+             "Chrome DevTools Protocol",
+             "Electron Application Integration",
+             "Agent Tool & API Design",
+             "Pine Script",
+             "Automated Testing (node:test)",
+             "CLI Engineering",
+             "Open Source Governance",
+           ],
+         },
          'enterprise-pmo-pe': {
            title: "Enterprise PMO Across Private Equity Portfolio",
            context: "Built enterprise PMO supporting 27+ private equity portfolio companies, standardizing governance, reporting, and delivery frameworks across acquisition, integration, and modernization initiatives.",
@@ -465,28 +557,35 @@
         },
         'pantry-tab': {
           title: "Pantry Tab — AI-Driven Household SaaS Platform",
-          context: "Pantry Tab is a subscription-based platform that helps families manage groceries, recipes, allergies, and home planning in one place. Founded and built from the ground up, this project represents hands-on leadership across every dimension of modern SaaS — from cloud architecture and AI automation to subscription billing and go-to-market strategy.",
+          context: "Pantry Tab is a live, subscription-based platform that helps families manage groceries, recipes, allergies, and meal planning in one place. I founded it and built it from the ground up — 400+ commits into a production product, not a proof of concept. The backend is 26 serverless edge functions, nine of them AI-powered: recipe parsing from photographs, receipts, URLs, and documents, ingredient recognition from images, automated weekly meal planning, and generated prep sheets and shopping lists. It carries a full retail grocery commerce integration, complete Stripe subscription billing, and ships as an installable progressive web app. The judgment call worth noting is where the AI actually sits: at ingestion, eliminating the manual data entry that kills adoption of every household app of this kind — rather than as a chatbot bolted onto an otherwise conventional product.",
           responsibilities: [
-            "Led product strategy and roadmap from ideation through live platform launch",
-            "Designed and governed scalable cloud platform architecture with strong security and privacy practices",
-            "Architected AI-driven automation workflows to reduce manual data entry and enhance user experience",
-            "Established security, privacy, and data-protection planning aligned with enterprise-grade standards",
-            "Implemented subscription billing systems, compliance processes, and customer-data governance",
-            "Developed branding, pricing model, legal policies, and go-to-market strategy",
+            "Founded and built a production subscription SaaS platform end to end, sustained through 400+ commits from concept to live paying product.",
+            "Architected a serverless backend of 26 Supabase edge functions spanning AI inference, third-party commerce, billing, and scheduled jobs.",
+            "Built nine AI-powered ingestion and generation workflows: recipe parsing from photo, receipt, URL, and document; ingredient recognition from images; automated weekly meal planning; recipe suggestion; and prep-sheet and shopping-list generation.",
+            "Integrated a complete retail grocery commerce path — an eleven-function OAuth flow covering store discovery, product search, cart population, token refresh, and account disconnection.",
+            "Implemented subscription billing end to end with Stripe checkout, customer portal, webhook handling, trial and expiry checks, and subscription-state verification.",
+            "Delivered the front end as an installable progressive web app in React and TypeScript with a full component system, offline-capable install, and barcode/QR scanning.",
+            "Established secrets management, row-level data-access rules, and customer-data governance aligned to enterprise privacy practice.",
+            "Owned branding, pricing model, legal policies, and go-to-market strategy alongside the technical build.",
           ],
           benefits: [
-            "Demonstrates end-to-end SaaS product ownership — from architecture and AI workflows to analytics and customer acquisition",
-            "Keeps skills current with modern AI, cloud, and subscription business model practices relevant to CIO-level transformation",
-            "Applies the same enterprise-grade security and governance principles used across large-scale IT organizations",
-            "Live platform validating leadership across product development, cloud architecture, security governance, and operations",
+            "Demonstrates ownership of a complete AI product lifecycle — model-backed features, third-party integration, billing, security, and go-to-market — at production quality.",
+            "Shows practical judgment about where AI creates value: removing manual data entry at the point of ingestion, which is the actual adoption barrier for this product category.",
+            "Maintains hands-on currency in the serverless, edge-function, and AI-integration patterns now arriving in enterprise environments.",
+            "Applies the same security, privacy, and data-governance discipline used across large-scale IT organizations to an independently owned platform.",
+            "Validates leadership across product strategy, cloud architecture, security governance, and operations simultaneously rather than in isolation.",
           ],
           technical: [
-            "SaaS Platform Architecture",
-            "AI & Automation Workflows",
-            "Cloud Infrastructure & Security",
-            "Subscription Billing & Analytics",
-            "Marketing Automation",
-            "Product Strategy & GTM",
+            "React 18 + TypeScript",
+            "Supabase (Postgres, Edge Functions, RLS)",
+            "Serverless Architecture",
+            "AI Vision & Document Parsing",
+            "Stripe Billing & Webhooks",
+            "OAuth 2.0 Commerce Integration",
+            "Progressive Web App (PWA)",
+            "Tailwind CSS + shadcn/ui",
+            "TanStack Query / Zustand",
+            "Vite",
           ],
         },
       };
@@ -633,13 +732,20 @@
          ],
 
          // ALL Project Summaries used on the main page
+         // AI & Automation project cards (dedicated section)
+         aiProjects: [
+           { id: 'exodus-multi-agent', title: "EXODUS \u2014 Autonomous Multi-Agent Operating System", shortDescription: "A production multi-agent AI system in Python (~37,800 lines) running daily operations through roughly twenty specialized agents with defined authority, escalation paths, and executive reporting \u2014 at about $10/month in model cost." },
+           { id: 'ai-agent-governance', title: "AI Agent Governance & Delegated Authority Framework", shortDescription: "A formal three-tier authority matrix for autonomous AI agents \u2014 decision rights, escalation thresholds, and document control \u2014 answering the question that actually blocks enterprise agent adoption: who authorized the action, and how is it audited?" },
+           { id: 'tradingview-mcp', title: "TradingView MCP Bridge \u2014 Agent Tooling & Protocol Engineering", shortDescription: "An open-source Model Context Protocol server giving LLM agents structured access to a stateful desktop application over Chrome DevTools Protocol \u2014 16 tool modules, 5 packaged agent skills, full test suite and security policy." },
+           { id: 'pantry-tab', title: "Pantry Tab \u2014 AI-Driven Household SaaS Platform", shortDescription: "A live subscription SaaS platform built from scratch: 26 serverless edge functions, nine of them AI-powered, plus retail grocery commerce integration, Stripe billing, and an installable PWA." },
+           { id: 'hoa-compliance', title: "AI Process Automation in a Regulated Industry \u2014 HOA Compliance Platform", shortDescription: "An end-to-end AI automation system built around a Texas regulatory compliance gap: live-data prospecting, risk scoring, AI-assisted site generation, and automated deployment \u2014 clients live in 48 hours, no developer required." },
+         ],
+
          projectSummaries: [
            { id: 'enterprise-pmo-pe', title: "Enterprise PMO Across Private Equity Portfolio", shortDescription: "Built enterprise PMO supporting 27+ private equity portfolio companies, standardizing governance, reporting, and delivery frameworks across acquisition, integration, and modernization initiatives." },
            { id: 'ma-cost-synergies', title: "M&A Integration & $5M+ Cost Synergies", shortDescription: "Led M&A technology integration and standardization efforts that delivered $5M+ in annual cost synergies across multi-company environments." },
            { id: 'cloud-infra-modernization', title: "Cloud & Infrastructure Modernization", shortDescription: "Migrated 165+ servers to cloud platforms, reduced infrastructure costs, improved scalability, and strengthened disaster recovery readiness." },
            { id: 'cybersecurity-zero-trust', title: "Cybersecurity & Zero Trust Governance", shortDescription: "Established enterprise cybersecurity governance, implemented Zero Trust principles, improved identity/security alignment, and strengthened regulatory readiness." },
-          { id: 'hoa-compliance', title: "AI Process Automation in a Regulated Industry — HOA Compliance Platform", shortDescription: "Built an end-to-end AI automation system around a Texas regulatory compliance gap: live-data prospecting, risk scoring, AI-assisted site generation, and automated deployment — clients live in 48 hours, no developer required." },
-          { id: 'pantry-tab', title: "Pantry Tab — AI-Driven Household SaaS Platform", shortDescription: "Subscription-based SaaS platform helping families manage groceries, recipes, allergies, and home planning — built with modern cloud, AI workflows, and enterprise-grade security practices." },
            { id: 'ma-integration', title: "M&A Integration & Strategic Divestiture Management", shortDescription: "Led M&A integrations and a major IT divestiture, realizing $5M+ in annual IT cost synergies with zero business disruption." },
            { id: 'vendor-management', title: "Enterprise-wide Third-Party Vendor Management", shortDescription: "Developed vendor management program for 200+ vendors and $25M+ spend, achieving $3.5M in annual savings." },
            { id: 'datacenter-consolidation', title: "Data Center Consolidation, Migration & Virtualization", shortDescription: "Led consolidation of 5 data centers, migrating 300+ servers to VMware/Azure with zero downtime and $2.8M annual savings." },
@@ -1109,12 +1215,13 @@
          
 
          const navLinks = [
-           { name: "Home", id: "home", icon: Home },
-           { name: "Leadership", id: "leadership", icon: User },
-           { name: "Skills", id: "skills", icon: Code },
-           { name: "Projects", id: "projects", icon: Lightbulb },
-           { name: "Experience", id: "experience", icon: Briefcase },
-           { name: "Contact", id: "contact", icon: Mail },
+           { name: "Home", short: "Home", id: "home", icon: Home },
+           { name: "Leadership", short: "Lead", id: "leadership", icon: User },
+           { name: "Skills", short: "Skills", id: "skills", icon: Code },
+           { name: "AI Work", short: "AI", id: "ai-projects", icon: Zap },
+           { name: "Projects", short: "Projects", id: "projects", icon: Lightbulb },
+           { name: "Experience", short: "Exp", id: "experience", icon: Briefcase },
+           { name: "Contact", short: "Contact", id: "contact", icon: Mail },
          ];
 
          const currentProjectData = selectedProjectId ? PROJECT_DETAILS[selectedProjectId] : null;
@@ -1168,10 +1275,10 @@
                          <button
                            key={`mobile-${link.id}`}
                            onClick={() => handleScroll(link.id)}
-                           className="flex flex-col items-center text-xs text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition duration-150 p-2"
+                           className="flex flex-col items-center justify-center flex-1 min-w-0 text-[10px] leading-tight text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition duration-150 px-0.5 py-2"
                          >
-                           <link.icon className="w-5 h-5 mb-1"/>
-                           {link.name}
+                           <link.icon className="w-5 h-5 mb-1 flex-shrink-0"/>
+                           <span className="truncate w-full text-center">{link.short || link.name}</span>
                          </button>
                        ))}
                      </div>
@@ -1325,6 +1432,24 @@
                      </div>
                    </section>
                    
+                   {/* 5b. AI & Automation Projects */}
+                   <section id="ai-projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 text-center">
+                         AI &amp; <span className="text-indigo-600 dark:text-indigo-400">Automation</span>
+                       </h2>
+                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 text-center max-w-3xl mx-auto">
+                         Systems I designed and built myself: multi-agent architectures, agent governance frameworks,
+                         protocol-level tooling, and production AI products. Built and running &mdash; not theoretical.
+                       </p>
+                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                         {MOCK_DATA.aiProjects.map((project, index) => (
+                           <ProjectSummaryCard key={index} {...project} onSelectProject={handleSelectProject} />
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+
                    {/* 6. Highlighted Projects / Case Studies - Summary View */}
                    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
                      <div className="max-w-6xl mx-auto">
