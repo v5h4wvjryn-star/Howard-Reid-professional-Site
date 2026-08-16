@@ -1,0 +1,10 @@
+{
+  "name": "howard-reid-site",
+  "private": true,
+  "description": "Source for howardreid.me. Edit src/app.jsx, then `node build.js` to regenerate index.html.",
+  "scripts": { "build": "node build.js" },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-react": "^7.24.0"
+  }
+}
