@@ -107,26 +107,26 @@
          },
          'exodus-multi-agent': {
            title: "EXODUS — Autonomous Multi-Agent Operating System",
-           context: "EXODUS is a production multi-agent AI system I designed and built in Python — roughly 117 modules and 37,800 lines of code — that runs the daily operating rhythm of a private venture portfolio. Rather than a single assistant answering prompts, it is an organization: about twenty specialized agents arranged in a deliberate hierarchy, each with defined scope, authority, and reporting lines. An executive tier (CEO, CFO, CIO, CRO) sets direction, domain desk agents handle specialized analysis, a dedicated escalation agent enforces the boundary conditions, and a chief-of-staff agent named Moses acts as the single human-facing entry point. The design principle is the one that governs any well-run enterprise: the owner reviews decisions, rather than managing the people making them. The interesting engineering problem was never getting an agent to produce output — it was getting twenty of them to operate continuously without producing chaos, and doing it at a model cost tracked at roughly ten dollars a month.",
+           context: "EXODUS is a production multi-agent AI system I designed and built in Python — 116 modules and roughly 37,600 lines of code — that runs the daily operating rhythm of a private venture portfolio. Rather than a single assistant answering prompts, it is an organization: sixteen specialized agents arranged in a deliberate hierarchy, each with defined scope, authority, and reporting lines. An executive tier (CEO, CFO, CIO, CRO) sets direction, domain desk agents handle specialized analysis, a dedicated escalation agent enforces the boundary conditions, and a chief-of-staff agent named Moses acts as the single human-facing entry point. The design principle is the one that governs any well-run enterprise: the owner reviews decisions, rather than managing the people making them. The interesting engineering problem was never getting an agent to produce output — it was getting sixteen of them to operate continuously without producing chaos, and doing it without the inference bill running away.",
            images: [
              { src: "./assets/exodus-dashboard.webp",
                alt: "EXODUS operations dashboard showing system health, macro environment, five agent desks with status and open positions, a pending-decisions panel, and phase progress checklist.",
                caption: "The operations dashboard: every agent's state on one screen, with a pending-decisions queue as the single place a human is asked for input. Business identifiers and capital figures redacted." },
            ],
            responsibilities: [
-             "Designed and built EXODUS end to end — a production multi-agent operating system of ~117 Python modules and 37,800+ lines running continuous daily operations.",
-             "Architected a hierarchical agent organization of roughly twenty agents: an executive tier (CEO, CFO, CIO, CRO), specialized domain desk agents, a cross-entity oversight agent, and a dedicated escalation agent, each with explicit scope and authority.",
-             "Built \"Moses,\" a chief-of-staff agent with a Telegram interface, as the single human-facing entry point — consolidating twenty agents' output into one reviewable channel.",
-             "Developed a modular skills library spanning nine domains — governance, intelligence, risk, security, capital, trading, options, futures, and shared services — so capability is composed once and reused rather than duplicated per agent.",
+             "Designed and built EXODUS end to end — a production multi-agent operating system of 116 Python modules and roughly 37,600 lines running continuous daily operations.",
+             "Architected a hierarchical agent organization of sixteen agents: an executive tier (CEO, CFO, CIO, CRO), specialized domain desk agents covering equities, options, crypto and short-dated derivatives, a cross-entity oversight agent, and a dedicated escalation agent, each with explicit scope and authority.",
+             "Built \"Moses,\" a chief-of-staff agent with a Telegram interface, as the single human-facing entry point — consolidating every agent's output into one reviewable channel.",
+             "Developed a modular skills library — options strategy, futures trading, risk management, trailing stops, trade-entry frameworks, and expert personas — so capability is authored once and composed across agents rather than duplicated in each.",
              "Implemented scheduled intelligence pipelines: pre-market daily briefings, news and economic-calendar ingestion, and automated end-of-day review with persisted state across runs.",
              "Built a REST API server and a React/Vite operations dashboard delivering portfolio-level status, system health checks, a pending-decision queue, and per-entity drill-down.",
-             "Instrumented model-cost tracking and routing to hold total AI operating cost near $10/month while running continuous multi-agent workloads.",
+             "Built a two-tier model architecture — frontier reasoning reserved for judgment-dense decisions, local open-weight models for high-frequency work — holding recurring inference cost near zero, and identified and eliminated a $400/month runaway API cost leak.",
              "Established durable session context and directory contracts so successive agent runs inherit state instead of rediscovering it.",
            ],
            benefits: [
              "Reduced human involvement to review-and-approve against a designed 90/9/1 decision distribution — 90% resolved at the domain tier, 9% at the executive tier, and 1% escalated to a person.",
              "Demonstrated that enterprise operating-model concepts — org charts, delegated authority, escalation paths, executive reporting — transfer directly and usefully to autonomous agent systems.",
-             "Delivered continuous multi-agent operations at roughly $10/month in model cost, showing that agentic architecture is a cost-engineering discipline rather than a prompting exercise.",
+             "Kept recurring inference cost near zero through deliberate model routing, and found and removed a $400/month cost leak — showing that agentic architecture is a cost-engineering discipline rather than a prompting exercise.",
              "Created a reusable pattern for agent observability: every agent's output flows into a common dashboard and decision queue instead of disappearing into isolated chat sessions.",
              "Produced a working reference for how an IT organization can adopt agents at scale without surrendering auditability, traceability, or control.",
            ],
@@ -823,7 +823,7 @@
          // ALL Project Summaries used on the main page
          // AI & Automation project cards (dedicated section)
          aiProjects: [
-           { id: 'exodus-multi-agent', title: "EXODUS \u2014 Autonomous Multi-Agent Operating System", shortDescription: "A production multi-agent AI system in Python (~37,800 lines) running daily operations through roughly twenty specialized agents with defined authority, escalation paths, and executive reporting \u2014 at about $10/month in model cost." },
+           { id: 'exodus-multi-agent', title: "EXODUS \u2014 Autonomous Multi-Agent Operating System", shortDescription: "A production multi-agent AI system in Python (116 modules, ~37,600 lines) running daily operations through sixteen specialized agents with defined authority, escalation paths, and executive reporting \u2014 with inference cost engineered as a first-class constraint." },
            { id: 'ai-agent-governance', title: "AI Agent Governance & Delegated Authority Framework", shortDescription: "A formal three-tier authority matrix for autonomous AI agents \u2014 decision rights, escalation thresholds, and document control \u2014 answering the question that actually blocks enterprise agent adoption: who authorized the action, and how is it audited?" },
            { id: 'tradingview-mcp', title: "TradingView MCP Bridge \u2014 Agent Tooling & Protocol Engineering", shortDescription: "An open-source Model Context Protocol server giving LLM agents structured access to a stateful desktop application over Chrome DevTools Protocol \u2014 16 tool modules, 5 packaged agent skills, full test suite and security policy." },
            { id: 'signal-works', title: "Signal Works \u2014 Shared-Service AI Marketing Firm", shortDescription: "Eleven agents producing marketing content at volume behind a human approval gate \u2014 with the publishing lock encoded in four separate places so no single edit can remove it." },
@@ -924,7 +924,7 @@
          
          linkedinUrl: "https://www.linkedin.com/in/howardareid",
          // Note: The file name must match the one referenced in the HTML tag's download attribute.
-         resumeDownloadLink: "./Howard Reid 05Resume.docx"
+         resumeDownloadLink: "./Howard-Reid-Resume.pdf"
        };
        // --- END MOCK DATA ---
 
@@ -1503,7 +1503,7 @@
                            </a>
                            <a
                              href={MOCK_DATA.resumeDownloadLink}
-                             download="Howard Reid 05Resume.docx"
+                             download="Howard-Reid-Resume.pdf"
                              className="px-8 py-3 bg-transparent border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-400 font-semibold rounded-full shadow-lg hover:bg-indigo-50 dark:hover:bg-gray-800 transition duration-300 transform hover:scale-105 flex items-center justify-center"
                            >
                              <Download className="w-5 h-5 mr-2" />
@@ -1660,7 +1660,7 @@
                          <div className="mt-8 text-center">
                             <a
                                href={MOCK_DATA.resumeDownloadLink}
-                               download="Howard Reid 05Resume.docx"
+                               download="Howard-Reid-Resume.pdf"
                                className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 flex items-center justify-center"
                             >
                                <Download className="w-5 h-5 mr-2" />
@@ -1686,7 +1686,7 @@
                          {/* Resume Button */}
                          <a
                            href={MOCK_DATA.resumeDownloadLink}
-                           download="Howard Reid 05Resume.docx"
+                           download="Howard-Reid-Resume.pdf"
                            className="flex flex-col items-center justify-center px-6 py-8 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
                          >
                            <Download className="w-12 h-12 mb-3" />
