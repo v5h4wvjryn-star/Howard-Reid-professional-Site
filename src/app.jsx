@@ -1,1 +1,1641 @@
+       // Import components/hooks from the globally loaded React libraries
+       const { useState, useEffect, StrictMode } = React;
+       const { Briefcase, Code, User, Mail, Home, ArrowUp, Zap, Download, Linkedin, CheckCircle, Lightbulb, ArrowLeft, ArrowRight } = LucideReact;
+
+       // --- FULL PROJECT DETAIL DATA ---
+       const PROJECT_DETAILS = {
+         'signal-works': {
+           title: "Signal Works — Shared-Service AI Marketing Firm",
+           context: "Signal Works is an AI marketing organization rather than a marketing tool. Seven \u201cStudio\u201d agents \u2014 brand and strategy, paid acquisition, organic growth, social and community, creative, lifecycle, and insights \u2014 serve multiple portfolio companies under engagement contracts, coordinated by a director agent and governed by three system agents: an Approval Router, a Policy Engine that acts as the single source of truth for what authority tier any action falls under, and a Graduation Tracker that measures whether an agent has earned more autonomy but is structurally forbidden from granting it. The design decision that matters most is the founder lock: no customer-facing content publishes without human approval, and that constraint is encoded in four independent places \u2014 the master blueprint, the foundational design document, the Social Studio charter, and a flag on every individual engagement file. The redundancy is deliberate. A control that exists in exactly one place is a control that can be removed by accident.",
+           images: [
+             { src: "./assets/signalworks-dashboard.webp",
+               alt: "Signal Works review queue showing 29 drafts pending review, 22 approved, 7 rejected, 67 total, with approve, reject and edit controls on each draft.",
+               caption: "The approval queue. AI drafts the content; a human approves, rejects, or edits every item before anything reaches a channel. Client and business identifiers redacted." },
+           ],
+           responsibilities: [
+             "Designed a shared-services marketing organization of eleven agents \u2014 seven domain Studios, three system agents, and a coordinating director \u2014 serving multiple portfolio companies from one capability rather than duplicating a marketing function inside each.",
+             "Built the approval pipeline end to end: drafts enter a review queue with pending, approved, rejected, pushed, and exported states, and only a human moves content past review.",
+             "Encoded the founder lock on customer-facing publishing in four independent locations so that no single edit can silently remove it.",
+             "Wrote a Policy Engine as the single source of truth for what authority tier a given action requires on a given engagement, so tiering is resolved by policy rather than by each agent's judgment.",
+             "Built a Graduation Tracker that measures eligibility for increased autonomy but is explicitly barred from granting it \u2014 promotion remains an owner decision.",
+             "Implemented the backend as pure-standard-library Python (~750 lines) with a single-dispatch API surface, backup-before-write on every queue mutation, and atomic file writes.",
+             "Built REST endpoints for queue retrieval, approve, reject, field-level edit, and export, each writing an audit record with timestamp and actor.",
+             "Integrated a product catalog sync against the Shopify Admin API using normalized title matching with a fuzzy substring fallback, cached atomically to disk.",
+             "Delivered a review dashboard with status counts, filtered queues, inline editing, and one-click export of approved content to a scheduling-tool CSV.",
+             "Structured the initial build to match the locked target architecture conventions so the later foundation build absorbs it mechanically instead of requiring a rewrite.",
+           ],
+           benefits: [
+             "Demonstrates the governance thesis in production: AI generates at volume, a human authorizes, and nothing customer-facing publishes unreviewed.",
+             "The shared-service model eliminates duplicated marketing capability across portfolio companies \u2014 the same consolidation argument that justifies shared IT services in an enterprise.",
+             "Every state change carries an audit record, so content decisions are traceable after the fact rather than reconstructed.",
+             "Defense-in-depth on the publishing lock reflects real controls practice: a control encoded once is a control that erodes.",
+             "Building the first version to the conventions of the eventual architecture avoided the rewrite that normally follows a proof of concept.",
+           ],
+           technical: [
+             "Multi-Agent Orchestration",
+             "Human-in-the-Loop Approval Workflow",
+             "Policy & Authority Engines",
+             "Python REST API (stdlib)",
+             "Shopify Admin API Integration",
+             "Audit Logging & Atomic Writes",
+             "Content Operations Automation",
+             "Review Dashboard & Tooling",
+           ],
+         },
+         'exodus-multi-agent': {
+           title: "EXODUS — Autonomous Multi-Agent Operating System",
+           context: "EXODUS is a production multi-agent AI system I designed and built in Python — 116 modules and roughly 37,600 lines of code — that runs the daily operating rhythm of a private venture portfolio. Rather than a single assistant answering prompts, it is an organization: sixteen specialized agents arranged in a deliberate hierarchy, each with defined scope, authority, and reporting lines. An executive tier (CEO, CFO, CIO, CRO) sets direction, domain desk agents handle specialized analysis, a dedicated escalation agent enforces the boundary conditions, and a chief-of-staff agent named Moses acts as the single human-facing entry point. The design principle is the one that governs any well-run enterprise: the owner reviews decisions, rather than managing the people making them. The interesting engineering problem was never getting an agent to produce output — it was getting sixteen of them to operate continuously without producing chaos, and doing it without the inference bill running away.",
+           images: [
+             { src: "./assets/exodus-dashboard.webp",
+               alt: "EXODUS operations dashboard showing system health, macro environment, five agent desks with status and open positions, a pending-decisions panel, and phase progress checklist.",
+               caption: "The operations dashboard: every agent's state on one screen, with a pending-decisions queue as the single place a human is asked for input. Business identifiers and capital figures redacted." },
+           ],
+           responsibilities: [
+             "Designed and built EXODUS end to end — a production multi-agent operating system of 116 Python modules and roughly 37,600 lines running continuous daily operations.",
+             "Architected a hierarchical agent organization of sixteen agents: an executive tier (CEO, CFO, CIO, CRO), specialized domain desk agents covering equities, options, crypto and short-dated derivatives, a cross-entity oversight agent, and a dedicated escalation agent, each with explicit scope and authority.",
+             "Built \"Moses,\" a chief-of-staff agent with a Telegram interface, as the single human-facing entry point — consolidating every agent's output into one reviewable channel.",
+             "Developed a modular skills library — options strategy, futures trading, risk management, trailing stops, trade-entry frameworks, and expert personas — so capability is authored once and composed across agents rather than duplicated in each.",
+             "Implemented scheduled intelligence pipelines: pre-market daily briefings, news and economic-calendar ingestion, and automated end-of-day review with persisted state across runs.",
+             "Built a REST API server and a React/Vite operations dashboard delivering portfolio-level status, system health checks, a pending-decision queue, and per-entity drill-down.",
+             "Built a two-tier model architecture — frontier reasoning reserved for judgment-dense decisions, local open-weight models for high-frequency work — holding recurring inference cost near zero, and identified and eliminated a $400/month runaway API cost leak.",
+             "Established durable session context and directory contracts so successive agent runs inherit state instead of rediscovering it.",
+           ],
+           benefits: [
+             "Reduced human involvement to review-and-approve against a designed 90/9/1 decision distribution — 90% resolved at the domain tier, 9% at the executive tier, and 1% escalated to a person.",
+             "Demonstrated that enterprise operating-model concepts — org charts, delegated authority, escalation paths, executive reporting — transfer directly and usefully to autonomous agent systems.",
+             "Kept recurring inference cost near zero through deliberate model routing, and found and removed a $400/month cost leak — showing that agentic architecture is a cost-engineering discipline rather than a prompting exercise.",
+             "Created a reusable pattern for agent observability: every agent's output flows into a common dashboard and decision queue instead of disappearing into isolated chat sessions.",
+             "Produced a working reference for how an IT organization can adopt agents at scale without surrendering auditability, traceability, or control.",
+           ],
+           technical: [
+             "Multi-Agent Orchestration",
+             "Python 3.13 / Asyncio / aiohttp",
+             "Anthropic Claude API",
+             "REST API Design",
+             "React + Vite Operations Dashboard",
+             "Scheduled Job & Data Pipelines",
+             "pandas / NumPy",
+             "Telegram Bot Integration",
+             "Model Routing & Cost Optimization",
+           ],
+         },
+         'ai-agent-governance': {
+           title: "AI Agent Governance & Delegated Authority Framework",
+           context: "Built for a confidential business. The question that stops enterprise AI adoption is not whether an agent can perform the work — it is who authorized the action, what the agent was permitted to decide alone, and how any of it can be audited afterward. I wrote a formal governance framework to answer that. It defines a three-tier authority model, explicit decision rights and escalation thresholds per agent role, and a documented target distribution for where decisions should resolve. It borrows its structure from private equity governance: a holding entity does not operate its portfolio companies, it governs them, and it intervenes only when a decision exceeds delegated authority. The framework also solves a failure mode that gets far less attention than it deserves — context drift, where successive AI sessions silently work from stale or duplicated copies of files. The fix was not more prompting. It was a versioned directory contract treated as a controlled document, with any artifact found outside its contracted location escalated as an anomaly rather than quietly used.",
+           images: [
+             { src: "./assets/agent-governance.svg",
+               alt: "Diagram of a three-tier delegated authority model: domain operating agents resolve 90 percent of decisions, an executive oversight tier resolves 9 percent, and 1 percent escalates through a chief-of-staff agent to the human owner.",
+               caption: "The authority model. Decision rights are explicit at each tier, and the escalation path is the only route to a human \u2014 which is what makes the system auditable." },
+           ],
+           responsibilities: [
+             "Authored a formal Global Executive Authority Matrix specifying what autonomous AI agents may decide independently, what requires peer review, and what must escalate to a human owner.",
+             "Designed a three-tier governance model — domain operating agents, a cross-entity executive oversight tier, and a chief-of-staff layer — modeled on how a private equity firm governs rather than operates its portfolio.",
+             "Defined explicit decision rights, escalation thresholds, and reporting lines for each agent role, with a documented target distribution of 90% / 9% / 1% across the three tiers.",
+             "Created a \"Directory Contract\" — a single-source-of-truth specification for where every operational file and artifact lives — to eliminate cross-session context drift.",
+             "Established anomaly-flagging rules requiring any artifact found outside its contracted location to be escalated as an exception instead of silently consumed.",
+             "Applied enterprise document-control practice to AI operating policy: classification, ownership, version history, and periodic re-verification of every governance artifact.",
+             "Defined onboarding procedures so a new entity or agent inherits the governance model by default rather than by convention.",
+           ],
+           benefits: [
+             "Addresses the actual blocker to enterprise agent adoption — authorization, traceability, and audit — rather than capability, which is rarely the constraint.",
+             "Directly transferable to enterprise AI governance, third-party AI risk review, and internal-audit readiness for organizations deploying agentic tooling.",
+             "Eliminated a real and under-discussed operational failure mode, AI context drift across sessions, using a filesystem contract instead of additional prompt engineering.",
+             "Provides a reusable template for delegated authority design, escalation thresholds, and human-in-the-loop boundaries in any AI program.",
+             "Aligns AI operations with the same governance discipline already applied to enterprise PMO, change management, and security policy.",
+           ],
+           technical: [
+             "AI Governance Frameworks",
+             "Delegated Authority & Decision Rights",
+             "Human-in-the-Loop Escalation Design",
+             "Risk & Controls",
+             "Document Control & Versioning",
+             "Operating Model Design",
+             "Agent Observability & Auditability",
+           ],
+         },
+         'tradingview-mcp': {
+           title: "TradingView MCP Bridge — Agent Tooling & Protocol Engineering",
+           context: "An open-source Model Context Protocol server that gives LLM agents structured, tool-level access to a live desktop trading application. Most enterprise software an AI agent needs to reach has no convenient API — it is a stateful desktop or legacy application that was never designed to be automated. This project is a working answer to that problem. It connects over Chrome DevTools Protocol against the application's Electron runtime, with no server-side API calls, no network interception, and no vendor data redistribution. Beyond the integration itself, the harder design work was context economics: a single Pine Script source file can exceed 200KB and full chart state can blow past any practical context window, so every tool defaults to compact, filtered, deduplicated output with verbose mode as an explicit opt-in. It ships with a CLI, an automated test suite, and full security and contribution documentation.",
+           images: [
+             { src: "./assets/tradingview-mcp.webp",
+               alt: "Trading chart interface driven by the MCP bridge, showing candlestick data, volume, session controls and toggles for indicators including VWAP, EMA, MACD and CVD.",
+               caption: "A chart session driven entirely through MCP tool calls \u2014 symbol, timeframe, session bounds and indicator overlays all set by the agent rather than by hand. Local endpoint redacted." },
+           ],
+           responsibilities: [
+             "Built an open-source Model Context Protocol (MCP) server in Node.js exposing structured tool-level access to a live, stateful desktop application for LLM agents.",
+             "Engineered the integration over Chrome DevTools Protocol against the application's Electron runtime — no vendor API dependency, no network interception, no data redistribution.",
+             "Designed 16 discrete tool modules spanning chart control, indicators, drawing, Pine Script authoring, replay, alerts, watchlists, data retrieval, batch operations, pane management, and health checks.",
+             "Packaged five reusable agent skills — chart analysis, multi-symbol scanning, a full Pine Script development loop, replay practice, and strategy reporting — so agents invoke workflows rather than raw primitives.",
+             "Solved agent context-budget constraints through compact-by-default tool output, study filtering, and deduplication, with verbose mode as an explicit opt-in.",
+             "Built a companion CLI, ESLint configuration, and an automated test suite covering end-to-end behavior, input sanitization, CLI surface, replay, and indicator handling.",
+             "Authored SECURITY, CONTRIBUTING, LICENSE, and setup documentation with explicit scope disclaimers defining precisely what the tool does and does not access.",
+           ],
+           benefits: [
+             "Demonstrates protocol-level integration engineering — exactly the layer enterprises must build to connect AI agents to existing line-of-business applications safely.",
+             "Establishes a repeatable pattern for agent-enabling legacy or vendor desktop software that exposes no official API — a common enterprise constraint.",
+             "Encodes a defensible security posture by design: local-only processing, an opt-in debug port disabled by default, no credential handling, and no circumvention of vendor access controls.",
+             "Tool-output design directly addresses context-window economics, which is a primary practical constraint on real-world agent reliability.",
+             "Released with security policy, contribution guidelines, and test coverage — production engineering discipline rather than prototype code.",
+           ],
+           technical: [
+             "Model Context Protocol (MCP)",
+             "Node.js (ESM)",
+             "Chrome DevTools Protocol",
+             "Electron Application Integration",
+             "Agent Tool & API Design",
+             "Pine Script",
+             "Automated Testing (node:test)",
+             "CLI Engineering",
+             "Open Source Governance",
+           ],
+         },
+         'enterprise-pmo-pe': {
+           title: "Enterprise PMO Across Private Equity Portfolio",
+           context: "Built enterprise PMO supporting 27+ private equity portfolio companies, standardizing governance, reporting, and delivery frameworks across acquisition, integration, and modernization initiatives.",
+           responsibilities: [
+             "Established enterprise PMO charter, standardized methodologies, and governance frameworks across 27+ private equity portfolio companies.",
+             "Standardized program reporting, delivery cadence, and executive scorecards across acquisition, integration, and modernization initiatives.",
+             "Developed repeatable playbooks for due diligence, integration, and post-close stabilization across portfolio entities.",
+             "Aligned IT investment governance with private equity value-creation plans and operating partner priorities.",
+           ],
+           benefits: [
+             "Improved execution discipline and visibility across 27+ private equity portfolio companies.",
+             "Reduced new portfolio company onboarding time through repeatable governance and integration playbooks.",
+             "Strengthened enterprise reporting and accountability across multi-company environments.",
+             "Aligned technology delivery with private equity value-creation outcomes.",
+           ],
+           technical: [
+             "Enterprise PMO Governance",
+             "Private Equity Portfolio Operations",
+             "Program & Portfolio Management",
+             "Executive Reporting & KPIs",
+             "Integration Playbooks",
+           ],
+         },
+         'cloud-infra-modernization': {
+           title: "Cloud Migration & Modern Workplace Transformation",
+           context: "Moving 165+ servers from on-premises data centers into Azure was the headline, but the migration was only worth doing if the workplace on top of it changed too. Alongside the lift, I rebuilt end-user computing — Hybrid Azure AD and ZTNA across 2,000+ employees and 30+ applications, Dell and Intune connected provisioning replacing manual imaging, and the elimination of 23 physical print servers. Device setup fell from six hours to thirty-five minutes. Cloud architecture and Microsoft 365 optimization produced $750K in annual savings, endpoint automation another $175K in labor, and infrastructure cost overall dropped 35%.",
+           responsibilities: [
+             "Led migration of 165+ servers from on-premises data centers to Azure, sustaining 99.9% uptime through cutover.",
+             "Directed a Hybrid Azure AD and ZTNA implementation covering 2,000+ employees and 30+ applications.",
+             "Replaced manual device imaging with Dell and Intune connected provisioning, automating workstation, application, and security policy setup.",
+             "Standardized device configuration enterprise-wide and re-engineered onboarding to align hardware delivery with HR timelines.",
+             "Eliminated 23 physical print servers via PrinterLogic, removing a recurring source of help desk load.",
+             "Modernized storage and backup architecture and implemented disaster recovery frameworks improving recovery time objectives.",
+             "Rationalized the infrastructure footprint and renegotiated vendor agreements to reduce recurring cost.",
+           ],
+           benefits: [
+             "Generated $750K in annual savings through cloud architecture optimization and Microsoft 365 alignment.",
+             "Achieved $175K in annual labor savings by cutting device setup from six hours to 35 minutes.",
+             "Reduced infrastructure costs 35% through modernization and rationalization.",
+             "Cut help desk tickets 70% and print management overhead 90% through print infrastructure overhaul.",
+             "Improved application performance 40% and reduced recovery time objective to four hours.",
+             "Delivered out-of-the-box ready devices requiring zero IT touch, scaling cleanly to a distributed workforce.",
+           ],
+           technical: [
+             "Microsoft Azure (IaaS) & Microsoft 365",
+             "Hybrid Azure AD / Conditional Access",
+             "Microsoft Intune & Dell Connected Provisioning",
+             "Cloud Migration & Architecture",
+             "Disaster Recovery & Business Continuity",
+             "PrinterLogic / Endpoint Management",
+             "Infrastructure Cost Optimization",
+           ],
+         },
+         'telecom-overhaul': {
+           title: "Global Telecom Overhaul & Cloud Voice Migration",
+           context: "Spearheaded a strategic migration of legacy, fragmented telecom infrastructure to scalable, unified, cloud-based voice and communication systems to support over 2000 global users.",
+           responsibilities: [
+             "Managed the migration of 2000+ users across global locations from traditional phone systems to Microsoft Teams and RingCentral.",
+             "Negotiated new long-term voice services contract, achieving significant recurring cost savings.",
+             "Developed and executed the internal communication and training strategy for the mass adoption of new cloud collaboration tools.",
+             "Ensured regulatory compliance across all operating regions during the transition.",
+           ],
+           benefits: [
+             "Reduced annual telecom expenses by $400K by migrating 2000+ users to cloud-based systems.",
+             "Achieved a 30% reduction in monthly operating expenses through contract negotiation.",
+             "Enabled secure, reliable remote work capabilities for over 2000 employees globally.",
+             "Improved collaboration and internal communication efficiency through a unified platform.",
+           ],
+           technical: [
+             "Microsoft Teams Voice/RingCentral",
+             "SIP/VOIP Telephony",
+             "Cisco Call Manager/Unity",
+             "Global Network Architecture",
+             "Vendor Management",
+           ],
+         },
+         'security-architecture': {
+           title: "Cybersecurity, Identity & Zero Trust Architecture",
+           context: "A multi-phase program that built an enterprise security function and then modernized identity and network access on top of it. The technical work — Hybrid Azure AD Join across 2,000+ employees and 2,800+ devices, conditional access, ZTNA, and enterprise MFA — is the visible half. The other half was governance: a formal IT security organization, policy and reporting frameworks that supported executive and board oversight, third-party penetration testing and risk assessment on a standing cadence, and enterprise-wide awareness training to address the human layer. MFA adoption reached 100% and security incidents fell 85%.",
+           responsibilities: [
+             "Established a formal enterprise cybersecurity organization with governance frameworks, policy, and executive reporting.",
+             "Implemented Zero Trust principles across identity, access, and network architecture, including ZTNA policy enforcement.",
+             "Deployed Hybrid Azure AD Join for 2,000+ employees and 2,800+ devices, securing access from any location.",
+             "Drove enterprise multi-factor authentication to full adoption and integrated legacy systems into the modern IAM framework.",
+             "Aligned identity and security frameworks across multi-company private equity portfolio environments.",
+             "Partnered with third-party security firms on penetration testing, risk assessments, and compliance audits on a recurring cadence.",
+             "Institutionalized enterprise-wide security awareness training to reduce human-layer risk.",
+           ],
+           benefits: [
+             "Achieved 100% MFA adoption across the enterprise.",
+             "Reduced security incidents by 85% following ZTNA and conditional access implementation.",
+             "Strengthened regulatory posture and board-level visibility through formal governance and reporting.",
+             "Reduced human-layer risk through sustained awareness training rather than one-time compliance exercises.",
+             "Improved security resilience across multi-site and remote operations without degrading access.",
+           ],
+           technical: [
+             "Zero Trust Network Access (ZTNA)",
+             "Identity & Access Management (IAM)",
+             "Hybrid Azure AD Join / Conditional Access",
+             "Multi-Factor Authentication (MFA)",
+             "Cybersecurity Governance & Policy",
+             "Risk, Compliance & Penetration Testing",
+             "Security Awareness (KnowBe4)",
+           ],
+         },
+         'pmo-itsm-development': {
+           title: "PMO Establishment & IT Service Management (ITSM) Overhaul",
+           context: "Created a formal Project Management Office (PMO) and implemented a centralized IT Service Desk to standardize processes, improve service delivery, and automate the employee lifecycle.",
+           responsibilities: [
+             "Established the PMO charter, standardized methodologies (Agile/Waterfall hybrid), and governance frameworks for IT projects.",
+             "Implemented a comprehensive IT Service Desk solution (FreshService), covering Incident, Request, and Change Management.",
+             "Integrated the Service Desk with HR platforms to automate employee onboarding, offboarding, and asset lifecycle management.",
+             "Developed key performance indicators (KPIs) and reporting mechanisms to track project delivery success and service desk efficiency.",
+           ],
+           benefits: [
+             "Improved project delivery success rates and organizational efficiency by standardizing methodologies.",
+             "Automated over 60% of common IT requests through the new Service Desk and HR integration.",
+             "Achieved 95% compliance on change management protocols, reducing unplanned downtime by 40%.",
+             "Significantly improved end-user satisfaction with IT services due to clear processes and faster resolution times.",
+           ],
+           technical: [
+             "FreshService (ITSM)",
+             "Project Management Office (PMO) Governance",
+             "Agile/Waterfall Methodologies",
+             "HRIS/IT System Integration (API)",
+             "SLA and KPI Reporting",
+           ],
+         },
+         'ma-integration': {
+           title: "M&A Integration, Divestiture & $5M+ Cost Synergies",
+           context: "Technology is where acquisitions either deliver their thesis or quietly lose it. Across a private equity portfolio I ran IT due diligence, post-close integration, and one full separation — consolidating systems, vendor contracts, identity, and security policy across acquired entities, and executing the divestiture of a $20M+ business unit inside a 90-day transition window. The integrations produced $5M+ in recurring annual synergies. The more durable output was the playbook: a repeatable sequence for diligence, cutover, and stabilization that turned each subsequent acquisition into an execution problem rather than a research project.",
+           responsibilities: [
+             "Directed end-to-end IT due diligence, post-merger integration, and standardization across multi-company private equity portfolio environments.",
+             "Executed the strategic divestiture of a $20M+ business unit, separating infrastructure, applications, and data within a 90-day transition timeline.",
+             "Negotiated and managed Transition Service Agreements (TSAs) to hold operational stability through the separation period.",
+             "Consolidated vendor contracts, licensing, and infrastructure across acquired entities to capture recurring annual synergies.",
+             "Aligned identity, security, and operational frameworks across acquired companies to reduce risk and eliminate duplicated controls.",
+             "Built a repeatable integration playbook — diligence, cutover, stabilization — supporting continuing portfolio acquisitions.",
+           ],
+           benefits: [
+             "Delivered $5M+ in recurring annual IT cost synergies through vendor consolidation and system rationalization.",
+             "Completed multiple acquisition integrations and one major divestiture with zero business disruption.",
+             "Secured compliant separation of data and systems for the divested entity inside the contractual window.",
+             "Reduced operational complexity and vendor sprawl across the acquired portfolio.",
+             "Shortened onboarding time for each subsequent acquisition through the standardized playbook.",
+           ],
+           technical: [
+             "M&A IT Due Diligence",
+             "Post-Merger Integration",
+             "Divestiture & Separation Management",
+             "Transition Service Agreements (TSAs)",
+             "Vendor & Contract Consolidation",
+             "Enterprise System Rationalization",
+             "Identity & Security Alignment",
+           ],
+         },
+         'teams-platform': {
+           title: "Microsoft Teams & Communication Platform",
+           context: "Led the enterprise-wide consolidation and optimization of unified communications infrastructure, migrating from fragmented Skype for Business deployments to a centralized Microsoft Teams platform serving 2000+ global users.",
+           responsibilities: [
+             "Directed the strategic migration from multiple Skype for Business instances to a unified Microsoft Teams environment across global locations.",
+             "Implemented governance frameworks and policies to ensure secure, compliant collaboration across the organization.",
+             "Established training programs and change management initiatives to drive 95%+ user adoption within 6 months.",
+             "Integrated Teams with existing business applications and workflows to maximize productivity and collaboration.",
+           ],
+           benefits: [
+             "Achieved 95% user adoption of Microsoft Teams within 6 months through comprehensive training and change management.",
+             "Reduced communication platform costs by 40% through consolidation and elimination of redundant systems.",
+             "Improved cross-functional collaboration and reduced email volume by 30% through integrated chat and video capabilities.",
+             "Enhanced remote work capabilities and business continuity with enterprise-grade unified communications.",
+           ],
+           technical: [
+             "Microsoft Teams Administration",
+             "Skype for Business Migration",
+             "Microsoft 365 Governance",
+             "PowerShell Automation",
+             "Teams Phone System",
+           ],
+         },
+         'project-success': {
+           title: "Project Success Management Initiative",
+           context: "Established a comprehensive project success framework and methodology to improve IT project delivery, stakeholder satisfaction, and alignment with business objectives across a portfolio of 50+ concurrent initiatives.",
+           responsibilities: [
+             "Developed and implemented standardized project success metrics and KPIs aligned with business outcomes.",
+             "Created a project governance framework including stage gates, risk management, and stakeholder engagement protocols.",
+             "Established a Project Management Office (PMO) with dedicated resources to support project managers and ensure methodology compliance.",
+             "Implemented project portfolio management tools to provide executive visibility and enable data-driven decision-making.",
+           ],
+           benefits: [
+             "Improved on-time project delivery rate from 65% to 92% through standardized methodologies and governance.",
+             "Increased stakeholder satisfaction scores by 35% through improved communication and expectation management.",
+             "Reduced project failures and cancellations by 50% through early risk identification and intervention.",
+             "Delivered $2M+ in cost avoidance through improved resource allocation and portfolio optimization.",
+           ],
+           technical: [
+             "Project Management Office (PMO)",
+             "Agile/Waterfall Methodologies",
+             "Microsoft Project/Project Server",
+             "ServiceNow PPM",
+             "Stakeholder Management",
+           ],
+         },
+         'vendor-management': {
+           title: "Enterprise-wide Third-Party Vendor Management",
+           context: "Developed and implemented a comprehensive vendor management program to optimize third-party relationships, reduce costs, ensure compliance, and mitigate risks across a portfolio of 200+ technology vendors and $25M+ in annual spend.",
+           responsibilities: [
+             "Established centralized vendor management office with standardized processes for vendor selection, onboarding, and performance management.",
+             "Implemented vendor risk assessment and compliance frameworks to ensure adherence to security, privacy, and regulatory requirements.",
+             "Negotiated master service agreements and enterprise licensing agreements to maximize value and minimize legal exposure.",
+             "Developed vendor scorecards and performance metrics to drive continuous improvement and accountability.",
+           ],
+           benefits: [
+             "Achieved $3.5M in annual cost savings through vendor consolidation and strategic contract negotiations.",
+             "Reduced vendor-related security incidents by 75% through improved risk assessment and compliance monitoring.",
+             "Improved vendor performance and service delivery through standardized SLAs and regular business reviews.",
+             "Established a vendor management framework adopted across the enterprise, managing 200+ vendors and $25M+ annual spend.",
+           ],
+           technical: [
+             "Vendor Risk Management",
+             "Contract Negotiation & Management",
+             "Supplier Relationship Management (SRM)",
+             "Procurement Systems",
+             "Compliance & Governance Frameworks",
+           ],
+         },
+         'datacenter-consolidation': {
+           title: "Data Center Consolidation, Migration & Virtualization",
+           context: "Led a multi-year initiative to consolidate 5 disparate data centers into a modernized, virtualized infrastructure, migrating 300+ physical servers to VMware and cloud platforms while achieving zero downtime and significant cost reductions.",
+           responsibilities: [
+             "Developed comprehensive data center consolidation strategy and roadmap aligned with business growth objectives.",
+             "Led the migration of 300+ physical servers to VMware virtualization platform and Azure cloud infrastructure.",
+             "Implemented disaster recovery and business continuity solutions to ensure 99.9% uptime and 4-hour RTO targets.",
+             "Managed decommissioning of legacy data centers and renegotiation of colocation agreements.",
+           ],
+           benefits: [
+             "Reduced annual data center operational costs by $2.8M through consolidation and virtualization.",
+             "Improved infrastructure availability to 99.9% uptime through redundancy and failover capabilities.",
+             "Reduced physical server footprint by 70% through virtualization, lowering power, cooling, and space requirements.",
+             "Achieved zero downtime during migration through careful planning and execution over 18-month timeline.",
+           ],
+           technical: [
+             "VMware vSphere/vCenter",
+             "Azure Infrastructure (IaaS)",
+             "Storage Area Networks (SAN)",
+             "Disaster Recovery Planning",
+             "Data Center Design & Operations",
+           ],
+         },
+         'portfolio-it-standardization': {
+           title: "Portfolio-Wide IT Standardization & Cloud Framework",
+           context: "Architected and deployed a scalable IT foundation and governance model across multiple portfolio companies to support rapid expansion.",
+           responsibilities: [
+             "Served as the Chief-Level Technology Consultant to define a unified technology roadmap for diverse service businesses.",
+             "Architected foundational IT and cloud frameworks, replacing fragmented legacy systems with a standardized, scalable stack.",
+             "Established comprehensive governance policies and support processes to ensure consistent security and operational standards across the portfolio.",
+             "Implemented automation frameworks to streamline repetitive tasks and accelerate the onboarding of new acquisitions.",
+           ],
+           benefits: [
+             "Established a repeatable \"technology playbook\" that reduced new portfolio company integration time by 40%.",
+             "Delivered scalable support processes that maintained high service levels during a period of rapid organizational growth.",
+             "Standardized technology procurement across entities, resulting in immediate cost synergies through consolidated vendor contracts.",
+             "Ensured 100% alignment on data security and governance protocols across all managed entities.",
+           ],
+           technical: [
+             "Enterprise Architecture",
+             "IT Governance",
+             "Cloud Strategy",
+             "Scalability Planning",
+             "Executive Advisory",
+           ],
+         },
+         'low-code-business-automation': {
+           title: "Low-Code Business Process Automation & Digitization",
+           context: "Designed and deployed a low-code application strategy to digitize manual finance and accounting workflows, automating the transition of on-premises paperwork to the cloud.",
+           responsibilities: [
+             "Identified inefficiencies in manual Accounting/Finance operations and spearheaded a digital transformation initiative to eliminate paper-based dependencies.",
+             "Selected and implemented a low-code/no-code solution (Glide Apps) to rapidly build custom internal tools without incurring significant development costs.",
+             "Architected the workflow to automate the digitization of physical paperwork directly into cloud documentation systems.",
+             "Led the change management process to transition staff from legacy manual processes to modern digital workflows.",
+           ],
+           benefits: [
+             "Successfully automated the digitization of on-premises paperwork, ensuring secure cloud storage and accessibility.",
+             "Streamlined critical Accounting and Finance operations, reducing processing time and manual errors.",
+             "Delivered a scalable solution that allowed non-technical business units to maintain and update their own digital records.",
+             "Enhanced data visibility and compliance by creating a digital audit trail for financial documents.",
+           ],
+           technical: [
+             "Digital Transformation",
+             "Low-Code/No-Code (Glide Apps)",
+             "Process Automation",
+             "Cloud Migration",
+             "Operational Efficiency",
+           ],
+         },
+         'security-awareness-training': {
+           title: "Enterprise Security Awareness & Human Risk Reduction",
+           context: "Institutionalized a global cybersecurity training program to mitigate human-layer risk and strengthen regulatory posture.",
+           responsibilities: [
+             "Established a formal IT Security organization and culture focused on reducing human error as a primary attack vector.",
+             "Institutionalized enterprise-wide cybersecurity awareness training using the KnowBe4 platform to educate employees on phishing and social engineering.",
+             "Partnered with third-party security firms to align training outcomes with insights gained from annual penetration tests and risk assessments.",
+             "Developed policies to enforce mandatory training compliance, linking security awareness directly to organizational risk management goals.",
+           ],
+           benefits: [
+             "Measurably reduced human layer risk by empowering employees to recognize and report security threats.",
+             "Improved overall security resilience and strengthened the organization's regulatory posture.",
+             "Achieved high adoption rates for security protocols, including 100% MFA adoption in previous initiatives.",
+             "Reduced the organization's vulnerability to ransomware and phishing attacks through proactive education.",
+           ],
+           technical: [
+             "Security Awareness Training",
+             "Risk Management",
+             "Regulatory Compliance",
+             "Culture Change",
+             "Vendor Management (KnowBe4)",
+           ],
+         },
+         'hoa-compliance': {
+          title: "AI Process Automation in a Regulated Industry — HOA Compliance Platform",
+          context: "This project started as a compliance problem and became a blueprint for AI-driven business automation. Texas SB 711 requires HOA management companies to maintain a compliant public website — and most are unaware they're exposed. Rather than market a service manually, we built an intelligent system around the gap: a live-data prospecting tool that queries the Texas state HOA registry, scores every entity for compliance risk, and surfaces the highest-priority targets automatically. From there, prospects move through a structured intake pipeline that feeds directly into an AI-assisted build process. Claude generates the compliant site, GitHub Actions handles deployment, and the client is live within 48 hours — no developer required after initial setup. The same architecture — regulated data in, AI processing, automated output — applies to dozens of enterprise workflows: vendor onboarding, policy documentation, regulatory reporting, and more. This is what that looks like in production.",
+          responsibilities: [
+            "Identified a regulatory compliance gap under Texas SB 711 affecting HOA management companies statewide and designed a scalable solution around it.",
+            "Built a live-data prospecting tool that queries the Texas state HOA registry, scores entities for compliance risk, and automatically surfaces highest-priority targets.",
+            "Designed a structured intake pipeline connecting prospect data directly to an AI-assisted site build process powered by Claude.",
+            "Implemented GitHub Actions-based automated deployment enabling client go-live within 48 hours — no developer required after initial setup.",
+            "Architected the full end-to-end system: regulated data ingestion, AI processing, and automated compliant output delivery.",
+          ],
+          benefits: [
+            "Eliminated manual prospecting by automating compliance risk scoring across the full Texas HOA registry.",
+            "Reduced client onboarding and site delivery from weeks to under 48 hours through AI-assisted generation and CI/CD deployment.",
+            "Demonstrated a reusable automation architecture applicable to vendor onboarding, policy documentation, regulatory reporting, and other enterprise workflows.",
+            "Established a production-validated blueprint for agentic AI workflows in regulated industries.",
+          ],
+          technical: [
+            "React",
+            "Supabase",
+            "GitHub Actions",
+            "Claude AI",
+            "AI Process Automation",
+            "Compliance Automation",
+            "Agentic Workflow",
+            "Regulated Industry Data Integration",
+          ],
+          cta: {
+            text: "Exploring how AI automation could work inside your organization? That's exactly what we do at NSTP.",
+            linkText: "Schedule a Conversation",
+          },
+        },
+        'pantry-tab': {
+          title: "Pantry Tab — AI-Driven Household SaaS Platform",
+          context: "Pantry Tab is a live, subscription-based platform that helps families manage groceries, recipes, allergies, and meal planning in one place. I founded it and built it from the ground up — 400+ commits into a production product, not a proof of concept. The backend is 26 serverless edge functions, nine of them AI-powered: recipe parsing from photographs, receipts, URLs, and documents, ingredient recognition from images, automated weekly meal planning, and generated prep sheets and shopping lists. It carries a full retail grocery commerce integration, complete Stripe subscription billing, and ships as an installable progressive web app. The judgment call worth noting is where the AI actually sits: at ingestion, eliminating the manual data entry that kills adoption of every household app of this kind — rather than as a chatbot bolted onto an otherwise conventional product.",
+          images: [
+          { src: "./assets/pantrytab-dashboard.webp",
+          alt: "Pantry Tab dashboard showing pantry value, expiring items, inventory counts by storage location, and AI actions for meal planning, grocery list building and receipt scanning.",
+          caption: "The dashboard. The three AI actions sit at the point of friction \u2014 planning, list building, and scanning \u2014 rather than behind a chat box." },
+          { src: "./assets/pantrytab-meal-planner.webp",
+          alt: "Pantry Tab weekly meal planner view showing planned meals across days of the week.",
+          caption: "Weekly planning generated from what is already in the pantry and what expires soonest." },
+          ],
+          responsibilities: [
+            "Founded and built a production subscription SaaS platform end to end, sustained through 400+ commits from concept to live paying product.",
+            "Architected a serverless backend of 26 Supabase edge functions spanning AI inference, third-party commerce, billing, and scheduled jobs.",
+            "Built nine AI-powered ingestion and generation workflows: recipe parsing from photo, receipt, URL, and document; ingredient recognition from images; automated weekly meal planning; recipe suggestion; and prep-sheet and shopping-list generation.",
+            "Integrated a complete retail grocery commerce path — an eleven-function OAuth flow covering store discovery, product search, cart population, token refresh, and account disconnection.",
+            "Implemented subscription billing end to end with Stripe checkout, customer portal, webhook handling, trial and expiry checks, and subscription-state verification.",
+            "Delivered the front end as an installable progressive web app in React and TypeScript with a full component system, offline-capable install, and barcode/QR scanning.",
+            "Established secrets management, row-level data-access rules, and customer-data governance aligned to enterprise privacy practice.",
+            "Owned branding, pricing model, legal policies, and go-to-market strategy alongside the technical build.",
+          ],
+          benefits: [
+            "Demonstrates ownership of a complete AI product lifecycle — model-backed features, third-party integration, billing, security, and go-to-market — at production quality.",
+            "Shows practical judgment about where AI creates value: removing manual data entry at the point of ingestion, which is the actual adoption barrier for this product category.",
+            "Maintains hands-on currency in the serverless, edge-function, and AI-integration patterns now arriving in enterprise environments.",
+            "Applies the same security, privacy, and data-governance discipline used across large-scale IT organizations to an independently owned platform.",
+            "Validates leadership across product strategy, cloud architecture, security governance, and operations simultaneously rather than in isolation.",
+          ],
+          technical: [
+            "React 18 + TypeScript",
+            "Supabase (Postgres, Edge Functions, RLS)",
+            "Serverless Architecture",
+            "AI Vision & Document Parsing",
+            "Stripe Billing & Webhooks",
+            "OAuth 2.0 Commerce Integration",
+            "Progressive Web App (PWA)",
+            "Tailwind CSS + shadcn/ui",
+            "TanStack Query / Zustand",
+            "Vite",
+          ],
+        },
+      };
+       // --- END FULL PROJECT DETAIL DATA ---
+
+       // --- LEADERSHIP COMPETENCIES DATA ---
+       const LEADERSHIP_DETAILS = {
+         'it-leadership-transformation': {
+           title: "IT Leadership and Transformation",
+           context: "Demonstrated strategic IT leadership driving organizational transformation through vision, innovation, and business alignment across complex enterprise environments.",
+           responsibilities: [
+             "Developed and executed comprehensive IT strategies aligned with business objectives and growth initiatives.",
+             "Led enterprise-wide technology transformations including cloud migration, infrastructure modernization, and digital workplace initiatives.",
+             "Built and mentored high-performing IT teams across infrastructure, security, operations, and end-user computing functions.",
+             "Fostered culture of innovation and continuous improvement through emerging technologies and best practices.",
+           ],
+           benefits: [
+             "Delivered $10M+ in cumulative IT cost savings through strategic initiatives and operational optimization.",
+             "Successfully led multiple large-scale transformations with minimal business disruption and high stakeholder satisfaction.",
+             "Developed talent pipeline with 90%+ retention rate through mentorship and career development programs.",
+             "Established IT as strategic business partner driving revenue growth and competitive advantage.",
+           ],
+           technical: [
+             "Strategic Planning & Roadmap Development",
+             "Enterprise Architecture",
+             "Technology Innovation & Adoption",
+             "Team Leadership & Development",
+             "Organizational Change Management",
+           ],
+         },
+         'team-management': {
+           title: "Team Management Excellence",
+           context: "Built and led high-performing, cross-functional teams through effective communication, mentorship, performance management, and fostering collaborative culture focused on delivering business value.",
+           responsibilities: [
+             "Recruited, developed, and retained top IT talent across technical disciplines and organizational levels.",
+             "Implemented performance management frameworks with clear goals, regular feedback, and career development planning.",
+             "Fostered collaborative team culture emphasizing accountability, innovation, and customer service excellence.",
+             "Facilitated cross-functional collaboration between IT and business units to ensure alignment and shared success.",
+           ],
+           benefits: [
+             "Maintained 90%+ employee retention rate in competitive talent market through strong culture and development opportunities.",
+             "Improved team productivity by 40% through effective delegation, empowerment, and removal of obstacles.",
+             "Developed 15+ direct reports into leadership positions within the organization and industry.",
+             "Achieved 95%+ employee satisfaction scores through transparent communication and supportive environment.",
+           ],
+           technical: [
+             "Talent Acquisition & Retention",
+             "Performance Management",
+             "Leadership Development & Coaching",
+             "Team Building & Culture",
+             "Conflict Resolution",
+           ],
+         },
+         'strategic-partnerships': {
+           title: "Strategic Partnerships and Change Management",
+           context: "Established and maintained strategic partnerships with business leaders, vendors, and stakeholders while leading successful organizational change initiatives through effective communication and stakeholder engagement.",
+           responsibilities: [
+             "Built trusted advisor relationships with C-suite executives and business unit leaders to understand needs and deliver solutions.",
+             "Led change management initiatives ensuring smooth adoption of new technologies and processes across the organization.",
+             "Negotiated and managed strategic vendor partnerships maximizing value and minimizing risk.",
+             "Developed comprehensive communication strategies to engage stakeholders and drive buy-in for IT initiatives.",
+           ],
+           benefits: [
+             "Achieved 95%+ stakeholder satisfaction through proactive communication and delivery of business-aligned solutions.",
+             "Successfully managed organizational change with 90%+ user adoption rates through effective change management practices.",
+             "Delivered $8M+ in value through strategic vendor partnerships and contract negotiations.",
+             "Established IT governance framework adopted enterprise-wide ensuring alignment and accountability.",
+           ],
+           technical: [
+             "Stakeholder Engagement & Management",
+             "Organizational Change Management",
+             "Vendor Relationship Management",
+             "Executive Communication",
+             "Governance & Compliance Frameworks",
+           ],
+         },
+         'data-driven-excellence': {
+           title: "Data-Driven Decision-Making & Operational Excellence",
+           context: "Leveraged data analytics, metrics, and KPIs to drive informed decision-making and continuous improvement while establishing operational excellence through process optimization and best practices.",
+           responsibilities: [
+             "Implemented comprehensive IT metrics and KPI frameworks to measure performance and drive accountability.",
+             "Established data-driven decision-making culture using analytics to identify opportunities and optimize resource allocation.",
+             "Developed and optimized IT service management processes improving efficiency and customer satisfaction.",
+             "Implemented automation and continuous improvement initiatives reducing manual effort and operational risk.",
+           ],
+           benefits: [
+             "Improved operational efficiency by 45% through process optimization and automation initiatives.",
+             "Reduced IT incident resolution time by 60% through data-driven problem identification and root cause analysis.",
+             "Achieved 99.9% system availability through proactive monitoring and data-driven capacity planning.",
+             "Delivered $3M+ in cost savings through data-driven resource optimization and waste elimination.",
+           ],
+           technical: [
+             "IT Metrics & KPI Development",
+             "Business Intelligence & Analytics",
+             "Process Optimization (Lean/Six Sigma)",
+             "ITSM Best Practices (ITIL)",
+             "Continuous Improvement Methodologies",
+           ],
+         },
+       };
+       // --- END LEADERSHIP COMPETENCIES DATA ---
+
+       // --- MOCK DATA ---
+       const MOCK_DATA = {
+         name: "Howard Reid",
+         tagline: "Technology Executive | AI Systems & Governance | Private Equity Portfolio Technology | Enterprise PMO & M&A Integration | Cloud & Cybersecurity",
+         profileImageUrl: "./IMG_9551.jpeg",
+
+         story: "I'm a technology executive with 27+ years of experience leading enterprise IT strategy, infrastructure modernization, cybersecurity transformation, and operational governance across complex multi-company environments.\n\nMy background includes supporting 27+ private equity portfolio companies, building enterprise PMO and ITSM functions, leading M&A technology integration, and delivering measurable business outcomes including $5M+ annual cost synergies, $750K annual cloud savings, and 35% infrastructure cost reductions.\n\nMore recently I've been building AI systems hands-on — production multi-agent architectures, formal governance frameworks defining what autonomous agents may decide and when they must escalate, and protocol-level tooling connecting AI to existing business applications. I approach AI the same way I approach any enterprise platform: with attention to authority, auditability, and cost, because those are what determine whether it survives contact with a real organization.\n\nI specialize in helping organizations improve execution discipline, reduce technology risk, modernize infrastructure, and align IT investments with business growth.",
+
+         executiveImpact: [
+           "Delivered $5M+ annual cost synergies through M&A integration",
+           "Reduced infrastructure costs by 35%",
+           "Generated $750K annual cloud savings",
+           "Led IT operations supporting 27+ private equity portfolio companies",
+           "Managed $12M–$15M enterprise IT budgets",
+           "Directed teams of 30+ IT professionals",
+         ],
+         
+         strengths: [
+           { name: "Restorative", description: "Natural problem solver with a focus on diagnosing and fixing complex infrastructure challenges." },
+           { name: "Strategic", description: "Strategic thinker with the ability to anticipate roadblocks and design scalable solutions." },
+           { name: "Achiever", description: "High personal drive and accountability to deliver results in fast-paced environments." },
+           { name: "Ideation", description: "Creative innovator who generates new ideas to optimize systems and processes." },
+           { name: "Arranger", description: "Skilled at coordinating people, tools, and priorities to execute effectively under pressure." }
+         ],
+         
+         skills: [
+           { icon: "🔷", title: "IT Strategy & Enterprise Architecture", description: "Building scalable, business-aligned technology roadmaps that reduce cost and accelerate transformation." },
+           { icon: "📈", title: "PMO Leadership & Organizational Development", description: "Building high-performance teams and governance models that improve delivery success rates." },
+           { icon: "⚖️", title: "AI Governance & Responsible Adoption", description: "Authority matrices, human-in-the-loop thresholds, and audit trails that let organizations adopt autonomous agents without sacrificing control, traceability, or compliance posture." },
+           { icon: "🤖", title: "AI Systems & Multi-Agent Architecture", description: "Designing and building production multi-agent systems — agent hierarchies, delegated authority, escalation design, and protocol-level integration (MCP) connecting AI to existing enterprise applications." },
+           { icon: "🛠️", title: "IT Operations, ITSM & Automation", description: "Standardizing processes and automating lifecycle operations for enterprise-scale service delivery." },
+           { icon: "🔄", title: "M&A Integration & Divestiture", description: "Harmonizing technology, identity, operations, and data across acquisitions to deliver rapid synergies." },
+           { icon: "☁️", title: "Cloud Transformation & Infrastructure Modernization", description: "Executing data center exits and cloud migrations delivering multi-million-dollar efficiencies." },
+           { icon: "🔐", title: "Cybersecurity & Zero Trust", description: "Establishing enterprise cybersecurity programs, IAM, and Zero Trust architectures that reduce risk exposure." },
+           { icon: "💰", title: "Budgeting & Vendor Optimization", description: "Managing $12M–$15M budgets while reducing operating costs by 35% through modernization and negotiation." },
+           { icon: "🚀", title: "SaaS Product Development & AI Enablement", description: "Building real-world SaaS platforms that apply enterprise architecture principles, AI-driven automation, subscription business models, and security-first design." },
+         ],
+         
+         achievements: [
+           { title: "Private Equity Portfolio Technology Leadership", detail: "Led IT operations and advisory across 27+ private equity portfolio companies, standardizing governance, integration, and modernization frameworks aligned to value-creation outcomes." },
+           { title: "M&A Integration & Cost Synergies", detail: "Delivered $5M+ in annual IT cost synergies through M&A integration and standardization, plus $750K annual cloud savings via Azure and Microsoft 365 optimization." },
+           { title: "Infrastructure Modernization", detail: "Led enterprise-wide transformations including data center consolidation (165+ servers to cloud), Zero Trust network security implementation, and 35% infrastructure cost reduction." },
+           { title: "Cybersecurity & PMO Leadership", detail: "Established formal enterprise cybersecurity governance and Zero Trust alignment, and built enterprise PMO and ITSM functions standardizing delivery, reporting, and employee lifecycle automation." },
+         ],
+
+         // ALL Project Summaries used on the main page
+         // AI & Automation project cards (dedicated section)
+         aiProjects: [
+           { id: 'exodus-multi-agent', title: "EXODUS \u2014 Autonomous Multi-Agent Operating System", shortDescription: "A production multi-agent AI system in Python (116 modules, ~37,600 lines) running daily operations through sixteen specialized agents with defined authority, escalation paths, and executive reporting \u2014 with inference cost engineered as a first-class constraint." },
+           { id: 'ai-agent-governance', title: "AI Agent Governance & Delegated Authority Framework", shortDescription: "A formal three-tier authority matrix for autonomous AI agents \u2014 decision rights, escalation thresholds, and document control \u2014 answering the question that actually blocks enterprise agent adoption: who authorized the action, and how is it audited?" },
+           { id: 'tradingview-mcp', title: "TradingView MCP Bridge \u2014 Agent Tooling & Protocol Engineering", shortDescription: "An open-source Model Context Protocol server giving LLM agents structured access to a stateful desktop application over Chrome DevTools Protocol \u2014 16 tool modules, 5 packaged agent skills, full test suite and security policy." },
+           { id: 'signal-works', title: "Signal Works \u2014 Shared-Service AI Marketing Firm", shortDescription: "Eleven agents producing marketing content at volume behind a human approval gate \u2014 with the publishing lock encoded in four separate places so no single edit can remove it." },
+           { id: 'pantry-tab', title: "Pantry Tab \u2014 AI-Driven Household SaaS Platform", shortDescription: "A live subscription SaaS platform built from scratch: 26 serverless edge functions, nine of them AI-powered, plus retail grocery commerce integration, Stripe billing, and an installable PWA." },
+           { id: 'hoa-compliance', title: "AI Process Automation in a Regulated Industry \u2014 HOA Compliance Platform", shortDescription: "An end-to-end AI automation system built around a Texas regulatory compliance gap: live-data prospecting, risk scoring, AI-assisted site generation, and automated deployment \u2014 clients live in 48 hours, no developer required." },
+         ],
+
+         projectSummaries: [
+           { id: 'enterprise-pmo-pe', title: "Enterprise PMO Across a Private Equity Portfolio", shortDescription: "Built the enterprise PMO supporting 27+ private equity portfolio companies across 17 industries \u2014 standardizing governance, reporting, and delivery across acquisition, integration, and modernization programs." },
+           { id: 'ma-integration', title: "M&A Integration, Divestiture & $5M+ Cost Synergies", shortDescription: "Ran IT due diligence, post-close integration, and a $20M+ divestiture inside a 90-day window \u2014 delivering $5M+ in recurring annual synergies and a repeatable playbook for every acquisition after." },
+           { id: 'security-architecture', title: "Cybersecurity, Identity & Zero Trust Architecture", shortDescription: "Built the enterprise security function, then modernized identity on top of it: Hybrid Azure AD across 2,000+ employees and 2,800+ devices, 100% MFA adoption, and an 85% reduction in security incidents." },
+           { id: 'cloud-infra-modernization', title: "Cloud Migration & Modern Workplace Transformation", shortDescription: "Migrated 165+ servers to Azure and rebuilt end-user computing on top of it \u2014 $750K in annual cloud savings, $175K in labor savings, 35% lower infrastructure cost, and device setup cut from six hours to 35 minutes." },
+           { id: 'vendor-management', title: "Enterprise Third-Party Vendor Management", shortDescription: "Built a vendor management program covering 200+ vendors and $25M+ in annual spend, delivering $3.5M in recurring savings through consolidation, competitive RFP, and renegotiation." },
+           { id: 'project-success', title: "Project Success & Delivery Governance", shortDescription: "Established a project success framework that moved on-time delivery from 65% to 92% and produced $2M+ in cost avoidance \u2014 execution discipline made measurable." },
+         ],
+
+         // Secondary initiatives — listed rather than carded, still fully linked
+         moreProjects: [
+           { id: 'datacenter-consolidation', title: "Data Center Consolidation, Migration & Virtualization" },
+           { id: 'portfolio-it-standardization', title: "Portfolio-Wide IT Standardization & Cloud Framework" },
+           { id: 'pmo-itsm-development', title: "PMO Establishment & IT Service Management Overhaul" },
+           { id: 'telecom-overhaul', title: "Global Telecom Overhaul & Cloud Voice Migration" },
+           { id: 'teams-platform', title: "Microsoft Teams & Communication Platform" },
+           { id: 'security-awareness-training', title: "Enterprise Security Awareness & Human Risk Reduction" },
+           { id: 'low-code-business-automation', title: "Low-Code Business Process Automation & Digitization" },
+         ],
+
+         // Leadership Competencies Summaries
+         leadershipSummaries: [
+           { id: 'it-leadership-transformation', title: "IT Leadership and Transformation", shortDescription: "Delivered $10M+ in IT cost savings and established IT as strategic business partner through vision, innovation, and transformation leadership." },
+           { id: 'team-management', title: "Team Management Excellence", shortDescription: "Built high-performing teams with 90%+ retention rate and 40% productivity improvement through effective leadership and development." },
+           { id: 'strategic-partnerships', title: "Strategic Partnerships and Change Management", shortDescription: "Achieved 95%+ stakeholder satisfaction and $8M+ in vendor value through strategic relationships and change management excellence." },
+           { id: 'data-driven-excellence', title: "Data-Driven Decision-Making & Operational Excellence", shortDescription: "Improved operational efficiency by 45% and delivered $3M+ savings through data-driven decision-making and process optimization." },
+         ],
+
+         experience: [
+          { period: "SEP 2024 - PRESENT", role: "Independent Technology Executive & Strategic Advisor", company: "Independent — Private Equity & Multi-Company Advisory", location: "DALLAS–FORT WORTH, TX",
+            description: "Provide executive-level technology leadership, modernization strategy, and governance development across multiple organizations and portfolio environments, maintaining continuous enterprise leadership engagement.",
+            highlights: [
+              "Delivered modernization and governance initiatives improving operational readiness across private equity portfolio environments",
+              "Designed scalable cloud, cybersecurity, and automation frameworks supporting business continuity and analytics",
+              "Strengthened governance and documentation maturity across multi-company advisory environments"
+            ],
+            engagements: [
+              {
+                name: "Blue Star Equity Group — Strategic Technology Advisor",
+                bullets: [
+                  "Provided executive-level advisory supporting scalable IT frameworks across portfolio companies",
+                  "Defined governance models, technology platforms, and operational workflows supporting growth"
+                ]
+              },
+              {
+                name: "Pantry Tab LLC — Founder & Technology Lead",
+                bullets: [
+                  "Designed and launched a cloud-based SaaS platform supporting automated workflows and subscription-based operations",
+                  "Built scalable architecture emphasizing security, privacy, and operational resilience"
+                ]
+              },
+              {
+                name: "DreidHQ Capital LLC — IT & Automation Consultant",
+                bullets: [
+                  "Designed secure data and reporting environments supporting operational analytics workflows",
+                  "Implemented governance processes improving reporting accuracy and operational reliability"
+                ]
+              }
+            ]
+          },
+           { period: "JUN 2023 - AUG 2024", role: "Director of Infrastructure, IT Security, Operations & End User Computing", company: "Liberty Steel USA", location: "PEORIA, IL / DALLAS, TX", highlights: [
+               "Managed $15M IT budget, improving security and reducing costs by 35% in network overhaul.",
+               "Led IT operations and infrastructure aligning zero trust strategies for efficiency across US sites, boosting service delivery.",
+               "Established a formal IT Security organization to strengthen enterprise cybersecurity posture, governance and driving initiatives in identity and zero trust access management, rights management, incident response resulting in a measurable reduction in security risk exposure.",
+               "Partnered with third-party security firms to conduct annual penetration tests, risk assessments, and compliance audits.",
+               "Institutionalizing enterprise-wide cybersecurity awareness training using KnowBe4; reducing human layer risk, strengthening regulatory posture, and improving overall security resilience.",
+               "Developed a centralized IT Service Desk with FreshService, standardizing Incident/Request/Change management processes and automating employee lifecycle management with HR integration.",
+               "Mentored cross-functional team, fostering a culture of learning and collaborative problem solving."
+           ]},
+           { period: "MAY 2021 - JUN 2023", role: "Sr. Director of IT Strategy & Architecture", company: "Wilks Brothers LLC", location: "FORT WORTH, TX", highlights: [
+               "Managed $12M IT budget, enhancing cloud efficiency and cutting costs by $750K annually.",
+               "Led enterprise-wide transformations including data center consolidation (165+ servers to cloud), Zero Trust network security implementation, and elimination of legacy infrastructure.",
+               "Led data migration to Azure, boosting app performance by 40% and slashing recovery time to 4 hours.",
+               "Reduced telecom expenses by $400K annually by migrating 2000+ users to cloud based systems.",
+               "Conducted in-depth risk assessments, enhancing cybersecurity protocols that fortified data integrity and reduced vulnerability to threats.",
+               "Partnered with third-party security firms to conduct annual penetration tests, risk assessments, and compliance audits.",
+               "Coordinated cross-departmental initiatives, ensuring alignment of IT strategies with business goals and fostering a culture of shared success."
+           ]},
+           { period: "MAY 2016 - MAY 2021", role: "Director of IT Operations & Enterprise Solutions", company: "Wilks Brothers LLC", location: "FORT WORTH, TX", highlights: [
+               "Spearheaded IT strategy across 27+ private equity portfolio companies, enhancing collaboration and standardization through targeted technology alignment.",
+               "Guided PMO establishment, mentoring project managers and fostering culture of continuous improvement.",
+               "Built comprehensive IT Service Desk standardizing Incident/Request/Change management processes.",
+               "Executed comprehensive IT integration for a mid-sized acquisition, achieving $5M in annual cost synergies and completing the project ahead of schedule.",
+               "Established a formal IT Security organization to drive enterprise cybersecurity strategy, governance.",
+               "Implemented Azure AD join for 2000+ employees, achieving 99.9% success across 2800+ devices.",
+               "Directed comprehensive cybersecurity initiatives reducing security incidents by 85%, implementing enterprise IAM for 1800+ users, and achieving 100% MFA adoption.",
+               "Deployed Dell/Intune connected provisioning reducing device setup time from 6 hours to 35 minutes, achieving $175K annual labor savings.",
+               "Print infrastructure Overhaul: Eliminated 23 print servers using PrinterLogic, reducing help desk tickets by 70% and management time by 90%."
+           ]},
+         ],
+         
+         linkedinUrl: "https://www.linkedin.com/in/howardareid",
+         // Note: The file name must match the one referenced in the HTML tag's download attribute.
+         resumeDownloadLink: "./Howard-Reid-Resume.pdf"
+       };
+       // --- END MOCK DATA ---
+
+       // --- UTILITY COMPONENTS ---
+
+       const useScrollToTop = () => {
+         const [isVisible, setIsVisible] = useState(false);
+         const toggleVisibility = () => {
+           if (window.scrollY > 300) {
+             setIsVisible(true);
+           } else {
+             setIsVisible(false);
+           }
+         };
+         const scrollToTop = () => {
+           window.scrollTo({ top: 0, behavior: "smooth" });
+         };
+         useEffect(() => {
+           window.addEventListener("scroll", toggleVisibility);
+           return () => window.removeEventListener("scroll", toggleVisibility);
+         }, []);
+         return { isVisible, scrollToTop };
+       };
+
+       const SkillBar = ({ name, level, icon }) => (
+         <div className="mb-6">
+           <div className="flex justify-between items-center mb-1 text-gray-700 dark:text-gray-300">
+             <span className="flex items-center font-medium">
+               {icon}
+               <span className="ml-2">{name}</span>
+             </span>
+             <span className="font-semibold text-sm">{level}%</span>
+           </div>
+           <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+             <div
+               className="bg-indigo-600 h-2.5 rounded-full transition-all duration-1000 ease-out"
+               style={{ width: `${level}%` }}
+             ></div>
+           </div>
+         </div>
+       );
+
+       const SkillCard = ({ icon, title, description }) => (
+         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-indigo-300 dark:hover:border-indigo-600">
+           <div className="flex items-start mb-3">
+             <span className="text-3xl mr-3 flex-shrink-0">{icon}</span>
+             <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{title}</h3>
+           </div>
+           <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{description}</p>
+         </div>
+       );
+
+       const AchievementCard = ({ title, detail }) => (
+         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 transition duration-300 transform hover:shadow-2xl">
+           <h3 className="text-xl font-bold mb-2 text-indigo-600 dark:text-indigo-400 flex items-center">
+             <CheckCircle className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" />
+             {title}
+           </h3>
+           <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{detail}</p>
+         </div>
+       );
+
+       const ExperienceItem = ({ period, role, company, location, description, highlights, impact, engagements }) => (
+         <div className="relative pl-8 sm:pl-32 pb-16 group">
+           {/* Line and Dot */}
+           <div className="absolute left-0 sm:left-10 top-0 w-px bg-gray-300 dark:bg-gray-700 h-full group-last:h-1/2"></div>
+           <div className="absolute -left-1 sm:left-9 top-0 w-3 h-3 bg-indigo-600 rounded-full ring-4 ring-white dark:ring-gray-900 z-10"></div>
+
+           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+             <div className="sm:w-20 sm:text-right mb-2 sm:mb-0">
+               <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">{period}</span>
+             </div>
+             <div className="sm:flex-1 sm:pl-6">
+               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{role}</h3>
+               <p className="text-indigo-600 dark:text-indigo-400 font-medium mb-3">{company} <span className="text-gray-500 dark:text-gray-400 font-normal">| {location}</span></p>
+               {description && <p className="text-sm text-gray-600 dark:text-gray-300 italic mb-3">{description}</p>}
+               {highlights && highlights.length > 0 && (
+                 <>
+                   {(impact || engagements) && <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-1">Key Contributions</p>}
+                   <ul className="list-disc space-y-2 text-gray-700 dark:text-gray-300 ml-4">
+                     {highlights.map((h, i) => (
+                       <li key={i} className="text-sm">{h}</li>
+                     ))}
+                   </ul>
+                 </>
+               )}
+               {impact && impact.length > 0 && (
+                 <>
+                   <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mt-4 mb-1">Impact</p>
+                   <ul className="list-disc space-y-2 text-gray-700 dark:text-gray-300 ml-4">
+                     {impact.map((h, i) => (
+                       <li key={i} className="text-sm">{h}</li>
+                     ))}
+                   </ul>
+                 </>
+               )}
+               {engagements && engagements.length > 0 && (
+                 <>
+                   <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mt-5 mb-2">Selected Engagements</p>
+                   <div className="space-y-4">
+                     {engagements.map((eng, i) => (
+                       <div key={i} className="border-l-2 border-indigo-300 dark:border-indigo-700 pl-4">
+                         <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{eng.name}</p>
+                         <ul className="list-disc space-y-1 text-gray-700 dark:text-gray-300 ml-4">
+                           {eng.bullets.map((b, j) => (
+                             <li key={j} className="text-sm">{b}</li>
+                           ))}
+                         </ul>
+                       </div>
+                     ))}
+                   </div>
+                 </>
+               )}
+             </div>
+           </div>
+         </div>
+       );
+
+       // --- NEW COMPONENTS FOR PROJECTS ---
+
+       const ProjectSummaryCard = ({ id, title, shortDescription, onSelectProject }) => (
+           <button
+               onClick={() => onSelectProject(id)}
+               className="text-left w-full h-full bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-indigo-500/30 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-indigo-500/50"
+           >
+               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-start">
+                   <Lightbulb className="w-6 h-6 mr-3 mt-1 flex-shrink-0 text-indigo-600" />
+                   {title}
+               </h3>
+               <p className="text-md text-gray-600 dark:text-gray-300 mb-5">{shortDescription}</p>
+               <span className="text-indigo-600 dark:text-indigo-400 font-semibold flex items-center justify-end">
+                   Read Full Case Study
+                   <ArrowRight className="w-4 h-4 ml-2"/>
+               </span>
+           </button>
+       );
+
+       const ProjectDetailPage = ({ projectData, onGoBack, backLabel }) => (
+           <section className="py-20 px-4 sm:px-6 lg:px-8 min-h-screen">
+               <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 md:p-12 rounded-2xl shadow-2xl">
+                   <button
+                       onClick={onGoBack}
+                       className="mb-8 flex items-center text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-700 transition duration-150"
+                   >
+                       <ArrowLeft className="w-5 h-5 mr-2" />
+                       {backLabel || 'Back to Projects List'}
+                   </button>
+
+                   <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight">
+                       {projectData.title}
+                   </h1>
+                   <p className="text-lg text-gray-600 dark:text-gray-300 mb-10 border-b pb-4 border-gray-200 dark:border-gray-700 italic">
+                       {projectData.context}
+                   </p>
+
+                   {/* Screenshots / diagrams */}
+                   {projectData.images && projectData.images.length > 0 && (
+                       <div className="mb-12 space-y-8">
+                           {projectData.images.map((img, i) => (
+                               <figure key={i}>
+                                   <img
+                                       src={img.src}
+                                       alt={img.alt}
+                                       loading="lazy"
+                                       className="w-full rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg bg-gray-50 dark:bg-gray-900"
+                                   />
+                                   {img.caption && (
+                                       <figcaption className="mt-3 text-sm text-gray-500 dark:text-gray-400 text-center italic px-4">
+                                           {img.caption}
+                                       </figcaption>
+                                   )}
+                               </figure>
+                           ))}
+                       </div>
+                   )}
+
+                   {/* Key Responsibilities */}
+                   <div className="mb-10">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-indigo-200 dark:border-indigo-800 pb-2">
+                           <Briefcase className="w-6 h-6 mr-3 text-indigo-600" />
+                           Key Responsibilities
+                       </h2>
+                       <ul className="space-y-4 text-gray-700 dark:text-gray-300">
+                           {projectData.responsibilities.map((r, i) => (
+                               <li key={i} className="flex items-start text-base">
+                                   <span className="w-2 h-2 mt-2 mr-3 bg-indigo-500 rounded-full flex-shrink-0"></span>
+                                   <span>{r}</span>
+                               </li>
+                           ))}
+                       </ul>
+                   </div>
+
+                   {/* Results and Benefits */}
+                   <div className="mb-10 p-6 bg-indigo-50 dark:bg-gray-900 rounded-xl">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-indigo-300 dark:border-indigo-700 pb-2">
+                           <Zap className="w-6 h-6 mr-3 text-green-600" />
+                           Results & Key Benefits
+                       </h2>
+                       <ul className="space-y-4 text-gray-700 dark:text-gray-300">
+                           {projectData.benefits.map((b, i) => (
+                               <li key={i} className="flex items-start text-base">
+                                   <CheckCircle className="w-5 h-5 mr-3 mt-1 flex-shrink-0 text-green-500" />
+                                   <span>{b}</span>
+                               </li>
+                           ))}
+                       </ul>
+                   </div>
+
+                   {/* Technical Stack */}
+                   <div className="mb-10">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-indigo-200 dark:border-indigo-800 pb-2">
+                           <Code className="w-6 h-6 mr-3 text-indigo-600" />
+                           Technical Environment
+                       </h2>
+                       <div className="flex flex-wrap gap-3">
+                           {projectData.technical.map((tech, i) => (
+                               <span key={i} className="px-4 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300 rounded-full text-sm font-medium shadow-sm">
+                                   {tech}
+                               </span>
+                           ))}
+                       </div>
+                   </div>
+                   
+                   {/* Call to Action */}
+                   <div className="mt-12 text-center p-6 bg-gray-100 dark:bg-gray-700 rounded-xl">
+                       <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">
+                           This project highlights my ability to drive massive enterprise change, cut costs, and improve security posture simultaneously.
+                       </p>
+                       <button
+                           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                           className="mt-4 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105"
+                       >
+                           Discuss this Project
+                       </button>
+                   </div>
+               </div>
+           </section>
+       );
+
+       // --- NEW COMPONENTS FOR LEADERSHIP ---
+
+       const LeadershipSummaryCard = ({ id, title, shortDescription, onSelectLeadership }) => (
+           <button
+               onClick={() => onSelectLeadership(id)}
+               className="text-left w-full h-full bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition duration-300 hover:shadow-purple-500/30 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
+           >
+               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-start">
+                   <User className="w-6 h-6 mr-3 mt-1 flex-shrink-0 text-purple-600" />
+                   {title}
+               </h3>
+               <p className="text-md text-gray-600 dark:text-gray-300 mb-5">{shortDescription}</p>
+               <span className="text-purple-600 dark:text-purple-400 font-semibold flex items-center justify-end">
+                   Read Full Details
+                   <ArrowRight className="w-4 h-4 ml-2"/>
+               </span>
+           </button>
+       );
+
+       const LeadershipDetailPage = ({ leadershipData, onGoBack }) => (
+           <section className="py-20 px-4 sm:px-6 lg:px-8 min-h-screen">
+               <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-8 md:p-12 rounded-2xl shadow-2xl">
+                   <button
+                       onClick={onGoBack}
+                       className="mb-8 flex items-center text-purple-600 dark:text-purple-400 font-medium hover:text-purple-700 transition duration-150"
+                   >
+                       <ArrowLeft className="w-5 h-5 mr-2" />
+                       Back to Leadership Competencies
+                   </button>
+
+                   <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight">
+                       {leadershipData.title}
+                   </h1>
+                   <p className="text-lg text-gray-600 dark:text-gray-300 mb-10 border-b pb-4 border-gray-200 dark:border-gray-700 italic">
+                       {leadershipData.context}
+                   </p>
+
+                   {/* Key Responsibilities */}
+                   <div className="mb-10">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-purple-200 dark:border-purple-800 pb-2">
+                           <Briefcase className="w-6 h-6 mr-3 text-purple-600" />
+                           Key Responsibilities & Approach
+                       </h2>
+                       <ul className="space-y-4 text-gray-700 dark:text-gray-300">
+                           {leadershipData.responsibilities.map((r, i) => (
+                               <li key={i} className="flex items-start text-base">
+                                   <span className="w-2 h-2 mt-2 mr-3 bg-purple-500 rounded-full flex-shrink-0"></span>
+                                   <span>{r}</span>
+                               </li>
+                           ))}
+                       </ul>
+                   </div>
+
+                   {/* Results and Benefits */}
+                   <div className="mb-10 p-6 bg-purple-50 dark:bg-gray-900 rounded-xl">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-purple-300 dark:border-purple-700 pb-2">
+                           <Zap className="w-6 h-6 mr-3 text-green-600" />
+                           Results & Impact
+                       </h2>
+                       <ul className="space-y-4 text-gray-700 dark:text-gray-300">
+                           {leadershipData.benefits.map((b, i) => (
+                               <li key={i} className="flex items-start text-base">
+                                   <CheckCircle className="w-5 h-5 mr-3 mt-1 flex-shrink-0 text-green-500" />
+                                   <span>{b}</span>
+                               </li>
+                           ))}
+                       </ul>
+                   </div>
+
+                   {/* Technical Skills/Competencies */}
+                   <div className="mb-10">
+                       <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center border-b border-purple-200 dark:border-purple-800 pb-2">
+                           <Code className="w-6 h-6 mr-3 text-purple-600" />
+                           Key Competencies & Skills
+                       </h2>
+                       <div className="flex flex-wrap gap-3">
+                           {leadershipData.technical.map((tech, i) => (
+                               <span key={i} className="px-4 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 rounded-full text-sm font-medium shadow-sm">
+                                   {tech}
+                               </span>
+                           ))}
+                       </div>
+                   </div>
+
+                   {/* Call to Action */}
+                   <div className="mt-12 text-center p-6 bg-gray-100 dark:bg-gray-700 rounded-xl">
+                       <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">
+                           This competency demonstrates my leadership approach and ability to drive organizational success through people, strategy, and execution.
+                       </p>
+                       <button
+                           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                           className="mt-4 px-8 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105"
+                       >
+                           Let's Discuss
+                       </button>
+                   </div>
+               </div>
+           </section>
+       );
+
+
+       // --- MAIN APP COMPONENT ---
+       function App() {
+         const { isVisible, scrollToTop } = useScrollToTop();
+         const [darkMode, setDarkMode] = useState(true);
+         // State for multi-page simulation
+         // --- URL ROUTING ---
+         // Every case study gets a real, shareable URL (#/project/<id>, #/leadership/<id>)
+         // so a link can be sent directly to one page and the browser back button works.
+         const routeFromHash = () => {
+           const raw = (window.location.hash || '').replace(/^#\/?/, '');
+           const [kind, id] = raw.split('/');
+           if (kind === 'project' && id && PROJECT_DETAILS[id]) {
+             return { page: 'project', projectId: id, leadershipId: null };
+           }
+           if (kind === 'leadership' && id && LEADERSHIP_DETAILS[id]) {
+             return { page: 'leadership', projectId: null, leadershipId: id };
+           }
+           return { page: 'home', projectId: null, leadershipId: null };
+         };
+         const initialRoute = routeFromHash();
+
+         const [currentPage, setCurrentPage] = useState(initialRoute.page); // 'home', 'project', or 'leadership'
+         const [selectedProjectId, setSelectedProjectId] = useState(initialRoute.projectId);
+         const [selectedLeadershipId, setSelectedLeadershipId] = useState(initialRoute.leadershipId);
+         const didInitRoute = React.useRef(false);
+
+         // Which section a project card belongs to, so "Back" returns to the right place
+         // (derived rather than remembered, so it also works for direct links).
+         const sectionForProject = (id) =>
+           MOCK_DATA.aiProjects.some((p) => p.id === id) ? 'ai-projects' : 'projects';
+
+         // Keep the URL in sync with the current view
+         useEffect(() => {
+           let target = '#/';
+           if (currentPage === 'project' && selectedProjectId) target = `#/project/${selectedProjectId}`;
+           else if (currentPage === 'leadership' && selectedLeadershipId) target = `#/leadership/${selectedLeadershipId}`;
+           // Treat '', '#' and '#/' as the same "home" URL. Without this, returning
+           // home from a detail page pushes '#/' over an empty hash, which silently
+           // destroys the forward history and breaks the browser's forward button.
+           const raw = window.location.hash || '';
+           const current = (!raw || raw === '#' || raw === '#/') ? '#/' : raw;
+           if (!didInitRoute.current) {
+             // First run: never push, or the back button would just strip the hash
+             didInitRoute.current = true;
+             if (current !== target && target !== '#/') window.history.replaceState(null, '', target);
+             return;
+           }
+           if (current !== target) window.history.pushState(null, '', target);
+         }, [currentPage, selectedProjectId, selectedLeadershipId]);
+
+         // Respond to browser back/forward and to hash edits
+         useEffect(() => {
+           const syncFromUrl = () => {
+             const r = routeFromHash();
+             setCurrentPage(r.page);
+             setSelectedProjectId(r.projectId);
+             setSelectedLeadershipId(r.leadershipId);
+           };
+           window.addEventListener('popstate', syncFromUrl);
+           window.addEventListener('hashchange', syncFromUrl);
+           return () => {
+             window.removeEventListener('popstate', syncFromUrl);
+             window.removeEventListener('hashchange', syncFromUrl);
+           };
+         }, []);
+
+         useEffect(() => {
+           // Manages the dark mode class on the root HTML element
+           if (darkMode) {
+             document.documentElement.classList.add('dark');
+           } else {
+             document.documentElement.classList.remove('dark');
+           }
+         }, [darkMode]);
+
+         // Jump to the top of any detail page AFTER it renders.
+         // This must run in an effect, not in the click handler: scrolling before
+         // React commits the new page means the browser clamps the scroll offset to
+         // the old (much taller) document, dumping the reader at the bottom.
+         useEffect(() => {
+           if (currentPage === 'project' || currentPage === 'leadership') {
+             window.scrollTo({ top: 0, behavior: 'auto' });
+           }
+         }, [currentPage, selectedProjectId, selectedLeadershipId]);
+
+         const handleScroll = (id) => {
+           // Only scroll if we are on the home page
+           if (currentPage === 'home') {
+               document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+           } else {
+               // If navigation is clicked from a detail page, return to home and then scroll
+               setCurrentPage('home');
+               setSelectedProjectId(null);
+               setSelectedLeadershipId(null);
+               // Timeout ensures the page state updates before attempting to scroll
+               setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 50);
+           }
+         };
+
+         const handleSelectProject = (id) => {
+           // Navigates to the project's 'own page' view.
+           // Scrolling and the URL are handled by the effects above, after render.
+           setSelectedProjectId(id);
+           setCurrentPage('project');
+         };
+
+         const handleSelectLeadership = (id) => {
+           // Navigates to the leadership competency detail page
+           setSelectedLeadershipId(id);
+           setCurrentPage('leadership');
+         };
+
+         const handleGoBack = () => {
+           // Handles the 'Back' button from detail pages
+           if (currentPage === 'project') {
+             // Return to whichever section this project belongs to
+             const target = sectionForProject(selectedProjectId);
+             setSelectedProjectId(null);
+             setCurrentPage('home');
+             setTimeout(() => document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' }), 50);
+           } else if (currentPage === 'leadership') {
+             setSelectedLeadershipId(null);
+             setCurrentPage('home');
+             setTimeout(() => document.getElementById('leadership-competencies')?.scrollIntoView({ behavior: 'smooth' }), 50);
+           }
+         };
+         
+
+         const navLinks = [
+           { name: "Home", short: "Home", id: "home", icon: Home },
+           { name: "Leadership", short: "Lead", id: "leadership", icon: User },
+           { name: "Skills", short: "Skills", id: "skills", icon: Code },
+           { name: "AI Work", short: "AI", id: "ai-projects", icon: Zap },
+           { name: "Projects", short: "Projects", id: "projects", icon: Lightbulb },
+           { name: "Experience", short: "Exp", id: "experience", icon: Briefcase },
+           { name: "Contact", short: "Contact", id: "contact", icon: Mail },
+         ];
+
+         const currentProjectData = selectedProjectId ? PROJECT_DETAILS[selectedProjectId] : null;
+         const currentLeadershipData = selectedLeadershipId ? LEADERSHIP_DETAILS[selectedLeadershipId] : null;
+
+         // --- RENDERING ---
+         return (
+           <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 font-inter">
+             {/* Header/Navigation */}
+             <header className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-md">
+               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                 <button onClick={() => {setCurrentPage('home'); setSelectedProjectId(null); setSelectedLeadershipId(null);}} className="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">
+                   {MOCK_DATA.name}<span className="text-gray-900 dark:text-white">.me</span>
+                 </button>
+                 
+                 {/* Desktop Navigation */}
+                 <nav className="hidden md:flex space-x-8">
+                   {navLinks.map((link) => (
+                     <button
+                       key={link.id}
+                       onClick={() => handleScroll(link.id)}
+                       className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition duration-150 flex items-center"
+                     >
+                       <link.icon className="w-4 h-4 mr-1"/>
+                       {link.name}
+                     </button>
+                   ))}
+                 </nav>
+                 
+                 {/* Dark Mode Toggle */}
+                 <button
+                   onClick={() => setDarkMode(!darkMode)}
+                   className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:ring-2 hover:ring-indigo-500 transition duration-150"
+                   aria-label="Toggle dark mode"
+                 >
+                   {darkMode ? (
+                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                   ) : (
+                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                   )}
+                 </button>
+               </div>
+             </header>
+
+             <main className="max-w-7xl mx-auto">
+               {/* Mobile Navigation (Fixed Bottom) - Hidden when on a detail page */}
+               {currentPage === 'home' && (
+                   <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-xl rounded-t-lg">
+                     <div className="flex justify-around items-center h-16">
+                       {navLinks.map((link) => (
+                         <button
+                           key={`mobile-${link.id}`}
+                           onClick={() => handleScroll(link.id)}
+                           className="flex flex-col items-center justify-center flex-1 min-w-0 text-[10px] leading-tight text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition duration-150 px-0.5 py-2"
+                         >
+                           <link.icon className="w-5 h-5 mb-1 flex-shrink-0"/>
+                           <span className="truncate w-full text-center">{link.short || link.name}</span>
+                         </button>
+                       ))}
+                     </div>
+                   </nav>
+               )}
+               
+               {/* Conditional Rendering: Home Page, Project Detail Page, or Leadership Detail Page */}
+               {currentPage === 'home' ? (
+                 <>
+                   {/* 1. Hero Section */}
+                   <section id="home" className="pt-20 pb-24 md:pt-32 md:pb-40 px-4 sm:px-6 lg:px-8 text-center min-h-screen flex items-center justify-center">
+                     <div className="max-w-4xl mx-auto">
+                       {/* Professional Image */}
+                       <div className={`${darkMode ? 'w-48 h-48' : 'w-64 h-64'} mx-auto mb-6 rounded-full overflow-hidden border-6 border-indigo-500 dark:border-indigo-400 shadow-2xl`}>
+                           <img
+                               key={darkMode ? 'dark-profile' : 'light-profile'}
+                               src={darkMode ? MOCK_DATA.profileImageUrl : "./profile-light.jpeg"}
+                               alt={`${MOCK_DATA.name} Profile`}
+                               className={`w-full h-full ${darkMode ? 'object-cover' : 'object-contain'}`}
+                               onError={(e) => {
+                                   e.target.onerror = null;
+                                   e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700"><svg class="w-24 h-24 text-indigo-500 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-4.418 0-8 2.015-8 4.5V20h16v-1.5c0-2.485-3.582-4.5-8-4.5z"></path></svg></div>';
+                               }}
+                           />
+                       </div>
+
+                       <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
+                         Hello, I'm <span className="text-indigo-600 dark:text-indigo-400">Howard Reid</span>
+                       </h1>
+                       <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light mb-8">
+                         {MOCK_DATA.tagline}
+                       </p>
+                       
+                       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                           <a
+                             href={MOCK_DATA.linkedinUrl}
+                             target="_blank"
+                             rel="noopener noreferrer"
+                             className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
+                           >
+                             <Linkedin className="w-5 h-5 mr-2" />
+                             View LinkedIn
+                           </a>
+                           <a
+                             href={MOCK_DATA.resumeDownloadLink}
+                             download="Howard-Reid-Resume.pdf"
+                             className="px-8 py-3 bg-transparent border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 dark:border-indigo-400 font-semibold rounded-full shadow-lg hover:bg-indigo-50 dark:hover:bg-gray-800 transition duration-300 transform hover:scale-105 flex items-center justify-center"
+                           >
+                             <Download className="w-5 h-5 mr-2" />
+                             View Resume
+                           </a>
+                           <a
+                             href="mailto:Howard.Reid@outlook.com"
+                             className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 flex items-center justify-center"
+                           >
+                             <Mail className="w-5 h-5 mr-2" />
+                             Contact Howard
+                           </a>
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* Executive Impact Section */}
+                   <section id="impact" className="py-16 px-4 sm:px-6 lg:px-8">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 text-center">
+                         Executive <span className="text-indigo-600 dark:text-indigo-400">Impact</span>
+                       </h2>
+                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 text-center max-w-3xl mx-auto">
+                         Measurable business outcomes delivered across enterprise IT strategy, M&amp;A integration, and private equity portfolio technology operations.
+                       </p>
+                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                         {MOCK_DATA.executiveImpact.map((item, index) => (
+                           <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 transition duration-300 hover:shadow-xl hover:border-indigo-300 dark:hover:border-indigo-600 flex items-start">
+                             <CheckCircle className="w-6 h-6 mr-3 mt-1 flex-shrink-0 text-green-500" />
+                             <p className="text-gray-800 dark:text-gray-200 font-semibold leading-snug">{item}</p>
+                           </div>
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* 2. My Leadership Philosophy Section */}
+                   <section id="leadership" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl mx-4 sm:mx-6 lg:mx-8 mb-12">
+                     <div className="max-w-4xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-8 text-center">
+                         Executive <span className="text-indigo-600 dark:text-indigo-400">Summary</span>
+                       </h2>
+                       <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-12 whitespace-pre-line">
+                         {MOCK_DATA.story}
+                       </p>
+                       
+                       <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                           <Zap className="w-6 h-6 mr-2 text-indigo-600" />
+                           CliftonStrengths Top 5
+                       </h3>
+                       
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           {MOCK_DATA.strengths.map((strength, index) => (
+                               <div key={index} className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+                                   <h4 className="font-bold text-indigo-600 dark:text-indigo-400 text-lg mb-1">{strength.name}</h4>
+                                   <p className="text-sm text-gray-600 dark:text-gray-400">{strength.description}</p>
+                               </div>
+                           ))}
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* 3. Key Achievements Section */}
+                   <section id="achievements" className="py-20 px-4 sm:px-6 lg:px-8">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                         Key <span className="text-indigo-600 dark:text-indigo-400">Achievements</span>
+                       </h2>
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                         {MOCK_DATA.achievements.map((achievement, index) => (
+                           <AchievementCard key={index} {...achievement} />
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* 4. Leadership Competencies Section */}
+                   <section id="leadership-competencies" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 text-center">
+                         Leadership <span className="text-purple-600 dark:text-purple-400">Competencies</span>
+                       </h2>
+                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 text-center max-w-3xl mx-auto">
+                         Click any competency below to explore the detailed approach, impact, and results that define my leadership philosophy.
+                       </p>
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                         {MOCK_DATA.leadershipSummaries.map((leadership, index) => (
+                           <LeadershipSummaryCard key={index} {...leadership} onSelectLeadership={handleSelectLeadership} />
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* 5. Skills/Expertise Section */}
+                   <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                         Core Technical <span className="text-indigo-600 dark:text-indigo-400">Expertise</span>
+                       </h2>
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                         {MOCK_DATA.skills.map((skill, index) => (
+                           <SkillCard key={index} {...skill} />
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+                   
+                   {/* 5b. AI & Automation Projects */}
+                   <section id="ai-projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 text-center">
+                         AI &amp; <span className="text-indigo-600 dark:text-indigo-400">Automation</span>
+                       </h2>
+                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-12 text-center max-w-3xl mx-auto">
+                         Systems I designed and built myself: multi-agent architectures, agent governance frameworks,
+                         protocol-level tooling, and production AI products. Built and running &mdash; not theoretical.
+                       </p>
+                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                         {MOCK_DATA.aiProjects.map((project, index) => (
+                           <ProjectSummaryCard key={index} {...project} onSelectProject={handleSelectProject} />
+                         ))}
+                       </div>
+                     </div>
+                   </section>
+
+                   {/* 6. Highlighted Projects / Case Studies - Summary View */}
+                   <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                         Highlighted <span className="text-indigo-600 dark:text-indigo-400">Projects</span>
+                       </h2>
+                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                         {MOCK_DATA.projectSummaries.map((project, index) => (
+                           <ProjectSummaryCard key={index} {...project} onSelectProject={handleSelectProject} />
+                         ))}
+                       </div>
+
+                       {/* Secondary initiatives — compact, still linked to full case studies */}
+                       <div className="mt-16 max-w-5xl mx-auto">
+                         <h3 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2 text-center">
+                           Additional Initiatives
+                         </h3>
+                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 text-center">
+                           Each links to a full case study.
+                         </p>
+                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
+                           {MOCK_DATA.moreProjects.map((project, index) => (
+                             <button
+                               key={index}
+                               onClick={() => handleSelectProject(project.id)}
+                               className="group text-left w-full flex items-center justify-between gap-4 py-4 border-b border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition duration-150 focus:outline-none focus:text-indigo-600"
+                             >
+                               <span className="text-base leading-snug">{project.title}</span>
+                               <ArrowRight className="w-4 h-4 flex-shrink-0 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition duration-150" />
+                             </button>
+                           ))}
+                         </div>
+                       </div>
+                     </div>
+                   </section>
+
+
+                   {/* 7. Professional Experience Section */}
+                   <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
+                     <div className="max-w-6xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                         Professional <span className="text-indigo-600 dark:text-indigo-400">Experience</span>
+                       </h2>
+                       <div className="flex flex-col items-center">
+                         {MOCK_DATA.experience.map((job, index) => (
+                           <ExperienceItem key={index} {...job} />
+                         ))}
+                         <div className="mt-8 text-center">
+                            <a
+                               href={MOCK_DATA.resumeDownloadLink}
+                               download="Howard-Reid-Resume.pdf"
+                               className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 flex items-center justify-center"
+                            >
+                               <Download className="w-5 h-5 mr-2" />
+                               View Full Resume
+                            </a>
+                         </div>
+                       </div>
+                     </div>
+                   </section>
+
+
+                   {/* 8. Contact Section */}
+                   <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl mx-4 sm:mx-6 lg:mx-8 mb-12">
+                     <div className="max-w-3xl mx-auto text-center">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
+                         Let's <span className="text-indigo-600 dark:text-indigo-400">Connect</span>
+                       </h2>
+                       <p className="text-lg text-gray-600 dark:text-gray-300 mb-12">
+                         Open to senior technology leadership roles &mdash; Director through CIO &mdash; focused on private equity portfolio operations, AI strategy and governance, enterprise PMO, M&amp;A integration, and infrastructure modernization.
+                       </p>
+
+                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-center items-stretch max-w-3xl mx-auto">
+                         {/* Resume Button */}
+                         <a
+                           href={MOCK_DATA.resumeDownloadLink}
+                           download="Howard-Reid-Resume.pdf"
+                           className="flex flex-col items-center justify-center px-6 py-8 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
+                         >
+                           <Download className="w-12 h-12 mb-3" />
+                           <span className="text-xl mb-2">View Resume</span>
+                           <span className="text-sm text-indigo-100">Download current resume</span>
+                         </a>
+
+                         {/* LinkedIn Button */}
+                         <a
+                           href="https://www.linkedin.com/in/howardareid"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="flex flex-col items-center justify-center px-6 py-8 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
+                         >
+                           <Linkedin className="w-12 h-12 mb-3" />
+                           <span className="text-xl mb-2">Connect on LinkedIn</span>
+                           <span className="text-sm text-blue-100">linkedin.com/in/howardareid</span>
+                         </a>
+
+                         {/* Email Button */}
+                         <a
+                           href="mailto:Howard.Reid@outlook.com"
+                           className="flex flex-col items-center justify-center px-6 py-8 bg-gray-800 dark:bg-gray-700 text-white font-semibold rounded-xl shadow-lg hover:bg-gray-900 dark:hover:bg-gray-600 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-500 focus:ring-opacity-50"
+                         >
+                           <Mail className="w-12 h-12 mb-3" />
+                           <span className="text-xl mb-2">Contact Howard</span>
+                           <span className="text-sm text-gray-300">Howard.Reid@outlook.com</span>
+                         </a>
+                       </div>
+                     </div>
+                   </section>
+                 </>
+               ) : currentPage === 'project' ? (
+                 <ProjectDetailPage projectData={currentProjectData} onGoBack={handleGoBack} backLabel={sectionForProject(selectedProjectId) === 'ai-projects' ? 'Back to AI & Automation' : 'Back to Projects List'} />
+               ) : currentPage === 'leadership' ? (
+                 <LeadershipDetailPage leadershipData={currentLeadershipData} onGoBack={handleGoBack} />
+               ) : null}
+
+             </main>
+
+             {/* 9. Footer */}
+             <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-12 py-8">
+               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+                 <p>© {new Date().getFullYear()} {MOCK_DATA.name}. All rights reserved.</p>
+                 <p className="mt-2 text-gray-400">Designed and built with React and Tailwind CSS.</p>
+               </div>
+             </footer>
+             
+             {/* Scroll to Top Button */}
+             {isVisible && currentPage === 'home' && (
+               <button
+                 onClick={scrollToTop}
+                 className="fixed bottom-24 md:bottom-8 right-8 p-3 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 z-50"
+                 aria-label="Scroll to top"
+               >
+                 <ArrowUp className="w-6 h-6" />
+               </button>
+             )}
+           </div>
+         );
+       }
+       
+       // --- APPLICATION BOOTSTRAP ---
+       // This ensures the App component is accessible by the index.html loader script.
+       window.App = App;
+
+       // Render the App to the DOM
+       const root = ReactDOM.createRoot(document.getElementById('root'));
+       root.render(<App />);
 
