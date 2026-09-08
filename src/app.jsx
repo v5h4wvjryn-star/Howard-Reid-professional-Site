@@ -724,18 +724,18 @@
 
          experience: [
           { period: "SEP 2024 - PRESENT", role: "Independent Technology Executive & Strategic Advisor", company: "Independent — Private Equity & Multi-Company Advisory", location: "DALLAS–FORT WORTH, TX",
-            description: "Provide executive-level technology leadership, modernization strategy, and governance development across multiple organizations and portfolio environments, maintaining continuous enterprise leadership engagement.",
+            description: "Advise multi-company leadership teams on IT operating model design, infrastructure and security standards, platform and ERP selection, and support organization structure — while building and operating production systems and AI automation personally.",
             highlights: [
-              "Delivered modernization and governance initiatives improving operational readiness across private equity portfolio environments",
-              "Designed scalable cloud, cybersecurity, and automation frameworks supporting business continuity and analytics",
-              "Strengthened governance and documentation maturity across multi-company advisory environments"
+              "Advise on IT operating model design, infrastructure and security standards, and support organization structure across multi-company environments",
+              "Ran an ERP evaluation covering multi-entity consolidation requirements, vendor scoring, and migration onto Odoo",
+              "Build and operate production systems and AI automation personally — 25+ scheduled Python services, a React operations dashboard, dead-man switch monitoring, and secrets management — keeping hands-on with current infrastructure and security practice"
             ],
             engagements: [
               {
                 name: "Blue Star Equity Group — Strategic Technology Advisor",
                 bullets: [
-                  "Provided executive-level advisory supporting scalable IT frameworks across portfolio companies",
-                  "Defined governance models, technology platforms, and operational workflows supporting growth"
+                  "Organized and streamlined the IT function across the holding structure, defining governance models, technology platforms, and operational workflows",
+                  "Drove the ERP evaluation that moved the business off QuickBooks onto Odoo, with multi-entity financial consolidation and reporting requirements setting the selection criteria"
                 ]
               },
               {
@@ -754,34 +754,39 @@
               }
             ]
           },
-           { period: "JUN 2023 - AUG 2024", role: "Director of Infrastructure, IT Security, Operations & End User Computing", company: "Liberty Steel USA", location: "PEORIA, IL / DALLAS, TX", highlights: [
-               "Managed $15M IT budget, improving security and reducing costs by 35% in network overhaul.",
-               "Led IT operations and infrastructure aligning zero trust strategies for efficiency across US sites, boosting service delivery.",
-               "Established a formal IT Security organization to strengthen enterprise cybersecurity posture, governance and driving initiatives in identity and zero trust access management, rights management, incident response resulting in a measurable reduction in security risk exposure.",
-               "Partnered with third-party security firms to conduct annual penetration tests, risk assessments, and compliance audits.",
-               "Institutionalizing enterprise-wide cybersecurity awareness training using KnowBe4; reducing human layer risk, strengthening regulatory posture, and improving overall security resilience.",
-               "Developed a centralized IT Service Desk with FreshService, standardizing Incident/Request/Change management processes and automating employee lifecycle management with HR integration.",
-               "Mentored cross-functional team, fostering a culture of learning and collaborative problem solving."
+           { period: "JUN 2023 - AUG 2024", role: "Senior Director, Technology Operations, Infrastructure & Security", company: "Liberty Steel USA", location: "PEORIA, IL / DALLAS, TX", highlights: [
+               "Owned all technology for a seven-site U.S. manufacturing business of roughly 3,000 endpoints on a $15M IT budget, directing a 15-person internal organization, a dedicated ERP team, and an India-based outsourced support group.",
+               "Directed network operations across seven locations — LAN/WAN connectivity, wireless, and site-level reliability — and cut infrastructure cost 35% through network and platform modernization.",
+               "Established enterprise cybersecurity governance aligned to the NIST Cybersecurity Framework, covering firewall and perimeter controls, endpoint protection, vulnerability management, backup and disaster recovery, and recurring security awareness training.",
+               "Replaced a legacy AS/400 environment with Epicor ERP across manufacturing operations, retiring decades of accumulated technical debt and moving the business onto a supportable modern platform.",
+               "Stood up a centralized IT service desk on Freshservice, consolidating site-by-site support into one intake and escalation model, and served as senior escalation point for major incidents.",
+               "Restructured the vendor ecosystem through competitive RFP and renegotiation for 20% cost optimization while raising service levels, rebuilding SLAs, service reviews, and escalation paths so provider performance was measured rather than assumed.",
+               "Replaced manual reporting with Power BI analytics and digitized paper-based finance workflows."
            ]},
-           { period: "MAY 2021 - JUN 2023", role: "Sr. Director of IT Strategy & Architecture", company: "Wilks Brothers LLC", location: "FORT WORTH, TX", highlights: [
-               "Managed $12M IT budget, enhancing cloud efficiency and cutting costs by $750K annually.",
-               "Led enterprise-wide transformations including data center consolidation (165+ servers to cloud), Zero Trust network security implementation, and elimination of legacy infrastructure.",
-               "Led data migration to Azure, boosting app performance by 40% and slashing recovery time to 4 hours.",
-               "Reduced telecom expenses by $400K annually by migrating 2000+ users to cloud based systems.",
-               "Conducted in-depth risk assessments, enhancing cybersecurity protocols that fortified data integrity and reduced vulnerability to threats.",
-               "Partnered with third-party security firms to conduct annual penetration tests, risk assessments, and compliance audits.",
-               "Coordinated cross-departmental initiatives, ensuring alignment of IT strategies with business goals and fostering a culture of shared success."
+           { period: "MAY 2021 - JUN 2023", role: "Senior Director of IT Strategy & Architecture", company: "Wilks Brothers LLC", location: "FORT WORTH, TX", highlights: [
+               "Set enterprise technology direction for a private equity holding company operating 27+ portfolio businesses across 17 industries, roughly 5,000 endpoints, and $1.5B+ in annual revenue — owning a $12M budget and a 30+ person technology organization.",
+               "Delivered $750K in recurring annual savings through Azure and Microsoft 365 optimization and consolidation of duplicate systems, licensing, and support contracts, and removed a further $400K in annual telecom expense through carrier consolidation and renegotiation.",
+               "Directed cloud migration of 165+ servers to Microsoft Azure, improving application performance and availability and reducing recovery time objective to four hours with tested backup and restore procedures.",
+               "Ran the enterprise network platform RFI and RFP, selected Cisco Meraki, and phased migration off legacy infrastructure across three years against end-of-life and end-of-support dates — so modernization rode a funded replacement cycle rather than becoming a capital event or a field disruption.",
+               "Led enterprise Zero Trust implementation, hardening single sign-on, account provisioning and deprovisioning, permissions, and conditional access across every operating company.",
+               "Built the technology governance framework defining intake, prioritization, investment approval, and reporting, and partnered with third-party security firms on annual penetration tests, risk assessments, and compliance audits."
            ]},
-           { period: "MAY 2016 - MAY 2021", role: "Director of IT Operations & Enterprise Solutions", company: "Wilks Brothers LLC", location: "FORT WORTH, TX", highlights: [
-               "Spearheaded IT strategy across 27+ private equity portfolio companies, enhancing collaboration and standardization through targeted technology alignment.",
-               "Guided PMO establishment, mentoring project managers and fostering culture of continuous improvement.",
-               "Built comprehensive IT Service Desk standardizing Incident/Request/Change management processes.",
-               "Executed comprehensive IT integration for a mid-sized acquisition, achieving $5M in annual cost synergies and completing the project ahead of schedule.",
-               "Established a formal IT Security organization to drive enterprise cybersecurity strategy, governance.",
-               "Implemented Azure AD join for 2000+ employees, achieving 99.9% success across 2800+ devices.",
-               "Directed comprehensive cybersecurity initiatives reducing security incidents by 85%, implementing enterprise IAM for 1800+ users, and achieving 100% MFA adoption.",
-               "Deployed Dell/Intune connected provisioning reducing device setup time from 6 hours to 35 minutes, achieving $175K annual labor savings.",
-               "Print infrastructure Overhaul: Eliminated 23 print servers using PrinterLogic, reducing help desk tickets by 70% and management time by 90%."
+           { period: "MAY 2014 - MAY 2021", role: "Director of IT Operations & Enterprise Solutions", company: "Wilks Brothers LLC", location: "FORT WORTH, TX", highlights: [
+               "Built the enterprise IT function from the ground up through the company's most acquisitive period — 11 acquisitions, 6 ground-up company builds, and 3 divestitures — delivering $5M+ in recurring annual synergies.",
+               "Led the identity and access management program end to end: ran the RFI and competitive RFP, selected Okta, and drove implementation to 100% MFA and single sign-on adoption across roughly 5,000 endpoints while cutting security incidents 85%.",
+               "Selected and implemented centralized ITSM platforms (Track-It, then TeamDynamix), standardizing Incident, Request, and Change processes, asset records, and service reporting into a single surface.",
+               "Owned hardware and software lifecycle for roughly 5,000 endpoints — purchasing standards, imaging, deployment, refresh cycles, license compliance, inventory accuracy, and disposal — removing $175K in annual provisioning labor through automation.",
+               "Implemented Hybrid Azure AD join for 2,000+ employees across 2,800+ devices, and eliminated 23 print servers with PrinterLogic, reducing related help desk tickets by 70%.",
+               "Established an enterprise PMO standardizing project intake, prioritization, and delivery reporting; improved reliability from frequent outages to 99% uptime and achieved 21% budget optimization while sustaining 93% employee retention."
+           ]},
+           { period: "NOV 2010 - MAY 2014", role: "Manager of Client Services", company: "FTS International", location: "FORT WORTH, TX", highlights: [
+               "Led a 28-member client technology and executive support organization on a $1.6M OPEX/CAPEX budget, covering three administrative offices plus remote offices, field camps, and mobile units at drill sites, sustaining 99% uptime.",
+               "Delivered a 700-device PC refresh entirely with in-house staff, standardized hardware approval and imaging company-wide, and ran a Mobile Device Management selection from RFP through vendor demos to deployment."
+           ]},
+           { period: "EARLIER", role: "Earlier Career", company: "Capgemini Energy & HCL America · Yellowbook USA · Northwest Texas Healthcare System", location: "DALLAS & AMARILLO, TX", highlights: [
+               "Capgemini Energy & HCL America — Client Services Team Manager: delivered outsourced IT under contract and SLA to TXU Energy, Oncor, Luminant, and Energy Future Holdings with India-based delivery teams.",
+               "Yellowbook USA — IT Operations.",
+               "Northwest Texas Healthcare System — IT Operations; led HIPAA training and technology standardization across physician offices and facilities."
            ]},
          ],
          
