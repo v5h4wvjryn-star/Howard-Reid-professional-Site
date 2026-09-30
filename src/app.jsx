@@ -1016,12 +1016,12 @@
                        <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">
                            This project highlights my ability to drive massive enterprise change, cut costs, and improve security posture simultaneously.
                        </p>
-                       <button
-                           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                           className="mt-4 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105"
+                       <a
+                           href={`mailto:howard@howardreid.me?subject=${encodeURIComponent(projectData.title)}`}
+                           className="inline-block mt-4 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105"
                        >
                            Discuss this Project
-                       </button>
+                       </a>
                    </div>
                </div>
            </section>
@@ -1373,7 +1373,7 @@
                              View Resume
                            </a>
                            <a
-                             href="mailto:Howard.Reid@outlook.com"
+                             href="mailto:howard@howardreid.me"
                              className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 flex items-center justify-center"
                            >
                              <Mail className="w-5 h-5 mr-2" />
@@ -1590,12 +1590,12 @@
 
                          {/* Email Button */}
                          <a
-                           href="mailto:Howard.Reid@outlook.com"
+                           href="mailto:howard@howardreid.me"
                            className="flex flex-col items-center justify-center px-6 py-8 bg-gray-800 dark:bg-gray-700 text-white font-semibold rounded-xl shadow-lg hover:bg-gray-900 dark:hover:bg-gray-600 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-500 focus:ring-opacity-50"
                          >
                            <Mail className="w-12 h-12 mb-3" />
                            <span className="text-xl mb-2">Contact Howard</span>
-                           <span className="text-sm text-gray-300">Howard.Reid@outlook.com</span>
+                           <span className="text-sm text-gray-300">howard@howardreid.me</span>
                          </a>
                        </div>
                      </div>
