@@ -1116,12 +1116,12 @@
                        <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">
                            This competency demonstrates my leadership approach and ability to drive organizational success through people, strategy, and execution.
                        </p>
-                       <button
-                           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                           className="mt-4 px-8 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105"
+                       <a
+                           href={`mailto:howard@howardreid.me?subject=${encodeURIComponent(leadershipData.title)}`}
+                           className="inline-block mt-4 px-8 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105"
                        >
                            Let's Discuss
-                       </button>
+                       </a>
                    </div>
                </div>
            </section>
