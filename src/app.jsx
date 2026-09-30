@@ -1016,12 +1016,12 @@
                        <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold">
                            This project highlights my ability to drive massive enterprise change, cut costs, and improve security posture simultaneously.
                        </p>
-                       <button
-                           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                           className="mt-4 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105"
+                       <a
+                           href={`mailto:howard@howardreid.me?subject=${encodeURIComponent(projectData.title)}`}
+                           className="inline-block mt-4 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105"
                        >
                            Discuss this Project
-                       </button>
+                       </a>
                    </div>
                </div>
            </section>
