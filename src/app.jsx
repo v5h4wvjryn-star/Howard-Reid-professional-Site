@@ -1,6 +1,6 @@
        // Import components/hooks from the globally loaded React libraries
        const { useState, useEffect, StrictMode } = React;
-       const { Briefcase, Code, User, Mail, Home, ArrowUp, Zap, Download, Linkedin, CheckCircle, Lightbulb, ArrowLeft, ArrowRight } = LucideReact;
+       const { Briefcase, Code, User, Mail, Home, ArrowUp, Zap, Download, Linkedin, CheckCircle, Lightbulb, ArrowLeft, ArrowRight, Heart } = LucideReact;
 
        // --- FULL PROJECT DETAIL DATA ---
        const PROJECT_DETAILS = {
@@ -784,6 +784,13 @@
                "Print infrastructure Overhaul: Eliminated 23 print servers using PrinterLogic, reducing help desk tickets by 70% and management time by 90%."
            ]},
          ],
+
+         volunteering: [
+           { role: "Soccer Coach", organization: "i9 Sports", cause: "Children" },
+           { role: "Assistant Coach \u2014 Club Goal Keeping Coach", organization: "Hurst United Futbol Club", period: "Jan 2021 \u2013 Jun 2022", duration: "1 yr 6 mos", cause: "Children" },
+           { role: "Goal Keeping Coach", organization: "Allegiance FC", period: "Jun 2018 \u2013 Nov 2021", duration: "3 yrs 6 mos" },
+           { role: "Goal Keeping Coach U17\u2013U19", organization: "Solar ECNL North Texas", period: "Jun 2024 \u2013 May 2025", duration: "1 yr" },
+         ],
          
          linkedinUrl: "https://www.linkedin.com/in/howardareid",
          // Note: The file name must match the one referenced in the HTML tag's download attribute.
@@ -847,6 +854,26 @@
              {title}
            </h3>
            <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{detail}</p>
+         </div>
+       );
+
+       const VolunteerCard = ({ role, organization, period, duration, cause }) => (
+         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 flex items-start">
+           <div className="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center flex-shrink-0 mr-4">
+             <Heart className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+           </div>
+           <div className="min-w-0">
+             <h3 className="text-lg font-bold text-gray-900 dark:text-white">{role}</h3>
+             <p className="text-indigo-600 dark:text-indigo-400 font-medium">{organization}</p>
+             {period && (
+               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                 {period}{duration && <span> &middot; {duration}</span>}
+               </p>
+             )}
+             {cause && (
+               <span className="inline-block mt-2 px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300">{cause}</span>
+             )}
+           </div>
          </div>
        );
 
@@ -1549,6 +1576,21 @@
                                View Full Resume
                             </a>
                          </div>
+                       </div>
+                     </div>
+                   </section>
+
+
+                   {/* Volunteering Section */}
+                   <section id="volunteering" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
+                     <div className="max-w-5xl mx-auto">
+                       <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-12 text-center">
+                         <span className="text-indigo-600 dark:text-indigo-400">Volunteering</span>
+                       </h2>
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                         {MOCK_DATA.volunteering.map((v, index) => (
+                           <VolunteerCard key={index} {...v} />
+                         ))}
                        </div>
                      </div>
                    </section>
